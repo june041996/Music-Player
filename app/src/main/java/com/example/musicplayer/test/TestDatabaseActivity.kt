@@ -21,10 +21,10 @@ class TestDatabaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTestDatabaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+	//test edit
         val dao = MusicDatabase.getInstance(this).songDao()
         var playlists = listOf<Playlist>(
-            Playlist(null, 1, "a", "a"),
+            Playlist(null, 1, "a", "aa"),
             Playlist(null, 2, "b", "b"),
         )
         var songs = listOf<Song>(
