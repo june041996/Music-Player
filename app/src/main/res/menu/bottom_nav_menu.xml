@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search"
+        android:title="Search" />
+
+    <item
+        android:id="@+id/rankFragment"
+        android:icon="@drawable/ic_bar_chart"
+        android:title="Rank" />
+
+    <item
+        android:id="@+id/libraryFragment"
+        android:icon="@drawable/ic_library_music"
+        android:title="Library" />
+
+    <item
+        android:id="@+id/settingFragment"
+        android:icon="@drawable/ic_settings"
+        android:title="Setting" />
+
+</menu>
