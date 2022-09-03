@@ -3,25 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_bar_chart.xml" value="0.2075" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/select_bottom_nav.xml" value="0.1925" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/shape_bottom_nav.xml" value="0.1925" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/shape_music_disc.xml" value="0.1275" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_home.xml" value="0.152" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_library.xml" value="0.24375" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_rank.xml" value="0.24375" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_search.xml" value="0.2296875" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_setting.xml" value="0.112" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_test_database.xml" value="0.16" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_home.xml" value="0.11510416666666666" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_library.xml" value="0.1" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_music_player.xml" value="0.264" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_rank.xml" value="0.11614583333333334" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_search.xml" value="0.11614583333333334" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_setting.xml" value="0.11510416666666666" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1044776119402985" />
-        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/menu/nav_menu.xml" value="0.259375" />
         <entry key="..\:/Users/PhucDH11/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/activity_test_database.xml" value="0.20416666666666666" />
       </map>
     </option>

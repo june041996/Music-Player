@@ -3,7 +3,6 @@ package com.example.musicplayer.test
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.example.musicplayer.databinding.ActivityTestDatabaseBinding
 import com.example.musicplayer.db.MusicDatabase
@@ -22,7 +21,7 @@ class TestDatabaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTestDatabaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //test edit
+	//test edit
         val dao = MusicDatabase.getInstance(this).songDao()
         var playlists = listOf<Playlist>(
             Playlist(null, 1, "a", "aa"),
@@ -82,14 +81,5 @@ class TestDatabaseActivity : AppCompatActivity() {
             }
         }
 
-        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                //Light
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }else{
-                //Night
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-        }
     }
 }
