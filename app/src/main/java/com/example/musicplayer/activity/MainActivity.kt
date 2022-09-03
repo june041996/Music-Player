@@ -2,6 +2,8 @@ package com.example.musicplayer.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -33,12 +35,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.searchFragment,
                 R.id.rankFragment,
                 R.id.libraryFragment,
-                R.id.settingFragment
             )
         )
 
         setupActionBarWithNavController(navController, appBarConfig)
-        binding.bnvMain.setupWithNavController(navController)
+
+        binding.apply {
+            bnvMain.setupWithNavController(navController)
+            navView.setupWithNavController(navController)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
