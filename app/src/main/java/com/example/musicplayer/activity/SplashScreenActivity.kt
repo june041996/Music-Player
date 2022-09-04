@@ -37,6 +37,6 @@ class SplashScreenActivity : AppCompatActivity() {
 
             //Tắt luôn splash
             finish()
-        }, 5000)
+        }, 100L)
     }
 }

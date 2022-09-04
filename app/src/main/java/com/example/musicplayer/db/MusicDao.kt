@@ -45,6 +45,10 @@ interface MusicDao {
     @Query("SELECT * FROM tb_song")
     fun getAllSongs(): LiveData<List<Song>>
 
+    //get all local song with isOffline = true
+    @Query("SELECT * FROM tb_song WHERE isOffline=:status ")
+    suspend fun getLocalSongs(status: Boolean): List<Song>
+
     //get list song of playlist
     @Transaction
     @Query("SELECT * FROM tb_playlist WHERE idPlaylist=:id")
