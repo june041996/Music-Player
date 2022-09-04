@@ -48,9 +48,7 @@ class MainActivity : AppCompatActivity() {
             navView.setupWithNavController(navController)
         }
 
-        lifecycleScope.launch {
-            SongClient.invoke().getSong()
-        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
