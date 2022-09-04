@@ -2,8 +2,8 @@ package com.example.musicplayer.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,6 +11,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMainBinding
+import com.example.musicplayer.network.SongClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -44,6 +47,8 @@ class MainActivity : AppCompatActivity() {
             bnvMain.setupWithNavController(navController)
             navView.setupWithNavController(navController)
         }
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
