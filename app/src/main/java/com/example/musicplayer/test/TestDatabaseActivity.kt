@@ -3,6 +3,7 @@ package com.example.musicplayer.test
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.example.musicplayer.databinding.ActivityTestDatabaseBinding
 import com.example.musicplayer.db.MusicDatabase
@@ -21,17 +22,18 @@ class TestDatabaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTestDatabaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
-	//test edit
+        //test edit
         val dao = MusicDatabase.getInstance(this).songDao()
         var playlists = listOf<Playlist>(
             Playlist(null, 1, "a", "aa"),
             Playlist(null, 2, "b", "b"),
         )
-        var songs = listOf<Song>(
-            Song(null, "A", "A", "A", "A", "A", "A", "A", "A", 1),
-            Song(null, "B", "B", "A", "A", "A", "A", "A", "A", 2),
-            Song(null, "C", "C", "A", "A", "A", "A", "A", "A", 3),
-        )
+//        var songs = listOf<Song>(
+//            Song(null, "A", "A", "A", "A", "A", "A", "A", "A", 1),
+//            Song(null, "B", "B", "A", "A", "A", "A", "A", "A", 2),
+//            Song(null, "C", "C", "A", "A", "A", "A", "A", "A", 3),
+//        )
+
         var songPlaylistCrossRef = listOf<SongPlaylistCrossRef>(
             SongPlaylistCrossRef(1, 1),
             SongPlaylistCrossRef(2, 1),
@@ -55,7 +57,7 @@ class TestDatabaseActivity : AppCompatActivity() {
         binding.add.setOnClickListener() {
             lifecycleScope.launch {
                 playlists.forEach { dao.insertPlaylist(it) }
-                songs.forEach { dao.insertSong(it) }
+                //songs.forEach { dao.insertSong(it) }
                 songPlaylistCrossRef.forEach { dao.insertSongPlaylistCrossRef(it) }
                 users.forEach { dao.insertUser(it) }
                 favourites.forEach { dao.insertFavourite(it) }
@@ -81,5 +83,14 @@ class TestDatabaseActivity : AppCompatActivity() {
             }
         }
 
+        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                //Light
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }else{
+                //Night
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }
     }
 }

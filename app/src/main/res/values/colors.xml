@@ -7,4 +7,23 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Rin add color -->
+    <!-- Dark-->
+    <color name="background_dark">#FF091227</color>
+    <color name="text_dark">#FFEAF0FF</color>
+    <color name="title_dark">#FFA5C0FF</color>
+    <color name="line_dark">#FF212238</color>
+
+    <!-- Light-->
+    <color name="background_light">#FFF7FAFF</color>
+    <color name="text_light">#FF091227</color>
+    <color name="title_light">#FF8996B8</color>
+    <color name="line_light">#FFD3D4E5</color>
+
+    <!--Splash-->
+    <color name="splash_1">#FF8996B8</color>
+    <color name="splash_2">#FF091227</color>
+
+
 </resources>
