@@ -1,5 +1,6 @@
 package com.example.musicplayer.activity
 
+
 import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -17,17 +19,23 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMainBinding
+
 import com.example.musicplayer.vm.HomeViewModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+
+import com.example.musicplayer.network.SongClient
+import kotlinx.coroutines.Dispatchers
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
+
     private val TAG: String = "DHP"
     private val viewModel: HomeViewModel by viewModels()
     private val READ_STORAGE_PERMISSION_CODE = 101
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -56,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             bnvMain.setupWithNavController(navController)
             navView.setupWithNavController(navController)
         }
+
         viewModel.localSongs.observe(this  ){
             Log.d(TAG,"local songs: ${it.toString()}")
         }
@@ -74,11 +83,13 @@ class MainActivity : AppCompatActivity() {
             delay(500L)
             viewModel.updateLocalSongs()
         }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
     // Function to check and request permission.
     private fun checkPermission(permission: Array<String>, requestCode: Int) {
         if (ContextCompat.checkSelfPermission(
@@ -115,4 +126,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }
