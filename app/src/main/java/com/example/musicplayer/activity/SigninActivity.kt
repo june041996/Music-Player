@@ -2,6 +2,7 @@ package com.example.musicplayer.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,9 +36,10 @@ class SigninActivity : AppCompatActivity() {
                 viewModel.requestLogin(binding.edtUser.text.toString(), binding.edtPassword.text.toString())
                 startActivity(Intent(this,MainActivity::class.java))
                 finish()
-            } else {
-                Toast.makeText(application, "Vui lòng nhập đúng!", Toast.LENGTH_LONG).show()
             }
+        }
+        binding.txtSignup.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
         }
 
         //khi dang nhap thanh cong hoac that bai
@@ -45,29 +47,24 @@ class SigninActivity : AppCompatActivity() {
             //handle
             var message = ""
             if (it == true) {
-                message = "Đăng nhập thành công!"
+                message = "Logged in successfully!"
             } else {
-                message = "Đăng nhập thất bại!"
+                message = "Login failed!"
             }
 
             Toast.makeText(application, message, Toast.LENGTH_LONG).show()
         })
-
-//
-//        val accessToken = AccessToken.getCurrentAccessToken()
-//        val isLoggedIn = accessToken != null && !accessToken.isExpired
-
-
     }
-
-
     //check valid data
     //true valid - failed invalid
     private fun isValidData(): Boolean {
-        if (binding.edtUser.text.isNullOrEmpty() || binding.edtPassword.text.isNullOrEmpty()) {
+        if (TextUtils.isEmpty(binding.edtUser.text.toString())){
+            binding.edtUser.setError("Please enter Email")
+            return false
+        }else if (TextUtils.isEmpty(binding.edtPassword.text.toString())) {
+            binding.edtPassword.setError("Please enter Password")
             return false
         }
-
         return true
     }
 }

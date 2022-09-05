@@ -3,10 +3,8 @@ package com.example.musicplayer.vm
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.musicplayer.model.LoginModel
 import com.example.musicplayer.repository.AuthenticationRepository
-import com.google.firebase.auth.FirebaseUser
 
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
@@ -26,5 +24,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     fun getLoginInfo() : LoginModel {
         return repository.getLoginInfo()
     }
+//    //đăng nhập thông tin
+    fun register(mail: String,password: String){
+        repository.requestRegister( mail, password)
+    }
+
+
 
 }
