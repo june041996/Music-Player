@@ -11,15 +11,14 @@ data class Song(
     @SerializedName("id")
     val idSong: Int?,
     val nameSong: String,
-
     val urlImage: String?,
     val urlSong: String,
+    @SerializedName("category")
     val genre: String?,
     val musician: String?,
     val singer: String,
     val album: String?,
     val release: Int?,
-
     val duration: String,
     val views: Int,
     val isOffline: Boolean

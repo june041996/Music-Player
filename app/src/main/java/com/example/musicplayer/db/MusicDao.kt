@@ -11,7 +11,7 @@ import com.example.musicplayer.model.relation.*
 
 @Dao
 interface MusicDao {
-    //INSERT
+    //INSERT Thêm dữ liệu từ API vào Local DB
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSong(song: Song)
 

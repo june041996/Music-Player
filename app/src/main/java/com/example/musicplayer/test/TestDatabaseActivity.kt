@@ -84,10 +84,10 @@ class TestDatabaseActivity : AppCompatActivity() {
         }
 
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 //Light
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }else{
+            } else {
                 //Night
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }

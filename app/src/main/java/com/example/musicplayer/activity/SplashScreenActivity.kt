@@ -7,14 +7,28 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.Window
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivitySplashScreenBinding
+import com.example.musicplayer.model.Song
 import com.example.musicplayer.network.SongClient
+import com.example.musicplayer.utils.Status
+import com.example.musicplayer.vm.SongViewModel
+import com.example.musicplayer.vm.SongViewModelFactory
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SplashScreenActivity : AppCompatActivity() {
+    companion object {
+        private const val LOG = "TCR"
+    }
+
     private lateinit var binding: ActivitySplashScreenBinding
+    private val viewModel: SongViewModel by viewModels {
+        SongViewModelFactory(application)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //ẩn title bar
@@ -25,13 +39,10 @@ class SplashScreenActivity : AppCompatActivity() {
 
         //ẩn action bar
         supportActionBar?.hide()
-
         Handler(Looper.getMainLooper()).postDelayed({
             //Handle API
-            lifecycleScope.launch {
-                val result = SongClient.invoke().getSong()
-                Log.d("Changne",result.body().toString())
-            }
+
+
             //Start Activity
             startActivity(Intent(this, MainActivity::class.java))
 

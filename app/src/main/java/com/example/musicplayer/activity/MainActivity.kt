@@ -19,12 +19,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMainBinding
-
-import com.example.musicplayer.vm.HomeViewModel
+import com.example.musicplayer.model.Song
+import com.example.musicplayer.utils.Status
+import com.example.musicplayer.vm.SongViewModel
+import com.example.musicplayer.vm.SongViewModelFactory
 import kotlinx.coroutines.delay
-
-import com.example.musicplayer.network.SongClient
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,9 +32,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
 
-    private val TAG: String = "DHP"
-    private val viewModel: HomeViewModel by viewModels()
-    private val READ_STORAGE_PERMISSION_CODE = 101
+
+//   // private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: SongViewModel by viewModels {
+        SongViewModelFactory(application)
+    }
+    companion object {
+        private const val LOG = "TCR"
+        private const val TAG: String = "DHP"
+        private const val READ_STORAGE_PERMISSION_CODE = 101
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,9 +72,10 @@ class MainActivity : AppCompatActivity() {
             navView.setupWithNavController(navController)
         }
 
-        viewModel.localSongs.observe(this  ){
-            Log.d(TAG,"local songs: ${it.toString()}")
+        viewModel.localSongs.observe(this) {
+            Log.d(TAG, "local songs: ${it.toString()}")
         }
+
         // check permission
         checkPermission(
             arrayOf(
@@ -76,10 +84,51 @@ class MainActivity : AppCompatActivity() {
             ),
             READ_STORAGE_PERMISSION_CODE
         )
-    }
+
+        //Rin
+        /////////////////////////////////////////////////////////////////////
+        //INSERT to DB
+        lifecycleScope.launch {
+            viewModel.getSong().observe(this@MainActivity) {
+                it?.let {
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            val songs = it.data
+                            Log.d(LOG, songs.toString())
+                            for (i in 0..songs!!.size) {
+                                val song = Song(
+                                    songs[i].idSong,
+                                    songs[i].nameSong,
+                                    songs[i].urlImage,
+                                    songs[i].urlSong,
+                                    songs[i].genre,
+                                    songs[i].musician,
+                                    songs[i].singer,
+                                    songs[i].album,
+                                    songs[i].release,
+                                    songs[i].duration,
+                                    songs[i].views,
+                                    songs[i].isOffline
+                                )
+                                viewModel.insertSongToDB(song)
+                            }
+                        }
+                        Status.LOADING -> {
+                            Log.d(LOG, "Loading")
+                        }
+                        Status.ERROR -> {
+                            Log.d(LOG, "Error")
+                        }
+                    }
+                }
+            }
+        }
+        /////////////////////////////////////////////////////////////
+  }
+
     //update local song between room and device
-    private fun updateLocalSongs(){
-        lifecycleScope.launch{
+    private fun updateLocalSongs() {
+        lifecycleScope.launch {
             delay(500L)
             viewModel.updateLocalSongs()
         }
@@ -90,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    //3
     // Function to check and request permission.
     private fun checkPermission(permission: Array<String>, requestCode: Int) {
         if (ContextCompat.checkSelfPermission(
@@ -109,6 +159,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //4
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -117,11 +168,19 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == READ_STORAGE_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this@MainActivity, "READ and WRITE STORAGE Permission Granted", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this@MainActivity,
+                    "READ and WRITE STORAGE Permission Granted",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
                 updateLocalSongs()
             } else {
-                Toast.makeText(this@MainActivity, "READ and WRITE STORAGE  Permission Denied", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this@MainActivity,
+                    "READ and WRITE STORAGE  Permission Denied",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
         }
