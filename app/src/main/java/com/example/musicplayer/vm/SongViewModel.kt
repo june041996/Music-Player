@@ -5,17 +5,46 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
+import com.example.musicplayer.network.SongClient
+import com.example.musicplayer.utils.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel(app: Application) : AndroidViewModel(app) {
-    private val TAG: String = "DHP"
-    val dao = MusicDatabase.getInstance(getApplication()).songDao()
+
+class SongViewModel(application: Application) : AndroidViewModel(application) {
+    companion object {
+        private const val TAG: String = "DHP"
+    }
+
+    //Rin
+    ////////////////////////////////////////////////////////////////////////////////
+    private val dao = MusicDatabase.getInstance(application.applicationContext).songDao()
+
+    //GET Song from API
+    private suspend fun getSongFromAPI() = SongClient.invoke().getSong()
+
+    fun getSong() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            val data = getSongFromAPI().body()?.songList
+            emit(Resource.success(data = data))
+        } catch (ex: Exception) {
+            emit(Resource.error(data = null, message = ex.message ?: "Error !!"))
+        }
+    }
+
+    //INSERT Song to Database
+    private suspend fun insertSongDao(song: Song) = dao.insertSong(song)
+
+    fun insertSongToDB(song: Song) = viewModelScope.launch {
+        insertSongDao(song)
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    //Anh Phuc
 
     private fun insertSong(song: Song) {
         viewModelScope.launch {
@@ -118,4 +147,5 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
         tempOld.forEach { deleteSong(it) }
         tempNew.forEach { insertSong(it) }
     }
+
 }
