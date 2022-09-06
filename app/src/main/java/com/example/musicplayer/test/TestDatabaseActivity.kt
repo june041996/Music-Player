@@ -28,11 +28,12 @@ class TestDatabaseActivity : AppCompatActivity() {
             Playlist(null, 1, "a", "aa"),
             Playlist(null, 2, "b", "b"),
         )
-        var songs = listOf<Song>(
-            Song(null, "A", "A", "A", "A", "A", "A", "A", "A", 1),
-            Song(null, "B", "B", "A", "A", "A", "A", "A", "A", 2),
-            Song(null, "C", "C", "A", "A", "A", "A", "A", "A", 3),
-        )
+//        var songs = listOf<Song>(
+//            Song(null, "A", "A", "A", "A", "A", "A", "A", "A", 1),
+//            Song(null, "B", "B", "A", "A", "A", "A", "A", "A", 2),
+//            Song(null, "C", "C", "A", "A", "A", "A", "A", "A", 3),
+//        )
+
         var songPlaylistCrossRef = listOf<SongPlaylistCrossRef>(
             SongPlaylistCrossRef(1, 1),
             SongPlaylistCrossRef(2, 1),
@@ -56,7 +57,7 @@ class TestDatabaseActivity : AppCompatActivity() {
         binding.add.setOnClickListener() {
             lifecycleScope.launch {
                 playlists.forEach { dao.insertPlaylist(it) }
-                songs.forEach { dao.insertSong(it) }
+                //songs.forEach { dao.insertSong(it) }
                 songPlaylistCrossRef.forEach { dao.insertSongPlaylistCrossRef(it) }
                 users.forEach { dao.insertUser(it) }
                 favourites.forEach { dao.insertFavourite(it) }
@@ -83,10 +84,10 @@ class TestDatabaseActivity : AppCompatActivity() {
         }
 
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 //Light
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }else{
+            } else {
                 //Night
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }

@@ -22,5 +22,9 @@
     <color name="line_light">#FFD3D4E5</color>
     <color name="red">#DA0119</color>
 
+    <!--Splash-->
+    <color name="splash_1">#FF8996B8</color>
+    <color name="splash_2">#FF091227</color>
+
 
 </resources>

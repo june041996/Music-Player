@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/background_color</item>
 
         <!-- Customize your theme here. -->
         <item name="background_color">@color/background_dark</item>
@@ -20,5 +20,20 @@
         <item name="icon_checked_color">@color/text_dark</item>
         <item name="text_color">@color/text_dark</item>
         <item name="title_color">@color/title_dark</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Theme.CustomMusicPlayer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryVariant">@android:color/transparent</item>
+        <item name="colorOnPrimary">@android:color/transparent</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@android:color/transparent</item>
+        <item name="colorSecondaryVariant">@android:color/transparent</item>
+        <item name="colorOnSecondary">@android:color/transparent</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/background_color</item>
+        <!--Bỏ màn hình trắng mới mở lên-->
+        <item name="android:windowBackground">@drawable/shape_splash_screen</item>
     </style>
 </resources>
