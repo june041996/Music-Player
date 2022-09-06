@@ -42,9 +42,8 @@ class SplashScreenActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             //Handle API
 
-
             //Start Activity
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, SigninActivity::class.java))
 
             //Tắt luôn splash
             finish()
