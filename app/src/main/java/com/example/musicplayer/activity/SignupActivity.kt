@@ -1,12 +1,14 @@
 package com.example.musicplayer.activity
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.musicplayer.databinding.ActivitySignupBinding
+import com.example.musicplayer.fragment.HomeFragment
 import com.example.musicplayer.vm.AuthViewModel
 
 class SignupActivity : AppCompatActivity() {
@@ -26,6 +28,8 @@ class SignupActivity : AppCompatActivity() {
         binding.btnSignup.setOnClickListener {
             signUpuser()
             viewModel.register(binding.edtEmail.text.toString(), binding.edtPassword.text.toString())
+            startActivity(Intent(this, HomeFragment::class.java))
+            finish()
         }
         viewModel.isSuccessful.observe(this, Observer {
             //handle

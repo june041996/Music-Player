@@ -21,6 +21,9 @@ class AuthenticationRepository(val application: Application) {
         firebaseAuth.signInWithEmailAndPassword(mail, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+                    // get current user
+                    val firebaseUser = firebaseAuth.currentUser
+                    val email = firebaseUser!!.email
                     Log.d("login", "login success")
                     isSuccessful.value = it.isSuccessful
                     //luu lai mail va password vao app de lan sau su dung
@@ -53,6 +56,9 @@ class AuthenticationRepository(val application: Application) {
         firebaseAuth.createUserWithEmailAndPassword(mail, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+                    // get current user
+                    val firebaseUser = firebaseAuth.currentUser
+                    val email = firebaseUser!!.email
                     isSuccessful.value = it.isSuccessful
                     //luu lai mail va password vao app de lan sau su dung
                     val loginInfo = LoginModel(mail, password)
