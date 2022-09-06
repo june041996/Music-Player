@@ -2,4 +2,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="?attr/icon_checked_color" android:state_checked="true" />
     <item android:color="?attr/icon_unchecked_color" android:state_checked="false" />
+
 </selector>
