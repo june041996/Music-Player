@@ -15,6 +15,10 @@ interface MusicDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSong(song: Song)
 
+    //SELECT song by id
+    @Query("SELECT * FROM tb_song WHERE idSong=:id")
+    fun getSongById(id: Int): LiveData<Song>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlaylist(playlist: Playlist)
 
