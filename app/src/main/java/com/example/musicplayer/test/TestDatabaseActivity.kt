@@ -1,7 +1,6 @@
 package com.example.musicplayer.test
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
@@ -71,14 +70,14 @@ class TestDatabaseActivity : AppCompatActivity() {
         }
         binding.show.setOnClickListener() {
             lifecycleScope.launch {
-                val l1 = dao.getUserWithFavouriteAndSongs(1)
-                val l2 = dao.getUserWithFavouriteAndSongs(2)
-                val l3 = dao.getUserWithPlaylistsAndSongs(1)
-                val l4 = dao.getUserWithPlaylistsAndSongs(2)
-                Log.d(TAG, "user1: ${l1.toString()} ")
-                Log.d(TAG, "user2: ${l2.toString()} ")
-                Log.d(TAG, "user1: ${l3.toString()} ")
-                Log.d(TAG, "user2: ${l4.toString()} ")
+                /*  val l1 = dao.getUserWithFavouriteAndSongs(1)
+                  val l2 = dao.getUserWithFavouriteAndSongs(2)
+                  val l3 = dao.getUserWithPlaylistsAndSongs(1)
+                  val l4 = dao.getUserWithPlaylistsAndSongs(2)
+                  Log.d(TAG, "user1: ${l1.toString()} ")
+                  Log.d(TAG, "user2: ${l2.toString()} ")
+                  Log.d(TAG, "user1: ${l3.toString()} ")
+                  Log.d(TAG, "user2: ${l4.toString()} ")*/
             }
         }
 

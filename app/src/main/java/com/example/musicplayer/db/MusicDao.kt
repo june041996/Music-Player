@@ -45,6 +45,9 @@ interface MusicDao {
     @Query("DELETE FROM tb_song WHERE idSong=:id")
     suspend fun deleteSong(id: Int)
 
+    @Query("DELETE FROM tb_favourite WHERE idUser=:idUser AND idSong=:idSong")
+    suspend fun deleteFavouriteSong(idUser: Int, idSong: Int)
+
     //QUERY
     @Query("SELECT * FROM tb_song")
     fun getAllSongs(): LiveData<List<Song>>
@@ -61,15 +64,15 @@ interface MusicDao {
     //get user playlist song
     @Transaction
     @Query("SELECT * FROM tb_user WHERE idUser=:id")
-    suspend fun getUserWithPlaylistsAndSongs(id: Int): List<UserWithPlaylistsAndSongs>
+    suspend fun getUserWithPlaylistsAndSongs(id: Int): UserWithPlaylistsAndSongs
 
     //get list song of favourite
     @Transaction
-    @Query("SELECT * FROM tb_favourite WHERE idFavourite=:id")
+    @Query("SELECT * FROM tb_user WHERE idUser=:id")
     suspend fun getSongsOfFavourite(id: Int): List<FavouriteWithSongs>
 
     //get user  favourite song
-    @Transaction
+    /*@Transaction
     @Query("SELECT * FROM tb_user WHERE idUser=:id")
-    suspend fun getUserWithFavouriteAndSongs(id: Int): List<UserWithFavouriteAndSongs>
+    suspend fun getUserWithFavouriteAndSongs(id: Int): UserWithFavouriteAndSongs*/
 }
