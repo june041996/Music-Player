@@ -9,7 +9,6 @@ import com.example.musicplayer.databinding.ActivityTestDatabaseBinding
 import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Favourite
 import com.example.musicplayer.model.Playlist
-import com.example.musicplayer.model.Song
 import com.example.musicplayer.model.User
 import com.example.musicplayer.model.relation.FavouriteSongCrossRef
 import com.example.musicplayer.model.relation.SongPlaylistCrossRef
