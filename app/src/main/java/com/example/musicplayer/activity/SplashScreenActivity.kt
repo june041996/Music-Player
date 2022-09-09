@@ -1,23 +1,15 @@
 package com.example.musicplayer.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.Window
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.musicplayer.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.musicplayer.databinding.ActivitySplashScreenBinding
-import com.example.musicplayer.model.Song
-import com.example.musicplayer.network.SongClient
-import com.example.musicplayer.utils.Status
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.SongViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class SplashScreenActivity : AppCompatActivity() {
     companion object {
@@ -43,7 +35,7 @@ class SplashScreenActivity : AppCompatActivity() {
             //Handle API
 
             //Start Activity
-            startActivity(Intent(this, SigninActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
 
             //Tắt luôn splash
             finish()

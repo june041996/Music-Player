@@ -10,8 +10,6 @@ import com.example.musicplayer.model.LoginModel
 import com.google.firebase.auth.FirebaseAuth
 
 
-
-
 class AuthenticationRepository(val application: Application) {
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val isSuccessful = MutableLiveData<Boolean>()
