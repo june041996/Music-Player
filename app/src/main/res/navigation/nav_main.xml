@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_libraryFragment_to_onDeviceFragment"
             app:destination="@id/onDeviceFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
@@ -43,5 +46,10 @@
         android:name="com.example.musicplayer.fragment.library.OnDeviceFragment"
         android:label="fragment_on_device"
         tools:layout="@layout/fragment_on_device" />
+
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.musicplayer.fragment.library.FavouriteFragment"
+        android:label="FavouriteFragment" />
 
 </navigation>

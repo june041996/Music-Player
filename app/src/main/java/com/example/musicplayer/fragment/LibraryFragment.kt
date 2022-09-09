@@ -33,6 +33,9 @@ class LibraryFragment : Fragment() {
         binding.lnOnDevice.setOnClickListener() {
             findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToOnDeviceFragment())
         }
+        binding.lnFavourite.setOnClickListener(){
+            findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToFavouriteFragment())
+        }
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 // Add menu items here

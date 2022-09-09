@@ -29,7 +29,7 @@ class OnDeviceAdapter() : RecyclerView.Adapter<OnDeviceAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener() {
-                listener.onItemClick(absoluteAdapterPosition)
+                listener.onItemClick(absoluteAdapterPosition,binding.imgMenu)
             }
         }
 
