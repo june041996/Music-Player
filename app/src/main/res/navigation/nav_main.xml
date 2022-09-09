@@ -20,9 +20,18 @@
     <fragment
         android:id="@+id/libraryFragment"
         android:name="com.example.musicplayer.fragment.LibraryFragment"
-        android:label="Library" />
+        android:label="Library">
+        <action
+            android:id="@+id/action_libraryFragment_to_onDeviceFragment"
+            app:destination="@id/onDeviceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.example.musicplayer.fragment.SettingFragment"
         android:label="Setting" />
+    <fragment
+        android:id="@+id/onDeviceFragment"
+        android:name="com.example.musicplayer.fragment.library.OnDeviceFragment"
+        android:label="fragment_on_device"
+        tools:layout="@layout/fragment_on_device" />
 </navigation>

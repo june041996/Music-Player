@@ -6,13 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.model.User
 import com.example.musicplayer.vm.AuthViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -42,7 +39,7 @@ class HomeFragment : Fragment() {
             //user not null, user is logged in, get user info
             val email = firebaseUser.email
             //set to text view
-            viewModel.insertUser(User(idUser = null, email=email!!, password = ""))
+            viewModel.insertUser(User(idUser = null, email = email!!, password = ""))
             binding.tvEmail.text = email
 
 

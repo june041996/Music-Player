@@ -3,15 +3,13 @@ package com.example.musicplayer.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
-
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -34,10 +32,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfig: AppBarConfiguration
 
 
-//   // private val viewModel: HomeViewModel by viewModels()
+    //   // private val viewModel: HomeViewModel by viewModels()
     private val viewModel: SongViewModel by viewModels {
         SongViewModelFactory(application)
     }
+
     companion object {
         private const val LOG = "TCR"
         private const val TAG: String = "DHP"
@@ -127,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         /////////////////////////////////////////////////////////////
 
 
-  }
+    }
 
     //update local song between room and device
     private fun updateLocalSongs() {
