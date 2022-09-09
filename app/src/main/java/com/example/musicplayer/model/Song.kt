@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.util.concurrent.TimeUnit
 
 @Entity(tableName = "tb_song")
 data class Song(
