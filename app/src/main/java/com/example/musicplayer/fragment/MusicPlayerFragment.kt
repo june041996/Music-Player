@@ -89,7 +89,6 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         controlMusic()
         binding.musicDisc.startAnimation(animation)
 
-
         //Control
         binding.btnPlayStopMusic.setOnClickListener {
             if (isPlaying) {
