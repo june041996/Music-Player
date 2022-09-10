@@ -15,9 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="?attr/text_color"
         app:navigationIcon="@drawable/ic_arrow_back"
-        />
+        app:titleTextColor="?attr/text_color" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host"
