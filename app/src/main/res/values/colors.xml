@@ -20,6 +20,7 @@
     <color name="text_light">#FF091227</color>
     <color name="title_light">#FF8996B8</color>
     <color name="line_light">#FFD3D4E5</color>
+    <color name="red">#DA0119</color>
 
     <!--Splash-->
     <color name="splash_1">#FF8996B8</color>
