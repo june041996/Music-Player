@@ -148,4 +148,11 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
         tempNew.forEach { insertSong(it) }
     }
 
+    var _selectedSong = MutableLiveData<Song>()
+    val selectedSong: LiveData<Song>
+        get() = _selectedSong
+
+    fun setSelectSong(song: Song) {
+        _selectedSong.value = song
+    }
 }

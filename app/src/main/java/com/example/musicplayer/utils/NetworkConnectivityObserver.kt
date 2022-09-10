@@ -18,28 +18,28 @@ class NetworkConnectivityObserver(val context: Context) : ConnectivityObserver {
             val callback = object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     super.onAvailable(network)
-                    launch{
+                    launch {
                         send(ConnectivityObserver.StatusInternet.AVAILABLE)
                     }
                 }
 
                 override fun onLosing(network: Network, maxMsToLive: Int) {
                     super.onLosing(network, maxMsToLive)
-                    launch{
+                    launch {
                         send(ConnectivityObserver.StatusInternet.LOSING)
                     }
                 }
 
                 override fun onLost(network: Network) {
                     super.onLost(network)
-                    launch{
+                    launch {
                         send(ConnectivityObserver.StatusInternet.LOST)
                     }
                 }
 
                 override fun onUnavailable() {
                     super.onUnavailable()
-                    launch{
+                    launch {
                         send(ConnectivityObserver.StatusInternet.UNAVAILABLE)
                     }
                 }

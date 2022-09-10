@@ -28,7 +28,6 @@ import com.example.musicplayer.model.Song
 import com.example.musicplayer.service.MusicPlayerService
 import com.example.musicplayer.utils.ConnectivityObserver
 import com.example.musicplayer.utils.NetworkConnectivityObserver
-import com.example.musicplayer.utils.Status
 import com.example.musicplayer.utils.formatSongDuration
 import com.example.musicplayer.vm.MusicPlayerViewModel
 import kotlinx.coroutines.launch

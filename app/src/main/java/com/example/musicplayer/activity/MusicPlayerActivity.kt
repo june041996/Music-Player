@@ -1,19 +1,13 @@
 package com.example.musicplayer.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import androidx.activity.viewModels
-import androidx.core.view.GravityCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMusicPlayerBinding
-import com.example.musicplayer.vm.SongViewModel
-import com.example.musicplayer.vm.SongViewModelFactory
 
 class MusicPlayerActivity : AppCompatActivity() {
     companion object {

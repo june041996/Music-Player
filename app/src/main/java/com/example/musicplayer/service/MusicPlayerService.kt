@@ -1,12 +1,10 @@
 package com.example.musicplayer.service
 
-import android.app.Notification
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
-import android.media.MediaSession2
 import android.net.Uri
 import android.os.Binder
 import android.os.Handler

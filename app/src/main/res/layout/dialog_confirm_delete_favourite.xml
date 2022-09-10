@@ -22,18 +22,12 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Enter a name of new playlist:"
+            android:text="Are you sure you want to remove this item?"
             android:layout_width="match_parent"
             android:textSize="@dimen/normal_text"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/edtName"
-            android:layout_marginTop="@dimen/padding_dialog"
-            android:padding="@dimen/padding_dialog"
-            android:background="@drawable/bg_edt_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -43,8 +37,8 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnCancel"
             android:background="@drawable/bg_btn_cancel"
+            android:id="@+id/btnCancel"
             android:text="Cancel"
             android:layout_weight="1"
             android:layout_width="0dp"

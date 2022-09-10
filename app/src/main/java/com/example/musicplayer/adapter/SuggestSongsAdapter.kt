@@ -1,5 +1,6 @@
 package com.example.musicplayer.adapter
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.databinding.ItemOnDeviceSongBinding
 import com.example.musicplayer.model.Song
 
-class OnDeviceAdapter() : RecyclerView.Adapter<OnDeviceAdapter.ViewHolder>() {
+class SuggestSongsAdapter() : RecyclerView.Adapter<SuggestSongsAdapter.ViewHolder>() {
     private var songs = arrayListOf<Song>()
     private lateinit var listener: OnItemClickListener
     private lateinit var btnListener: OnItemButtonClickListener

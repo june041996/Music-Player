@@ -2,10 +2,20 @@ package com.example.musicplayer.activity
 
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -19,6 +29,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMainBinding
 import com.example.musicplayer.model.Song
+import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Status
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.SongViewModelFactory
@@ -77,17 +88,53 @@ class MainActivity : AppCompatActivity() {
         }
 
         // check permission
-        checkPermission(
-            arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ),
-            READ_STORAGE_PERMISSION_CODE
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                try {
+                    val i = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                    i.addCategory("android.intent.category.DEFAULT")
+                    i.data = Uri.parse(String.format("package:%s", applicationContext.packageName))
+                    storageActivityResultLauncher.launch(i)
+                } catch (e: Exception) {
+                    val i = Intent()
+                    i.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                    storageActivityResultLauncher.launch(i)
+                }
+            } else {
+                //Permission already granted
+                updateLocalSongs()
+                updateApiSongs()
+            }
+        } else {
+            checkPermission(
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ),
+                READ_STORAGE_PERMISSION_CODE
+            )
+        }
 
         //Rin
         /////////////////////////////////////////////////////////////////////
         //INSERT to DB
+
+        /////////////////////////////////////////////////////////////
+
+
+    }
+
+
+    //update local song between room and device
+    private fun updateLocalSongs() {
+        lifecycleScope.launch {
+            delay(500L)
+            viewModel.updateLocalSongs()
+        }
+
+    }
+
+    private fun updateApiSongs() {
         lifecycleScope.launch {
             viewModel.getSong().observe(this@MainActivity) {
                 it?.let {
@@ -123,23 +170,29 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        /////////////////////////////////////////////////////////////
-
-  }
-
-
-    //update local song between room and device
-    private fun updateLocalSongs() {
-        lifecycleScope.launch {
-            delay(500L)
-            viewModel.updateLocalSongs()
-        }
-
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+    private var storageActivityResultLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                if (SDK_INT >= Build.VERSION_CODES.R) {
+                    if (Environment.isExternalStorageManager()) {
+                        // perform action when allow permission success
+                        Log.d(Contanst.TAG, "granted")
+                        updateLocalSongs()
+
+                    } else {
+                        Log.d(Contanst.TAG, "Denied")
+                    }
+                }
+            }
+        }
+
 
     //3
     // Function to check and request permission.
@@ -152,6 +205,7 @@ class MainActivity : AppCompatActivity() {
                 permission[1]
             ) == PackageManager.PERMISSION_DENIED
         ) {
+
             // Requesting the permission
             ActivityCompat.requestPermissions(this@MainActivity, permission, requestCode)
         } else {

@@ -1,11 +1,11 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
-import com.example.musicplayer.utils.Resource
-import kotlinx.coroutines.Dispatchers
 
 class MusicPlayerViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
