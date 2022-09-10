@@ -10,12 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imgPlay"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_play"
-            android:layout_width="@dimen/height_item_library"
-            android:layout_height="@dimen/height_item_library" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPlay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_play"
+                android:text="Play" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnShuffle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_play"
+                android:text="Shuffle" />
+        </LinearLayout>
 
         <TextView
             android:textSize="@dimen/title_text"
