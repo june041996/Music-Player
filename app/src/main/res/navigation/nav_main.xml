@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_libraryFragment_to_favouriteFragment"
             app:destination="@id/favouriteFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_playlistSongFragment"
+            app:destination="@id/playlistSongFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
@@ -45,11 +48,28 @@
         android:id="@+id/onDeviceFragment"
         android:name="com.example.musicplayer.fragment.library.OnDeviceFragment"
         android:label="fragment_on_device"
-        tools:layout="@layout/fragment_on_device" />
+        tools:layout="@layout/fragment_on_device">
+        <action
+            android:id="@+id/action_onDeviceFragment_to_addToPlaylistFragment"
+            app:destination="@id/addToPlaylistFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="com.example.musicplayer.fragment.library.FavouriteFragment"
         android:label="FavouriteFragment" />
+    <fragment
+        android:id="@+id/addToPlaylistFragment"
+        android:name="com.example.musicplayer.fragment.library.AddToPlaylistFragment"
+        android:label="fragment_add_to_playlist"
+        tools:layout="@layout/fragment_add_to_playlist" />
+    <fragment
+        android:id="@+id/playlistSongFragment"
+        android:name="com.example.musicplayer.fragment.library.PlaylistSongFragment"
+        android:label="PlaylistSongFragment">
+        <action
+            android:id="@+id/action_playlistSongFragment_to_addToPlaylistFragment"
+            app:destination="@id/addToPlaylistFragment" />
+    </fragment>
 
 </navigation>

@@ -10,15 +10,26 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
+import com.example.musicplayer.adapter.AddToPlaylistAdapter
+import com.example.musicplayer.adapter.OnItemClickListener
 import com.example.musicplayer.databinding.FragmentLibraryBinding
+import com.example.musicplayer.model.Playlist
+import com.example.musicplayer.model.User
 import com.example.musicplayer.utils.Contanst
+import com.example.musicplayer.vm.PlaylistViewModel
+import com.example.musicplayer.vm.UserViewMode
 
 
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
+    private val playlistViewModel: PlaylistViewModel by activityViewModels()
+    private val userViewModel: UserViewMode by activityViewModels()
+    private var playlists = arrayListOf<Playlist>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,11 +41,30 @@ class LibraryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userViewModel.insertUser(User(null, "a", ""))
         binding.lnOnDevice.setOnClickListener() {
             findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToOnDeviceFragment())
         }
         binding.lnFavourite.setOnClickListener() {
             findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToFavouriteFragment())
+        }
+        binding.lnPlaylist.setOnClickListener() {
+            binding.rvPlaylist.visibility = View.VISIBLE
+        }
+        val adapter = AddToPlaylistAdapter()
+        binding.rvPlaylist.adapter = adapter
+        binding.rvPlaylist.layoutManager = LinearLayoutManager(context)
+        adapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                playlistViewModel.setSelectedPlaylist(playlists[position])
+                findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToPlaylistSongFragment())
+            }
+
+        })
+        playlistViewModel.playlists.observe(viewLifecycleOwner) {
+            playlists.clear()
+            playlists.addAll(it)
+            adapter.submitData(playlists)
         }
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

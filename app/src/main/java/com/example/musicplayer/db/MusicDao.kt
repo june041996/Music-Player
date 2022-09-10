@@ -48,9 +48,15 @@ interface MusicDao {
     @Query("DELETE FROM tb_favourite WHERE idUser=:idUser AND idSong=:idSong")
     suspend fun deleteFavouriteSong(idUser: Int, idSong: Int)
 
+    @Query("DELETE FROM SongPlaylistCrossRef WHERE idPlaylist=:idPlaylist AND idSong=:idSong")
+    suspend fun deleteSongOfPlaylist(idPlaylist: Int, idSong: Int)
+
     //QUERY
     @Query("SELECT * FROM tb_song")
     fun getAllSongs(): LiveData<List<Song>>
+
+    @Query("SELECT * FROM tb_song")
+    suspend fun getSongs(): List<Song>
 
     //get all local song with isOffline = true
     @Query("SELECT * FROM tb_song WHERE isOffline=:status ")

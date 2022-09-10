@@ -73,11 +73,15 @@
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/bg_item_library.xml" value="0.167" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/dialog_confirm_delete_favourite.xml" value="0.1" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/dialog_create_playlist.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_add_to_playlist.xml" value="0.20416666666666666" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_favourite.xml" value="0.1" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_library.xml" value="0.20416666666666666" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_on_device.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_playlist_song.xml" value="0.25" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_add_to_playlist.xml" value="0.203125" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_favourite_song.xml" value="0.1" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_on_device_song.xml" value="0.2" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_suggest_song.xml" value="0.20416666666666666" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/drawer_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/library_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/song_menu.xml" value="0.1" />
