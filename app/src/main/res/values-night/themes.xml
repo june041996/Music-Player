@@ -36,4 +36,5 @@
         <!--Bỏ màn hình trắng mới mở lên-->
         <item name="android:windowBackground">@drawable/shape_splash_screen</item>
     </style>
+
 </resources>

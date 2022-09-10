@@ -2,18 +2,25 @@ package com.example.musicplayer.activity
 
 
 import android.Manifest
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
@@ -22,15 +29,26 @@ import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.Status
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.SongViewModelFactory
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
+    val themePrefsKey = "theme"
+
+    //    val appSettingPrefs: SharedPreferences = getSharedPreferences("AppSettingPrefs", 0)
+//    var sharedPrefsEdit: SharedPreferences.Editor = appSettingPrefs.edit()
+    private var isNightModeOn: Boolean = false
+
+
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
 
+    private lateinit var toolBar: Toolbar
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
 
     //   // private val viewModel: HomeViewModel by viewModels()
     private val viewModel: SongViewModel by viewModels {
@@ -48,9 +66,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        val toolBar = binding.toolbar
+        Log.d(TAG, "create")
+        toolBar = binding.toolbar
         setSupportActionBar(toolBar)
+
+        drawerLayout = binding.drawerLayout
+        navigationView = binding.navView
 
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
@@ -69,8 +90,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             bnvMain.setupWithNavController(navController)
-            navView.setupWithNavController(navController)
+            //navView.setupWithNavController(navController)
+            navView.setNavigationItemSelectedListener(this@MainActivity)
         }
+
 
         viewModel.localSongs.observe(this) {
             Log.d(TAG, "local songs: ${it.toString()}")
@@ -79,8 +102,7 @@ class MainActivity : AppCompatActivity() {
         // check permission
         checkPermission(
             arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE
             ),
             READ_STORAGE_PERMISSION_CODE
         )
@@ -125,8 +147,36 @@ class MainActivity : AppCompatActivity() {
         }
         /////////////////////////////////////////////////////////////
 
-  }
+    }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d(LOG, "pause")
+        val sharedPref =
+            getSharedPreferences(themePrefsKey, Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("NightMode", isNightModeOn)
+            apply()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(LOG, "resume")
+        val sharedPref = getSharedPreferences(themePrefsKey, Context.MODE_PRIVATE)
+        with(sharedPref) {
+            isNightModeOn = this.getBoolean("NightMode", false)
+        }
+
+        if (isNightModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            return
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            return
+        }
+
+    }
 
     //update local song between room and device
     private fun updateLocalSongs() {
@@ -138,7 +188,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfig) || super.onSupportNavigateUp()
     }
 
     //3
@@ -147,9 +197,6 @@ class MainActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(
                 this@MainActivity,
                 permission[0]
-            ) == PackageManager.PERMISSION_DENIED || ContextCompat.checkSelfPermission(
-                this@MainActivity,
-                permission[1]
             ) == PackageManager.PERMISSION_DENIED
         ) {
             // Requesting the permission
@@ -187,5 +234,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.dark_light_mode -> {
+                isNightModeOn = if (isNightModeOn) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    false
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    true
+                }
+            }
+            R.id.settingFragment -> {
+
+            }
+            else -> {
+
+            }
+        }
+
+        return true
+    }
+
 
 }

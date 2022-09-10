@@ -1,5 +1,6 @@
 package com.example.musicplayer.activity
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -31,11 +32,12 @@ class MusicPlayerActivity : AppCompatActivity() {
 
         val toolBar = binding.toolbar
         setSupportActionBar(toolBar)
+        toolBar.overflowIcon?.setTint(Color.RED)
 
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
 
-        setupActionBarWithNavController(navController)
+      //  setupActionBarWithNavController(navController)
     }
 
 }

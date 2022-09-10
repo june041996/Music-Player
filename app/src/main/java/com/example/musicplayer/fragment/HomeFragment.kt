@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.btnMusicPlayer.setOnClickListener {
-            startActivity(Intent(requireActivity(), MusicPlayerActivity::class.java))
+         startActivity(Intent(requireActivity(), MusicPlayerActivity::class.java))
 //            val action = HomeFragmentDirections.actionHomeFragmentToMusicPlayerFragment()
 //            findNavController().navigate(action)
         }

@@ -71,6 +71,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         viewModel.songById.observe(viewLifecycleOwner) {
             viewModel.setSong(it)
         }
+
         binding.vm = viewModel
         binding.lifecycleOwner = this
 

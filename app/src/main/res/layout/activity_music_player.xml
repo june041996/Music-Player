@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="?attr/text_color"
-        app:navigationIcon="@drawable/ic_keyboard_backspace"
+        app:navigationIcon="@drawable/ic_arrow_back"
         />
 
     <androidx.fragment.app.FragmentContainerView

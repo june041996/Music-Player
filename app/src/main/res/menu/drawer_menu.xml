@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/dark_light_mode"
+        android:icon="@drawable/ic_dark_mode"
+        android:title="Dark Light"
+        />
+
+    <item
         android:id="@+id/settingFragment"
         android:icon="@drawable/ic_settings"
-        android:title="Setting" />
+        android:title="Setting"
+        />
 </menu>
