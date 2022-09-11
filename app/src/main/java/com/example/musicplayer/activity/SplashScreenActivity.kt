@@ -8,12 +8,21 @@ import android.view.Window
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.musicplayer.databinding.ActivitySplashScreenBinding
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> 167b27c3d563c22aa5c364c3323831283280ab8e
 import com.example.musicplayer.fragment.HomeFragment
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.network.SongClient
 import com.example.musicplayer.utils.Status
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> origin/master
+>>>>>>> 167b27c3d563c22aa5c364c3323831283280ab8e
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.SongViewModelFactory
 

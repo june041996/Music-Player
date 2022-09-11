@@ -30,11 +30,27 @@ class SignupActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
         // Initialising auth object
         binding.btnSignup.setOnClickListener {
+<<<<<<< HEAD
 
 //            signUpuser()
             viewModel.register(binding.edtEmail.text.toString(), binding.edtPassword.text.toString())
 
 
+=======
+<<<<<<< HEAD
+//            signUpuser()
+            viewModel.register(binding.edtEmail.text.toString(), binding.edtPassword.text.toString())
+
+=======
+            signUpuser()
+            viewModel.register(
+                binding.edtEmail.text.toString(),
+                binding.edtPassword.text.toString()
+            )
+            startActivity(Intent(this, HomeFragment::class.java))
+            finish()
+>>>>>>> origin/master
+>>>>>>> 167b27c3d563c22aa5c364c3323831283280ab8e
         }
         viewModel.isSuccessful.observe(this, Observer {
             //handle

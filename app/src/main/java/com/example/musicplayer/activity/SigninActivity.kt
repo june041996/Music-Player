@@ -33,10 +33,24 @@ class SigninActivity : AppCompatActivity() {
             Log.d("login", "Login here")
             if (isValidData()) {
                 //REQUEST login firebase here
+<<<<<<< HEAD
 
                 viewModel.requestLogin(binding.edtUser.text.toString(), binding.edtPassword.text.toString())
 
 
+=======
+<<<<<<< HEAD
+                viewModel.requestLogin(binding.edtUser.text.toString(), binding.edtPassword.text.toString())
+
+=======
+                viewModel.requestLogin(
+                    binding.edtUser.text.toString(),
+                    binding.edtPassword.text.toString()
+                )
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+>>>>>>> origin/master
+>>>>>>> 167b27c3d563c22aa5c364c3323831283280ab8e
             }
         }
         binding.txtSignup.setOnClickListener {
