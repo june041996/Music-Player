@@ -29,7 +29,7 @@ class MusicPlayerActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
 
-        setupActionBarWithNavController(navController)
+       // setupActionBarWithNavController(navController)
     }
 
 }

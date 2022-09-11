@@ -15,7 +15,7 @@ class MusicPlayerViewModel(application: Application) : AndroidViewModel(applicat
     private val songDao = MusicDatabase.getInstance(application.applicationContext).songDao()
 
     val songs = songDao.getAllSongs()
-    val songById = songDao.getSongById(1004)
+    val songById = songDao.getSongById(1799)
 
     private val _nameSong = MutableLiveData<String>()
     private val _singer = MutableLiveData<String>()

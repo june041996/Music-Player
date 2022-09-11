@@ -33,12 +33,14 @@ class SigninActivity : AppCompatActivity() {
             Log.d("login", "Login here")
             if (isValidData()) {
                 //REQUEST login firebase here
+
+
                 viewModel.requestLogin(
                     binding.edtUser.text.toString(),
                     binding.edtPassword.text.toString()
                 )
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+
+
             }
         }
         binding.txtSignup.setOnClickListener {
@@ -50,6 +52,8 @@ class SigninActivity : AppCompatActivity() {
             //handle
             var message = ""
             if (it == true) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
                 message = "Logged in successfully!"
             } else {
                 message = "Login failed!"
