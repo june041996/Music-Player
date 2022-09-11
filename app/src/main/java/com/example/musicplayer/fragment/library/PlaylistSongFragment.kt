@@ -40,6 +40,8 @@ class PlaylistSongFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.playlist = playlistViewModel
+        binding.lifecycleOwner = this
         //playlistViewModel.getSuggestSongs()
 
 
@@ -74,6 +76,10 @@ class PlaylistSongFragment : Fragment() {
         adapterSuggest.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d(Contanst.TAG, position.toString())
+                favouriteViewModel.checkFavouriteSong(suggestSongs[position].idSong!!)
+                favouriteViewModel.checkSong.observe(viewLifecycleOwner) {
+                    Log.d(Contanst.TAG, "check: ${it.toString()}")
+                }
             }
 
         }, object : OnItemButtonClickListener {
@@ -116,7 +122,11 @@ class PlaylistSongFragment : Fragment() {
                         }
                         R.id.addToPlaylist -> {
                             //Log.d(Contanst.TAG, "pla")
-                            findNavController().navigate(PlaylistSongFragmentDirections.actionPlaylistSongFragmentToAddToPlaylistFragment())
+                            findNavController().navigate(
+                                PlaylistSongFragmentDirections.actionPlaylistSongFragmentToAddToPlaylistFragment(
+                                    song.nameSong
+                                )
+                            )
                         }
                         R.id.delete -> {
                             CustomDialog(requireContext()).createConfirmDialog(object :

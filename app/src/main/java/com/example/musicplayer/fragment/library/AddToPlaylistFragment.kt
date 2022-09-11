@@ -33,6 +33,7 @@ class AddToPlaylistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.btnCreatePlaylist.setOnClickListener() {
             CustomDialog(requireContext()).createInputDialog(object :
                 CustomDialog.OnSubmitBtnClick {

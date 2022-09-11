@@ -11,6 +11,7 @@ import com.example.musicplayer.model.relation.*
 
 @Dao
 interface MusicDao {
+
     //INSERT Thêm dữ liệu từ API vào Local DB
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSong(song: Song)
@@ -72,6 +73,9 @@ interface MusicDao {
     //get all local song with isOffline = true
     @Query("SELECT * FROM tb_song WHERE isOffline=:status ")
     suspend fun getLocalSongs(status: Boolean): List<Song>
+
+    @Query("SELECT * FROM tb_favourite WHERE idUser=:idUser AND idSong=:idSong")
+    suspend fun getFavouriteSong(idUser: Int, idSong: Int): Favourite
 
     //get list song of playlist
     @Transaction

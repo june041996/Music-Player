@@ -3,7 +3,9 @@ package com.example.musicplayer.activity
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -41,7 +43,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
-
+    private lateinit var sharedpreferences: SharedPreferences
+    private val SHARED_PREFS = "shared_prefs"
 
     //   // private val viewModel: HomeViewModel by viewModels()
     private val viewModel: SongViewModel by viewModels {
@@ -59,6 +62,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        //
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+        val editor = sharedpreferences.edit()
+        editor.putInt("id", 1)
+        editor.putString("username", "DHP")
+        editor.apply()
 
         val toolBar = binding.toolbar
         setSupportActionBar(toolBar)

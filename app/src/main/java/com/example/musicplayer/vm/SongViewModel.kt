@@ -9,12 +9,15 @@ import androidx.lifecycle.*
 import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.network.SongClient
+import com.example.musicplayer.repository.SongRepository
 import com.example.musicplayer.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
 class SongViewModel(application: Application) : AndroidViewModel(application) {
+    val songRepository = SongRepository(getApplication<Application>().applicationContext)
+
     companion object {
         private const val TAG: String = "DHP"
     }
@@ -48,13 +51,13 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun insertSong(song: Song) {
         viewModelScope.launch {
-            dao.insertSong(song)
+            songRepository.insertSong(song)
         }
     }
 
     private fun deleteSong(song: Song) {
         viewModelScope.launch {
-            dao.deleteSong(song.idSong!!)
+            songRepository.deleteSong(song)
         }
     }
 
@@ -65,7 +68,7 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
     var _localSong = MutableLiveData<List<Song>>()
     private fun getLocalSongs(): MutableLiveData<List<Song>> {
         viewModelScope.launch {
-            _localSong.value = dao.getLocalSongs(true)
+            _localSong.value = songRepository.getLocalSongs()
             _sizeLocalSongs.value = _localSong.value!!.size
         }
         return _localSong
