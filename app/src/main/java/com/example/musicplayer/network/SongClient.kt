@@ -8,8 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 Trong 1 thời điểm chỉ có 1 instance SongClient
  */
 object SongClient {
-    //private const val BASE_URL = "https://apimocha.com/rinphucquang/"
-    private const val BASE_URL = "https://musicplayer.free.beeceptor.com/"
+    private const val BASE_URL = "https://apimocha.com/rinphucquang/"
+    //private const val BASE_URL = "https://musicplayer.free.beeceptor.com/"
     /**
      * Retrofit lấy json về
      * Gson chuyển đổi json thành object
