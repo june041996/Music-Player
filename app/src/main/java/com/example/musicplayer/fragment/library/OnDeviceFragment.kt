@@ -102,7 +102,7 @@ class OnDeviceFragment : Fragment() {
                     R.id.addToPlaylist -> {
                         findNavController().navigate(
                             OnDeviceFragmentDirections.actionOnDeviceFragmentToAddToPlaylistFragment(
-                                song.nameSong
+                                song.nameSong!!
                             )
                         )
                     }

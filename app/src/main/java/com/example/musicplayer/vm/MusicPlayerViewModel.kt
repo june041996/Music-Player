@@ -21,8 +21,8 @@ class MusicPlayerViewModel(application: Application) : AndroidViewModel(applicat
     private val _singer = MutableLiveData<String>()
 
     fun setSong(song: Song) {
-        _nameSong.value = song.nameSong
-        _singer.value = song.singer
+        _nameSong.value = song.nameSong!!
+        _singer.value = song.singer!!
     }
 
     val nameSong: LiveData<String> = _nameSong

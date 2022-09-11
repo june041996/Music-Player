@@ -124,7 +124,7 @@ class PlaylistSongFragment : Fragment() {
                             //Log.d(Contanst.TAG, "pla")
                             findNavController().navigate(
                                 PlaylistSongFragmentDirections.actionPlaylistSongFragmentToAddToPlaylistFragment(
-                                    song.nameSong
+                                    song.nameSong!!
                                 )
                             )
                         }

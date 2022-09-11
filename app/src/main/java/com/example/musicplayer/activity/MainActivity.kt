@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             } else {
                 //Permission already granted
                 updateLocalSongs()
-                // updateApiSongs()
+                updateApiSongs()
             }
         } else {
             checkPermission(
