@@ -5,20 +5,50 @@
       <map>
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/drawer_image_circle.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_bar_chart.xml" value="0.2075" />
+<<<<<<< HEAD
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/select_bottom_nav.xml" value="0.1925" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/shape_bottom_nav.xml" value="0.1925" />
+=======
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_close.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_favorite.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_home.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_keyboard_backspace.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_library_music.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_music_note.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_pause.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_play_arrow.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_repeat.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_repeat_one.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_search.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_settings.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_skip_next.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_skip_previous.xml" value="0.1275" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/select_bottom_nav.xml" value="0.1925" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/shape_bottom_nav.xml" value="0.1925" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/shape_button_music_player.xml" value="0.142" />
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/shape_button_next_previous.xml" value="0.1275" />
+>>>>>>> origin/master
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/shape_music_disc.xml" value="0.1275" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/shape_splash_screen.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_home.xml" value="0.152" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_library.xml" value="0.24375" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_main.xml" value="0.1" />
+<<<<<<< HEAD
+=======
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_music_player.xml" value="0.1" />
+>>>>>>> origin/master
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_rank.xml" value="0.24375" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_search.xml" value="0.2296875" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_setting.xml" value="0.112" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_splash_screen.xml" value="0.1082427536231884" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/activity_test_database.xml" value="0.16" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/drawer_header.xml" value="0.11503623188405797" />
+<<<<<<< HEAD
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_home.xml" value="0.11510416666666666" />
+=======
+        <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_home.xml" value="0.176" />
+>>>>>>> origin/master
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_library.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_music_player.xml" value="0.264" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/layout/fragment_rank.xml" value="0.11614583333333334" />
@@ -31,6 +61,7 @@
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/mipmap-anydpi-v26/ic_music_player.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/mipmap-anydpi-v26/ic_music_player_round.xml" value="0.1" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable-v24/shape_drawable.xml" value="0.1" />
+<<<<<<< HEAD
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/btn_bg.xml" value="0.1795" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/custom_input.xml" value="0.1" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_down.xml" value="0.2595" />
@@ -42,6 +73,13 @@
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_repeat.xml" value="0.1" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_skip_next.xml" value="0.2595" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_skip_previous.xml" value="0.2595" />
+=======
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/custom_input.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_pause.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_person.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_repeat.xml" value="0.1" />
+>>>>>>> origin/master
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/shape_drawable.xml" value="0.1" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_main.xml" value="0.24635416666666668" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_signin.xml" value="0.25" />
@@ -50,6 +88,7 @@
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_home.xml" value="0.24635416666666668" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_library.xml" value="0.24635416666666668" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_music_player.xml" value="0.24635416666666668" />
+<<<<<<< HEAD
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_player.xml" value="0.264" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
@@ -59,6 +98,39 @@
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25052083333333336" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/menu/drawer_menu.xml" value="0.25052083333333336" />
         <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/menu/menu.xml" value="0.24947916666666667" />
+=======
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/bg_btn_cancel.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/bg_btn_ok.xml" value="0.167" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/bg_btn_play.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/bg_dialog.xml" value="0.167" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/bg_dialog_top.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/bg_edt_dialog.xml" value="0.167" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/bg_item_library.xml" value="0.167" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/drawable/ic_menu.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/dialog_confirm_delete_favourite.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/dialog_create_playlist.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_add_to_playlist.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_favourite.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_library.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_on_device.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_playlist.xml" value="0.19010416666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/fragment_playlist_song.xml" value="0.25" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_add_to_playlist.xml" value="0.203125" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_favourite_song.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_on_device_song.xml" value="0.2" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_playlist.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_songs_of_playlist.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/layout/item_suggest_song.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/drawer_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/item_playlist_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/library_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/search_menu.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/song_menu.xml" value="0.1" />
+        <entry key="..\:/FresherAndroid/Assignment/Mock/Code/99/Music-Player/app/src/main/res/menu/song_of_playlist_menu.xml" value="0.20416666666666666" />
+>>>>>>> origin/master
         <entry key="..\:/Users/PhucDH11/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/activity_test_database.xml" value="0.20416666666666666" />
       </map>
     </option>

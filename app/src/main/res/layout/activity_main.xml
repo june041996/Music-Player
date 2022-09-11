@@ -67,6 +67,5 @@
         app:itemIconTint="@color/select_bottom_nav"
         app:itemTextColor="@color/select_bottom_nav"
         app:headerLayout="@layout/drawer_header"
-        android:fitsSystemWindows="true"
-        />
+        android:fitsSystemWindows="true" />
 </androidx.drawerlayout.widget.DrawerLayout>

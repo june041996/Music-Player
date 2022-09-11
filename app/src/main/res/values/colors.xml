@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#808080</color>
 
     <!-- Rin add color -->
     <!-- Dark-->
@@ -26,5 +27,10 @@
     <color name="splash_1">#FF8996B8</color>
     <color name="splash_2">#FF091227</color>
 
+    <color name="disk">#808080</color>
+
+    <!--Splash-->
+    <color name="dialog">#FFE9F4FF</color>
+    <color name="bg_btn">#FFE9F4FF</color>
 
 </resources>

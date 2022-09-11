@@ -33,7 +33,9 @@ class SigninActivity : AppCompatActivity() {
             Log.d("login", "Login here")
             if (isValidData()) {
                 //REQUEST login firebase here
+
                 viewModel.requestLogin(binding.edtUser.text.toString(), binding.edtPassword.text.toString())
+
 
             }
         }
@@ -56,13 +58,14 @@ class SigninActivity : AppCompatActivity() {
             Toast.makeText(application, message, Toast.LENGTH_LONG).show()
         })
     }
+
     //check valid data
     //true valid - failed invalid
     private fun isValidData(): Boolean {
-        if (TextUtils.isEmpty(binding.edtUser.text.toString())){
+        if (TextUtils.isEmpty(binding.edtUser.text.toString())) {
             binding.edtUser.setError("Please enter Email")
             return false
-        }else if (TextUtils.isEmpty(binding.edtPassword.text.toString())) {
+        } else if (TextUtils.isEmpty(binding.edtPassword.text.toString())) {
             binding.edtPassword.setError("Please enter Password")
             return false
         }
