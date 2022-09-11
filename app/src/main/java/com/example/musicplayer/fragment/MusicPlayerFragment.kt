@@ -46,6 +46,8 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
 
     private val viewModel: MusicPlayerViewModel by viewModels()
 
+    private var getID: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,13 +67,9 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
 //                }
 //
 //            }}
+        getID = requireActivity().intent.getIntExtra("idSong", 1003)
+        Log.d(LOG, getID.toString())
 
-
-        viewModel.songById.observe(viewLifecycleOwner) {
-            viewModel.setSong(it)
-        }
-        binding.vm = viewModel
-        binding.lifecycleOwner = this
 
         //initial check internet
         connectivityObserver = NetworkConnectivityObserver(requireContext())
@@ -159,21 +157,18 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
             connectivityObserver.observer().collect {
                 when (it) {
                     ConnectivityObserver.StatusInternet.AVAILABLE -> {
-                        viewModel.songs.observe(viewLifecycleOwner) { listSong ->
-                            //  binding.musicDisc.loadUrl(it[2].urlImage.toString())
-
-                            Log.d(LOG, listSong[12].urlImage.toString())
+                        viewModel.songById(getID).observe(viewLifecycleOwner) { song ->
+                            viewModel.setSong(song)
+                            Log.d(LOG, song.urlImage.toString())
 
                             Glide.with(this@MusicPlayerFragment)
-                                .load(listSong[12].urlImage.toString()).circleCrop()
+                                .load(song.urlImage.toString()).circleCrop()
                                 .into(binding.musicDisc)
-                            // playMusic(listSong[1].urlSong)
 
-                            createMediaPlayer(listSong[12].urlSong!!)
-
-
-                            //   binding.tvNameSong.text = "$it"
+                            createMediaPlayer(song.urlSong!!)
                         }
+                        binding.vm = viewModel
+                        binding.lifecycleOwner = this@MusicPlayerFragment
                     }
                     ConnectivityObserver.StatusInternet.LOSING -> {
                         binding.tvNameSong.text = "$it"

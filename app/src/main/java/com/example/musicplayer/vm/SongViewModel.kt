@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 
 class SongViewModel(application: Application) : AndroidViewModel(application) {
-    val songRepository = SongRepository(getApplication<Application>().applicationContext)
+    private val songRepository = SongRepository(getApplication<Application>().applicationContext)
 
     companion object {
         private const val TAG: String = "DHP"
