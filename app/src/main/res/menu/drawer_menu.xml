@@ -11,11 +11,16 @@
             android:id="@+id/nav_favoriteSong"
             android:icon="@drawable/ic_favorite"
             android:title="Favorite Song" />
+
+        <item
+            android:id="@+id/dark_light_mode"
+            android:icon="@drawable/ic_dark_mode"
+            android:title="Dark Light"
+            />
+
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
             android:title="Setting" />
     </group>
-
-
 </menu>

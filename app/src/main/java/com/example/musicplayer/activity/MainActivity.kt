@@ -3,8 +3,10 @@ package com.example.musicplayer.activity
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
@@ -12,18 +14,23 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
@@ -33,15 +40,23 @@ import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Status
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.SongViewModelFactory
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
 
+    private lateinit var toolBar: Toolbar
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+
+    private val themePrefsKey = "theme"
+
+    private var checkOn: Boolean = true
 
     //   // private val viewModel: HomeViewModel by viewModels()
     private val viewModel: SongViewModel by viewModels {
@@ -54,15 +69,34 @@ class MainActivity : AppCompatActivity() {
         private const val READ_STORAGE_PERMISSION_CODE = 101
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        val toolBar = binding.toolbar
+
+        ///Không xoá
+//        val sharedPref = getSharedPreferences(themePrefsKey, Context.MODE_PRIVATE)
+//        val isNightMode = sharedPref.getBoolean("NightMode", false)
+//
+//        if (isNightMode) {
+//            Log.d(LOG, "CREATE n")
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//        } else {
+//            Log.d(LOG, "CREATE l")
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//        }
+////////////////////////////////////////////////Không xoá////////////////////////
+
+
+        toolBar = binding.toolbar
 
         setSupportActionBar(toolBar)
+
+        drawerLayout = binding.drawerLayout
+        navigationView = binding.navView
 
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
@@ -81,7 +115,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             bnvMain.setupWithNavController(navController)
-            navView.setupWithNavController(navController)
+            //navView.setupWithNavController(navController)
+            navView.setNavigationItemSelectedListener(this@MainActivity)
         }
 
         viewModel.localSongs.observe(this) {
@@ -104,7 +139,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 //Permission already granted
                 updateLocalSongs()
-                updateApiSongs()
+                // updateApiSongs()
             }
         } else {
             checkPermission(
@@ -175,7 +210,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfig) || super.onSupportNavigateUp()
     }
 
     private var storageActivityResultLauncher: ActivityResultLauncher<Intent> =
@@ -241,6 +276,34 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.dark_light_mode -> {
+                startActivity(Intent(this, DarkLightModeActivity::class.java))
+//                isNightModeOn = if (isNightModeOn) {
+//                    Log.d(LOG, "click light")
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//                    install = false
+//                    false
+//                } else {
+//                    Log.d(LOG, "click night")
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//                    delegate.applyDayNight()
+//                    install = false
+//                    true
+//                }
+            }
+            R.id.settingFragment -> {
+
+            }
+            else -> {
+
+            }
+        }
+
+        return false
     }
 
 }

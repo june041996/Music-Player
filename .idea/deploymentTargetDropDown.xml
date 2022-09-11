@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="deploymentTargetDropDown">
-    <runningDeviceTargetSelectedWithDropDown>
+    <targetSelectedWithDropDown>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             <value value="C:\Users\Dell\.android\avd\Pixel_5_API_30.avd" />
-=======
+
             <value value="C:\Users\tranc\.android\avd\Pixel_5_API_30.avd" />
->>>>>>> origin/master
-=======
+
             <value value="C:\Users\tranc\.android\avd\Pixel_5_API_30.avd" />
->>>>>>> 167b27c3d563c22aa5c364c3323831283280ab8e
+
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     <timeTargetWasSelectedWithDropDown value="2022-09-11T03:23:23.523450700Z" />
-=======
+
     <timeTargetWasSelectedWithDropDown value="2022-09-09T11:37:14.125504400Z" />
->>>>>>> origin/master
-=======
+
     <timeTargetWasSelectedWithDropDown value="2022-09-09T11:37:14.125504400Z" />
->>>>>>> 167b27c3d563c22aa5c364c3323831283280ab8e
+
   </component>
 </project>
