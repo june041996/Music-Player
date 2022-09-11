@@ -5,6 +5,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.net.Uri
@@ -50,6 +51,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
 
+    private lateinit var sharedpreferences: SharedPreferences
+    private val SHARED_PREFS = "shared_prefs"
+
+
     private lateinit var toolBar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
@@ -57,6 +62,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val themePrefsKey = "theme"
 
     private var checkOn: Boolean = true
+
 
     //   // private val viewModel: HomeViewModel by viewModels()
     private val viewModel: SongViewModel by viewModels {
@@ -75,6 +81,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        //
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+        val editor = sharedpreferences.edit()
+        editor.putInt("id", 1)
+        editor.putString("username", "DHP")
+        editor.apply()
 
 
         ///Không xoá
