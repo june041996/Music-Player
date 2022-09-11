@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DevAndroid/projects/Mock_project/Music-Player/app/src/main/res/drawable/ic_skip_next.xml" value="0.1" />
+        <entry key="..\:/DevAndroid/projects/Mock_project/Music-Player/app/src/main/res/drawable/ic_skip_previous.xml" value="0.1" />
+        <entry key="..\:/DevAndroid/projects/Mock_project/Music-Player/app/src/main/res/layout/activity_dark_light_mode.xml" value="0.1" />
+        <entry key="..\:/DevAndroid/projects/Mock_project/Music-Player/app/src/main/res/layout/activity_music_player.xml" value="0.1" />
+        <entry key="..\:/DevAndroid/projects/Mock_project/Music-Player/app/src/main/res/menu/drawer_menu.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/drawer_image_circle.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_bar_chart.xml" value="0.2075" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_close.xml" value="0.1275" />

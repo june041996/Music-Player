@@ -162,13 +162,13 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                         viewModel.songs.observe(viewLifecycleOwner) { listSong ->
                             //  binding.musicDisc.loadUrl(it[2].urlImage.toString())
 
-                            Log.d(LOG, listSong[1].urlImage.toString())
+                            Log.d(LOG, listSong[12].urlImage.toString())
 
-                            val a = Glide.with(this@MusicPlayerFragment)
-                                .load(listSong[1].urlImage.toString()).circleCrop()
+                            Glide.with(this@MusicPlayerFragment)
+                                .load(listSong[12].urlImage.toString()).circleCrop()
                                 .into(binding.musicDisc)
                             // playMusic(listSong[1].urlSong)
-                            createMediaPlayer(listSong[1].urlSong)
+                            createMediaPlayer(listSong[12].urlSong)
 
                             //   binding.tvNameSong.text = "$it"
                         }

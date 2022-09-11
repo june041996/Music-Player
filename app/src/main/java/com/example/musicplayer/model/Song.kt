@@ -19,7 +19,7 @@ data class Song(
     val singer: String,
     val album: String?,
     val release: Int?,
-    val duration: String,
+    val duration: String?,
     val views: Int,
     val isOffline: Boolean
 ) : Serializable
