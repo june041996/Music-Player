@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.musicplayer.databinding.ActivitySignupBinding
-import com.example.musicplayer.fragment.HomeFragment
 import com.example.musicplayer.vm.AuthViewModel
 
 class SignupActivity : AppCompatActivity() {
@@ -26,19 +25,21 @@ class SignupActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
         // Initialising auth object
         binding.btnSignup.setOnClickListener {
-            signUpuser()
+
+//            signUpuser()
             viewModel.register(
                 binding.edtEmail.text.toString(),
                 binding.edtPassword.text.toString()
             )
-            startActivity(Intent(this, HomeFragment::class.java))
-            finish()
+
         }
         viewModel.isSuccessful.observe(this, Observer {
             //handle
             var message = ""
             if (it == true) {
                 message = "Sign Up Success!"
+                startActivity(Intent(this, SigninActivity::class.java))
+                finish()
             } else {
                 message = "Sign Up Failed!"
             }

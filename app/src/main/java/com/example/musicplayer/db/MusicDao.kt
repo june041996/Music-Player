@@ -41,15 +41,26 @@ interface MusicDao {
     @Update
     suspend fun updateSong(song: Song)
 
+    @Query("UPDATE tb_playlist SET name = :name WHERE idPlaylist =:id")
+    suspend fun updatePlaylist(name: String, id: Int)
+
+
     //DELETE
     @Query("DELETE FROM tb_song WHERE idSong=:id")
     suspend fun deleteSong(id: Int)
+
+    @Query("DELETE FROM tb_playlist WHERE idPlaylist=:id")
+    suspend fun deletePlaylist(id: Int)
+
+    @Query("DELETE FROM songplaylistcrossref WHERE idPlaylist=:id")
+    suspend fun deletePlaylistSongs(id: Int)
 
     @Query("DELETE FROM tb_favourite WHERE idUser=:idUser AND idSong=:idSong")
     suspend fun deleteFavouriteSong(idUser: Int, idSong: Int)
 
     @Query("DELETE FROM SongPlaylistCrossRef WHERE idPlaylist=:idPlaylist AND idSong=:idSong")
     suspend fun deleteSongOfPlaylist(idPlaylist: Int, idSong: Int)
+
 
     //QUERY
     @Query("SELECT * FROM tb_song")

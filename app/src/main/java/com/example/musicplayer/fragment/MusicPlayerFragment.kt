@@ -168,7 +168,9 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                                 .load(listSong[12].urlImage.toString()).circleCrop()
                                 .into(binding.musicDisc)
                             // playMusic(listSong[1].urlSong)
-                            createMediaPlayer(listSong[12].urlSong)
+
+                            createMediaPlayer(listSong[12].urlSong!!)
+
 
                             //   binding.tvNameSong.text = "$it"
                         }

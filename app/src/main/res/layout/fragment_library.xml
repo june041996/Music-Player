@@ -12,15 +12,16 @@
             android:id="@+id/lnOnDevice"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:background="@drawable/bg_item_library"
             android:layout_height="@dimen/height_item_library">
 
             <ImageView
+                android:padding="5dp"
                 android:src="@drawable/ic_download"
                 android:layout_width="@dimen/height_item_library"
                 android:layout_height="@dimen/height_item_library" />
 
             <TextView
+                android:padding="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"
@@ -30,19 +31,27 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:background="#800098AE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+
         <LinearLayout
             android:id="@+id/lnFavourite"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:background="@drawable/bg_item_library"
             android:layout_height="@dimen/height_item_library">
 
             <ImageView
+                android:padding="5dp"
                 android:src="@drawable/ic_favorite"
                 android:layout_width="@dimen/height_item_library"
                 android:layout_height="@dimen/height_item_library" />
 
             <TextView
+                android:padding="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"
@@ -52,20 +61,28 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:background="#800098AE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+
         <LinearLayout
             android:id="@+id/lnPlaylist"
             android:layout_margin="5dp"
 
             android:layout_width="match_parent"
-            android:background="@drawable/bg_item_library"
             android:layout_height="@dimen/height_item_library">
 
             <ImageView
+                android:padding="5dp"
                 android:src="@drawable/ic_playlist"
                 android:layout_width="@dimen/height_item_library"
                 android:layout_height="@dimen/height_item_library" />
 
             <TextView
+                android:padding="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_gravity="center"
                 android:textStyle="bold"
@@ -75,11 +92,12 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:visibility="gone"
-            android:layout_margin="10dp"
-            android:id="@+id/rvPlaylist"
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:background="#800098AE"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="0.5dp" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
 import com.example.musicplayer.adapter.OnItemButtonClickListener
 import com.example.musicplayer.adapter.OnItemClickListener
+import com.example.musicplayer.adapter.SongsOfPlaylistAdapter
 import com.example.musicplayer.adapter.SuggestSongsAdapter
 import com.example.musicplayer.databinding.FragmentPlaylistSongBinding
 import com.example.musicplayer.model.Song
@@ -39,7 +40,11 @@ class PlaylistSongFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = SuggestSongsAdapter()
+        //playlistViewModel.getSuggestSongs()
+
+
+        //songs of playlist
+        val adapter = SongsOfPlaylistAdapter()
         binding.rvSongs.adapter = adapter
         binding.rvSongs.layoutManager = LinearLayoutManager(context)
         adapter.setOnItemClickListener(object : OnItemClickListener {
@@ -56,13 +61,17 @@ class PlaylistSongFragment : Fragment() {
         playlistViewModel.songsOfPlaylist.observe(viewLifecycleOwner) {
             songs.clear()
             songs.addAll(it)
-            adapter.submitData(it)
+            Log.d(Contanst.TAG, "or: ${it.size.toString()}")
+
+            adapter.submitData(songs)
         }
+
         //suggest songs
+        val suggestSongs = arrayListOf<Song>()
         val adapterSuggest = SuggestSongsAdapter()
         binding.rvSuggestSongs.adapter = adapterSuggest
         binding.rvSuggestSongs.layoutManager = LinearLayoutManager(context)
-        adapter.setOnItemClickListener(object : OnItemClickListener {
+        adapterSuggest.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d(Contanst.TAG, position.toString())
             }
@@ -71,39 +80,57 @@ class PlaylistSongFragment : Fragment() {
             override fun onItemClick(position: Int, view: View) {
                 //add
                 Log.d(Contanst.TAG, position.toString())
+                playlistViewModel.selectedPlaylist.observe(viewLifecycleOwner) {
+                    playlistViewModel.insertSongPlaylist(
+                        suggestSongs[position].idSong!!,
+                        it.idPlaylist!!
+                    )
+                    //suggestSongs.add(suggestSongs[position])
+                    //adapterSuggest.submitData(suggestSongs)
+                }
+
             }
 
         })
+        playlistViewModel.suggestSongs.observe(viewLifecycleOwner) {
+            Log.d(Contanst.TAG, "su: ${it.size.toString()}")
+            suggestSongs.clear()
+            suggestSongs.addAll(it)
+            adapterSuggest.submitData(suggestSongs)
+        }
+
 
     }
 
     private fun showMenuPopup(v: View, song: Song) {
-        val popupMenu = PopupMenu(requireContext(), v)
-        popupMenu.menuInflater.inflate(R.menu.song_of_playlist_menu, popupMenu.menu)
-        popupMenu.show()
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem): Boolean {
-                when (item.itemId) {
-                    R.id.favourite -> {
-                        Log.d(Contanst.TAG, "favou")
-                        favouriteViewModel.insertFavourite(song)
-                    }
-                    R.id.addToPlaylist -> {
-                        //Log.d(Contanst.TAG, "pla")
-                        findNavController().navigate(PlaylistSongFragmentDirections.actionPlaylistSongFragmentToAddToPlaylistFragment())
-                    }
-                    R.id.delete -> {
-                        CustomDialog(requireContext()).createConfirmDialog(object :
-                            CustomDialog.OnSubmitBtnClick {
-                            override fun onClick(name: String) {
-                                playlistViewModel.deleteSongOfPlaylist(song)
-                            }
-                        })
-                    }
-                }
-                return true
-            }
 
-        })
+        PopupMenu(requireContext(), v).apply {
+            menuInflater.inflate(R.menu.song_of_playlist_menu, menu)
+            show()
+            setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem): Boolean {
+                    when (item.itemId) {
+                        R.id.favourite -> {
+                            Log.d(Contanst.TAG, "favou")
+                            favouriteViewModel.insertFavourite(song)
+                        }
+                        R.id.addToPlaylist -> {
+                            //Log.d(Contanst.TAG, "pla")
+                            findNavController().navigate(PlaylistSongFragmentDirections.actionPlaylistSongFragmentToAddToPlaylistFragment())
+                        }
+                        R.id.delete -> {
+                            CustomDialog(requireContext()).createConfirmDialog(object :
+                                CustomDialog.OnSubmitBtnClick {
+                                override fun onClick(name: String) {
+                                    playlistViewModel.deleteSongOfPlaylist(song)
+                                }
+                            })
+                        }
+                    }
+                    return true
+                }
+
+            })
+        }
     }
 }

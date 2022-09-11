@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val view = binding.root
         setContentView(view)
 
+
         ///Không xoá
 //        val sharedPref = getSharedPreferences(themePrefsKey, Context.MODE_PRIVATE)
 //        val isNightMode = sharedPref.getBoolean("NightMode", false)
@@ -91,6 +92,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         toolBar = binding.toolbar
+
         setSupportActionBar(toolBar)
 
         drawerLayout = binding.drawerLayout

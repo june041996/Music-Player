@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.adapter.AddToPlaylistAdapter
 import com.example.musicplayer.adapter.OnItemClickListener
@@ -35,7 +34,7 @@ class AddToPlaylistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnCreatePlaylist.setOnClickListener() {
-            CustomDialog(requireContext()).createConfirmDialog(object :
+            CustomDialog(requireContext()).createInputDialog(object :
                 CustomDialog.OnSubmitBtnClick {
                 override fun onClick(name: String) {
                     playlistViewModel.insertPlaylist(name)
@@ -53,10 +52,9 @@ class AddToPlaylistFragment : Fragment() {
                         playlists[position].idPlaylist!!
                     )
                     Toast.makeText(context, "add success", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
+                    // findNavController().popBackStack()
                 }
             }
-
         })
         playlistViewModel.playlists.observe(viewLifecycleOwner) {
             playlists.clear()

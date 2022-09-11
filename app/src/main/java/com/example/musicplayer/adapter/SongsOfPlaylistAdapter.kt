@@ -1,14 +1,13 @@
 package com.example.musicplayer.adapter
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.databinding.ItemSuggestSongBinding
+import com.example.musicplayer.databinding.ItemSongsOfPlaylistBinding
 import com.example.musicplayer.model.Song
 
-class SuggestSongsAdapter() : RecyclerView.Adapter<SuggestSongsAdapter.ViewHolder>() {
+class SongsOfPlaylistAdapter() : RecyclerView.Adapter<SongsOfPlaylistAdapter.ViewHolder>() {
     private var songs = arrayListOf<Song>()
     private lateinit var listener: OnItemClickListener
     private lateinit var btnListener: OnItemButtonClickListener
@@ -29,7 +28,7 @@ class SuggestSongsAdapter() : RecyclerView.Adapter<SuggestSongsAdapter.ViewHolde
     }
 
     class ViewHolder(
-        private var binding: ItemSuggestSongBinding,
+        private var binding: ItemSongsOfPlaylistBinding,
         val listener: OnItemClickListener,
         val btnListener: OnItemButtonClickListener
     ) :
@@ -38,7 +37,7 @@ class SuggestSongsAdapter() : RecyclerView.Adapter<SuggestSongsAdapter.ViewHolde
             binding.root.setOnClickListener() {
                 listener.onItemClick(absoluteAdapterPosition)
             }
-            binding.imgAdd.setOnClickListener() {
+            binding.imgMenu.setOnClickListener() {
                 btnListener.onItemClick(absoluteAdapterPosition, it)
             }
         }
@@ -51,7 +50,7 @@ class SuggestSongsAdapter() : RecyclerView.Adapter<SuggestSongsAdapter.ViewHolde
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemSuggestSongBinding.inflate(
+            ItemSongsOfPlaylistBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             ), listener, btnListener
         )

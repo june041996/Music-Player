@@ -11,23 +11,26 @@ import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.model.relation.SongPlaylistCrossRef
 import com.example.musicplayer.utils.Contanst
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
     private val dao = MusicDatabase.getInstance(getApplication()).songDao()
 
+
     //get song of playlist
     var _songsOfPlaylist = MutableLiveData<ArrayList<Song>>()
     val songsOfPlaylist: LiveData<ArrayList<Song>>
         get() = getSongsOfPlaylist()
-
+    val listSongs = arrayListOf<Song>()
     fun getSongsOfPlaylist(): MutableLiveData<ArrayList<Song>> {
-        val temp = arrayListOf<Song>()
+        listSongs.clear()
         viewModelScope.launch {
+
             dao.getSongsOfPlaylist(_selectedPlaylist.value!!.idPlaylist!!).forEach {
-                temp.addAll(it.songs)
+                listSongs.addAll(it.songs)
             }
-            _songsOfPlaylist.value = temp
+            _songsOfPlaylist.value = listSongs
         }
         return _songsOfPlaylist
     }
@@ -35,23 +38,56 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
     //get suggest songs = all songs - songs of playlist
     var _songs = MutableLiveData<ArrayList<Song>>()
     val songs: LiveData<ArrayList<Song>>
-        get() = _songs
-
-    fun getAllSongs() {
+        get() = getAllSongs()
+    val list = arrayListOf<Song>()
+    fun getAllSongs(): MutableLiveData<ArrayList<Song>> {
         viewModelScope.launch {
-            val list = arrayListOf<Song>()
+            list.clear()
             list.addAll(dao.getSongs())
             _songs.value = list
         }
+        return _songs
     }
 
+    val _suggestSongs = MutableLiveData<ArrayList<Song>>()
     val suggestSongs: LiveData<ArrayList<Song>>
         get() = getSuggestSongs()
 
-    private fun getSuggestSongs(): MutableLiveData<ArrayList<Song>> {
-        val _suggestSongs = MutableLiveData<ArrayList<Song>>()
+    fun getSuggestSongs(): MutableLiveData<ArrayList<Song>> {
+        viewModelScope.launch {
+            getAllSongs()
+            //getSongsOfPlaylist()
+            delay(500L)
+            val temp = arrayListOf<Song>()
+            temp.addAll(list)
 
+            var songsOfPlaylist = arrayListOf<Song>()
+            songsOfPlaylist = listSongs
+
+            // Log.d(Contanst.TAG,temp.size.toString())
+            // Log.d(Contanst.TAG,songsOfPlaylist.size.toString())
+            temp.removeAll(songsOfPlaylist)
+            _suggestSongs.value = temp
+            // Log.d(Contanst.TAG,temp.size.toString())
+        }
         return _suggestSongs
+    }
+
+    //update playlist
+    fun updatePlaylist(name: String, id: Int) {
+        viewModelScope.launch {
+            dao.updatePlaylist(name, id)
+            getAllPlaylist()
+        }
+    }
+
+    //delete playlist
+    fun deletePlaylist(id: Int) {
+        viewModelScope.launch {
+            dao.deletePlaylist(id)
+            dao.deletePlaylistSongs(id)
+            getAllPlaylist()
+        }
     }
 
     //delete song of playlist
@@ -60,6 +96,7 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
             Log.d(Contanst.TAG, "${_selectedPlaylist.value.toString()}- ${song.idSong.toString()}")
             dao.deleteSongOfPlaylist(_selectedPlaylist.value!!.idPlaylist!!, song.idSong!!)
             getSongsOfPlaylist()
+            getSuggestSongs()
         }
     }
 
@@ -80,7 +117,9 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
 
         val temp = arrayListOf<Playlist>()
         viewModelScope.launch {
-            val l = dao.getUserWithPlaylistsAndSongs(1).playlists
+            dao.getUserWithPlaylistsAndSongs(1).playlists.forEach {
+                temp.add(it.playlist)
+            }
             _playlist.value = temp
         }
         return _playlist
@@ -98,6 +137,8 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
     fun insertSongPlaylist(idSong: Int, idPlaylist: Int) {
         viewModelScope.launch {
             dao.insertSongPlaylistCrossRef(SongPlaylistCrossRef(idSong, idPlaylist))
+            getSuggestSongs()
+            getSongsOfPlaylist()
         }
     }
 }
