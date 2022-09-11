@@ -2,9 +2,9 @@ package com.example.musicplayer.activity
 
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -30,9 +30,19 @@ class SignupActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
         // Initialising auth object
         binding.btnSignup.setOnClickListener {
+<<<<<<< HEAD
 //            signUpuser()
             viewModel.register(binding.edtEmail.text.toString(), binding.edtPassword.text.toString())
 
+=======
+            signUpuser()
+            viewModel.register(
+                binding.edtEmail.text.toString(),
+                binding.edtPassword.text.toString()
+            )
+            startActivity(Intent(this, HomeFragment::class.java))
+            finish()
+>>>>>>> origin/master
         }
         viewModel.isSuccessful.observe(this, Observer {
             //handle

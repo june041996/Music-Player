@@ -11,6 +11,7 @@ import java.io.Serializable
 data class User(
     @PrimaryKey(autoGenerate = true)
     val idUser: Int?,
+<<<<<<< HEAD
     val email: String?,
 //    val name: String?,
     val password: String?
@@ -42,3 +43,8 @@ data class User(
         }
     }
 }
+=======
+    val email: String,
+    val password: String
+) : Serializable
+>>>>>>> origin/master

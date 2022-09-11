@@ -1,16 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Library"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/lnOnDevice"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_item_library">
+
+            <ImageView
+                android:padding="5dp"
+                android:src="@drawable/ic_download"
+                android:layout_width="@dimen/height_item_library"
+                android:layout_height="@dimen/height_item_library" />
+
+            <TextView
+                android:padding="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/title_text"
+                android:text="ON DEVICE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:background="#800098AE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+
+        <LinearLayout
+            android:id="@+id/lnFavourite"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_item_library">
+
+            <ImageView
+                android:padding="5dp"
+                android:src="@drawable/ic_favorite"
+                android:layout_width="@dimen/height_item_library"
+                android:layout_height="@dimen/height_item_library" />
+
+            <TextView
+                android:padding="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/title_text"
+                android:text="FAVOURITE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:background="#800098AE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+
+        <LinearLayout
+            android:id="@+id/lnPlaylist"
+            android:layout_margin="5dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_item_library">
+
+            <ImageView
+                android:padding="5dp"
+                android:src="@drawable/ic_playlist"
+                android:layout_width="@dimen/height_item_library"
+                android:layout_height="@dimen/height_item_library" />
+
+            <TextView
+                android:padding="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/title_text"
+                android:text="PLAYLIST"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="8dp"
+            android:background="#800098AE"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

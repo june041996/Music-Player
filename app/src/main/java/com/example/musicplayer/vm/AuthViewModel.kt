@@ -6,18 +6,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.LoginModel
-import com.example.musicplayer.model.Song
 import com.example.musicplayer.model.User
 import com.example.musicplayer.repository.AuthenticationRepository
 import kotlinx.coroutines.launch
 
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository  = AuthenticationRepository(application)
-    val isSuccessful : LiveData<Boolean>
+    private val repository = AuthenticationRepository(application)
+    val isSuccessful: LiveData<Boolean>
     val dao = MusicDatabase.getInstance(getApplication()).songDao()
 
-     fun insertUser(user: User) {
+    fun insertUser(user: User) {
         viewModelScope.launch {
             dao.insertUser(user)
         }
@@ -33,14 +32,14 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     //lay thong tin dang nhap
-    fun getLoginInfo() : LoginModel {
+    fun getLoginInfo(): LoginModel {
         return repository.getLoginInfo()
     }
- //đăng nhập thông tin
-    fun register(mail: String,password: String){
-        repository.requestRegister( mail, password)
-    }
 
+    //đăng nhập thông tin
+    fun register(mail: String, password: String) {
+        repository.requestRegister(mail, password)
+    }
 
 
 }

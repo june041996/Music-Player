@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.musicplayer.fragment.HomeFragment"
-        android:label="Home" />
+        android:label="Home">
+        <action
+            android:id="@+id/action_homeFragment_to_musicPlayerFragment"
+            app:destination="@id/musicPlayerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.musicplayer.fragment.SearchFragment"
@@ -20,9 +24,64 @@
     <fragment
         android:id="@+id/libraryFragment"
         android:name="com.example.musicplayer.fragment.LibraryFragment"
-        android:label="Library" />
+        android:label="Library">
+        <action
+            android:id="@+id/action_libraryFragment_to_onDeviceFragment"
+            app:destination="@id/onDeviceFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_playlistSongFragment"
+            app:destination="@id/playlistSongFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.example.musicplayer.fragment.SettingFragment"
         android:label="Setting" />
+    <fragment
+
+        android:id="@+id/musicPlayerFragment"
+        android:name="com.example.musicplayer.fragment.MusicPlayerFragment"
+        android:label="Music Player" />
+    <fragment
+        android:id="@+id/onDeviceFragment"
+        android:name="com.example.musicplayer.fragment.library.OnDeviceFragment"
+        android:label="On Device"
+        tools:layout="@layout/fragment_on_device">
+        <action
+            android:id="@+id/action_onDeviceFragment_to_addToPlaylistFragment"
+            app:destination="@id/addToPlaylistFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.musicplayer.fragment.library.FavouriteFragment"
+        android:label="FavouriteFragment" />
+    <fragment
+        android:id="@+id/addToPlaylistFragment"
+        android:name="com.example.musicplayer.fragment.library.AddToPlaylistFragment"
+        android:label="Add song to playlist"
+        tools:layout="@layout/fragment_add_to_playlist" />
+    <fragment
+        android:id="@+id/playlistSongFragment"
+        android:name="com.example.musicplayer.fragment.library.PlaylistSongFragment"
+        android:label="Songs">
+        <action
+            android:id="@+id/action_playlistSongFragment_to_addToPlaylistFragment"
+            app:destination="@id/addToPlaylistFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.example.musicplayer.fragment.library.PlaylistFragment"
+        android:label="Playlist"
+        tools:layout="@layout/fragment_playlist">
+        <action
+            android:id="@+id/action_playlistFragment_to_playlistSongFragment"
+            app:destination="@id/playlistSongFragment" />
+    </fragment>
+
 </navigation>

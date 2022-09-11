@@ -1,32 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/background_color">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/music_disc"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/shape_music_disc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/tv_name_song"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Yêu không nghỉ phép"
+        <import type="com.example.musicplayer.vm.MusicPlayerViewModel" />
 
-        android:textFontWeight="20"
-        android:textSize="25sp"
+        <variable
+            name="vm"
+            type="MusicPlayerViewModel" />
+    </data>
 
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/music_disc" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/background_color">
+
+        <ImageView
+            android:id="@+id/music_disc"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape_music_disc"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_music_note"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name_song"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@{vm.nameSong}"
+            android:textColor="?attr/text_color"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/music_disc" />
+
+        <TextView
+            android:id="@+id/tv_singer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{vm.singer}"
+            android:textColor="?attr/title_color"
+            android:textFontWeight="20"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_song" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginVertical="35dp"
+            app:layout_constraintBottom_toTopOf="@+id/rl_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_favourite"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/shape_button_next_previous"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_unfavorite"
+                android:tint="?attr/text_color" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_download"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="15dp"
+                android:layout_toRightOf="@+id/btn_favourite"
+                android:background="@drawable/shape_button_next_previous"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_file_download"
+                android:tint="?attr/text_color" />
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/time_real"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            -->
+            <!--            android:text="00:00"-->
+            <!--            android:textColor="?attr/text_color"-->
+            <!--            android:textSize="15sp" />-->
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_repeat"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/shape_button_next_previous"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_repeat"
+                android:tint="?attr/text_color" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginVertical="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/ll_seekbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/time_real"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="00:00"
+                android:textColor="?attr/text_color"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/time_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="00:00"
+                android:textColor="?attr/text_color"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/ll_play_music"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/seekbar_time"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:progress="30"
+                android:progressTint="?attr/text_color"
+                android:thumbTint="?attr/text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_play_music"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_skip_previous"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape_button_next_previous"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_skip_previous"
+                android:tint="?attr/text_color" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_play_stop_music"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/shape_button_music_player"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_play_arrow"
+                android:tint="?attr/text_color" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_skip_next"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/shape_button_next_previous"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_skip_next"
+                android:tint="?attr/text_color" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

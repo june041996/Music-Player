@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 
 data class SongResponse(
     @SerializedName("data")
-    val songList:List<Song>
+    val songList: List<Song>
 
 )
