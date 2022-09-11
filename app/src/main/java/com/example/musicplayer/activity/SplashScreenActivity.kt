@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivitySplashScreenBinding
+import com.example.musicplayer.fragment.HomeFragment
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.network.SongClient
 import com.example.musicplayer.utils.Status

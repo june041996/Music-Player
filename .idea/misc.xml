@@ -3,24 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable-v24/shape_drawable.xml" value="0.1" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/custom_input.xml" value="0.1" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_pause.xml" value="0.1" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_person.xml" value="0.1" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_repeat.xml" value="0.1" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/shape_drawable.xml" value="0.1" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_main.xml" value="0.24635416666666668" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_signin.xml" value="0.25" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_signup.xml" value="0.264" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_test_database.xml" value="0.17135416666666667" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_home.xml" value="0.24635416666666668" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_library.xml" value="0.24635416666666668" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_music_player.xml" value="0.24635416666666668" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
-        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
-
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/drawer_image_circle.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/ic_bar_chart.xml" value="0.2075" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/drawable/select_bottom_nav.xml" value="0.1925" />
@@ -48,6 +30,35 @@
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/mipmap-anydpi-v26/ic_music_player.xml" value="0.1" />
         <entry key="..\:/DevAndroid/projects/Music-Player/app/src/main/res/mipmap-anydpi-v26/ic_music_player_round.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable-v24/shape_drawable.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/btn_bg.xml" value="0.1795" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/custom_input.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_down.xml" value="0.2595" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_favorite.xml" value="0.2595" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_pause.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_person.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_play.xml" value="0.2595" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_repeat.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_skip_next.xml" value="0.2595" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/ic_skip_previous.xml" value="0.2595" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/drawable/shape_drawable.xml" value="0.1" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_main.xml" value="0.24635416666666668" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_signin.xml" value="0.25" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_signup.xml" value="0.264" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/activity_test_database.xml" value="0.17135416666666667" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_home.xml" value="0.24635416666666668" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_library.xml" value="0.24635416666666668" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_music_player.xml" value="0.24635416666666668" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_player.xml" value="0.264" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_sign_in.xml" value="0.25" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/list_music.xml" value="0.25416666666666665" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/list_music_favorite.xml" value="0.25416666666666665" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/layout/list_music_playlist.xml" value="0.25416666666666665" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25052083333333336" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/menu/drawer_menu.xml" value="0.25052083333333336" />
+        <entry key="..\:/FPT/Project/Mock/Music-Player/app/src/main/res/menu/menu.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/PhucDH11/AndroidStudioProjects/MusicPlayer/app/src/main/res/layout/activity_test_database.xml" value="0.20416666666666666" />
       </map>
     </option>

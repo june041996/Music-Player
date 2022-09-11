@@ -1,24 +1,30 @@
 package com.example.musicplayer.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.musicplayer.Adapter.ListSongFavoriteAdapter
+import com.example.musicplayer.R
 import com.example.musicplayer.databinding.FragmentHomeBinding
+import com.example.musicplayer.model.Song
 import com.example.musicplayer.model.User
 import com.example.musicplayer.vm.AuthViewModel
+import com.example.musicplayer.vm.SongViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var viewModel: AuthViewModel
+
+    private val mSongViewModel: SongViewModel by activityViewModels()
+    var song = listOf<Song>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,27 +33,20 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
-        firebaseAuth = FirebaseAuth.getInstance()
-        checkUser()
 
+        //recycleview
+        val adapter = ListSongFavoriteAdapter()
+
+        //get all Song
+        mSongViewModel.localSongs.observe(viewLifecycleOwner){
+            Log.d("QuangLPT","call data: ${it.size}")
+           adapter.submitData(it)
+        }
+        binding.recycleViewPlaylist.adapter = adapter
+        binding.recycleViewPlaylist.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
         return binding.root
     }
 
-    private fun checkUser() {
-        //check user is logged in or not
-        val firebaseUser = firebaseAuth.currentUser
-        if (firebaseUser != null) {
-            //user not null, user is logged in, get user info
-            val email = firebaseUser.email
-            //set to text view
-            viewModel.insertUser(User(idUser = null, email=email!!, password = ""))
-            binding.tvEmail.text = email
-
-
-        }
-
-    }
 
 }
