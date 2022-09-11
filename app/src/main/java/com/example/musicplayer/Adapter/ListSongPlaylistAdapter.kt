@@ -22,7 +22,6 @@ class SongDiff(
     }
 
 }
-
 class ListSongPlaylistAdapter :
     RecyclerView.Adapter<ListSongPlaylistAdapter.ViewHolder>() {
     private val song = arrayListOf<Song>()
