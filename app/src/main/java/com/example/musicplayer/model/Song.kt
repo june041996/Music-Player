@@ -24,7 +24,7 @@ data class Song(
     val duration: String?,
     val views: Int,
     val isOffline: Boolean
-) : Serializable,Parcelable {
+) : Serializable, Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),

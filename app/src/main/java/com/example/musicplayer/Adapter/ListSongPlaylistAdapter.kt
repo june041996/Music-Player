@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.databinding.ListMusicPlaylistBinding
 import com.example.musicplayer.model.Song
+
 class SongDiff(
-    val oldSong:List<Song>,
-    val newSong:List<Song>
-):DiffUtil.Callback(){
+    val oldSong: List<Song>,
+    val newSong: List<Song>
+) : DiffUtil.Callback() {
     override fun getOldListSize() = oldSong.size
     override fun getNewListSize() = newSong.size
 
@@ -22,11 +23,12 @@ class SongDiff(
     }
 
 }
+
 class ListSongPlaylistAdapter :
     RecyclerView.Adapter<ListSongPlaylistAdapter.ViewHolder>() {
     private val song = arrayListOf<Song>()
 
-    fun submitData(temp:List<Song>){
+    fun submitData(temp: List<Song>) {
         val diff = DiffUtil.calculateDiff(SongDiff(song, temp))
         song.clear()
         song.addAll(temp)

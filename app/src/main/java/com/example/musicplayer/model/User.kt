@@ -4,22 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.io.Serializable
 
 
 @Entity(tableName = "tb_user")
 data class User(
     @PrimaryKey(autoGenerate = true)
     val idUser: Int?,
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> 167b27c3d563c22aa5c364c3323831283280ab8e
     val email: String?,
 //    val name: String?,
     val password: String?
-):
+) :
 //    Serializable,
     Parcelable {
     constructor(parcel: Parcel) : this(
@@ -47,12 +41,4 @@ data class User(
         }
     }
 }
-<<<<<<< HEAD
 
-=======
-=======
-    val email: String,
-    val password: String
-) : Serializable
->>>>>>> origin/master
->>>>>>> 167b27c3d563c22aa5c364c3323831283280ab8e

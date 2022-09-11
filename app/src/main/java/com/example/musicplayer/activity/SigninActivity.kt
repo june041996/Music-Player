@@ -35,8 +35,10 @@ class SigninActivity : AppCompatActivity() {
                 //REQUEST login firebase here
 
 
-                viewModel.requestLogin(binding.edtUser.text.toString(), binding.edtPassword.text.toString())
-
+                viewModel.requestLogin(
+                    binding.edtUser.text.toString(),
+                    binding.edtPassword.text.toString()
+                )
 
 
             }
@@ -50,7 +52,7 @@ class SigninActivity : AppCompatActivity() {
             //handle
             var message = ""
             if (it == true) {
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
                 message = "Logged in successfully!"
             } else {
