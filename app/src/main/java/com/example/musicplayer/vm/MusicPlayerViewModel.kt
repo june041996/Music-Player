@@ -15,7 +15,23 @@ class MusicPlayerViewModel(application: Application) : AndroidViewModel(applicat
     private val songDao = MusicDatabase.getInstance(application.applicationContext).songDao()
 
     val songs = songDao.getAllSongs()
-    val songById = songDao.getSongById(1799)
+
+    //Lấy id từ Fragment
+    private val _idSong = MutableLiveData<Int>()
+
+    fun setIdSong(id: Int) {
+        _idSong.value = id
+    }
+
+    val idSong: LiveData<Int> = _idSong
+
+    //Nhận id ở MusicPlayer
+
+    fun songById(id:Int): LiveData<Song> {
+       return songDao.getSongById(id)
+    }
+
+    //val songById = songDao.getSongById(1004)
 
     private val _nameSong = MutableLiveData<String>()
     private val _singer = MutableLiveData<String>()
