@@ -28,7 +28,7 @@
             android:name=".activity.DarkLightModeActivity"
             android:exported="true"
             android:parentActivityName=".activity.MainActivity"
-            android:label="Dark Light mode"/>
+            android:label="Dark Light mode" />
         <activity
             android:name=".activity.MusicPlayerActivity"
             android:exported="true"
@@ -55,8 +55,7 @@
             android:name=".activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MusicPlayer"
-            android:configChanges="uiMode"
-            />
+            android:configChanges="uiMode" />
         <activity
             android:name=".test.TestDatabaseActivity"
             android:exported="true" />

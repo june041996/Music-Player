@@ -35,7 +35,7 @@ class SplashScreenActivity : AppCompatActivity() {
             //Handle API
 
             //Start Activity
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, SigninActivity::class.java))
 
             //Tắt luôn splash
             finish()

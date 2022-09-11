@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class FavouriteViewModel(app: Application) : AndroidViewModel(app) {
     private val dao = MusicDatabase.getInstance(getApplication()).songDao()
     private val favouriteRepository = FavouriteRepository(getApplication())
-    val SHARED_PREFS = "shared_prefs"
+    private val SHARED_PREFS = "shared_prefs"
     private var sharedpreferences: SharedPreferences =
         getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
     private val id = sharedpreferences.getInt("id", 0)
@@ -27,7 +27,7 @@ class FavouriteViewModel(app: Application) : AndroidViewModel(app) {
     //insert
     fun insertFavourite(song: Song) {
         viewModelScope.launch {
-            favouriteRepository.insertFavourite(Favourite(1, song.idSong!!))
+            favouriteRepository.insertFavourite(Favourite(id, song.idSong!!))
         }
     }
 
@@ -40,11 +40,11 @@ class FavouriteViewModel(app: Application) : AndroidViewModel(app) {
         Log.d(Contanst.TAG, "id: ${id.toString()} - name: $name")
         var list = arrayListOf<Song>()
         viewModelScope.launch {
-            favouriteRepository.getSongsOfFavourite(1).forEach {
+            favouriteRepository.getSongsOfFavourite(id).forEach {
                 list.addAll(it.songs)
             }
             _songs.value = list
-            _sizeFvouriteSongs.value = list.size
+            _sizeFavouriteSongs.value = list.size
             Log.d(Contanst.TAG, "it: ${_songs.value.toString()}")
         }
         return _songs
@@ -53,15 +53,15 @@ class FavouriteViewModel(app: Application) : AndroidViewModel(app) {
     //delete
     fun removeFavouriteSong(song: Song) {
         viewModelScope.launch {
-            favouriteRepository.deleteFavouriteSong(1, song.idSong!!)
+            favouriteRepository.deleteFavouriteSong(id, song.idSong!!)
             getAllSongs()
         }
     }
 
     //size
-    val sizeFvouriteSongs: LiveData<Int>
-        get() = _sizeFvouriteSongs
-    var _sizeFvouriteSongs = MutableLiveData<Int>()
+    val sizeFavouriteSongs: LiveData<Int>
+        get() = _sizeFavouriteSongs
+    var _sizeFavouriteSongs = MutableLiveData<Int>()
 
     var check: Boolean = false
     val _checkSong = MutableLiveData<Favourite>()
@@ -72,7 +72,7 @@ class FavouriteViewModel(app: Application) : AndroidViewModel(app) {
 
         check = false
         viewModelScope.launch {
-            val a = favouriteRepository.getFavouriteSong(1, idSong)
+            val a = favouriteRepository.getFavouriteSong(id, idSong)
             _checkSong.value = a
             if (a != null) {
                 check = true

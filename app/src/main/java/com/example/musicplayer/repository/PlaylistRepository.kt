@@ -38,4 +38,8 @@ class PlaylistRepository(val context: Context) {
     suspend fun insertSongPlaylistCrossRef(idSong: Int, idPlaylist: Int) {
         dao.insertSongPlaylistCrossRef(SongPlaylistCrossRef(idSong, idPlaylist))
     }
+
+    suspend fun getPlaylistOfSong(idUser: Int, idSong: Int): List<Playlist> {
+        return dao.getPlaylistOfSong(idUser, idSong)
+    }
 }

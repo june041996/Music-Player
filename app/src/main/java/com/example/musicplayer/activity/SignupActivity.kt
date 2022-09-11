@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.musicplayer.databinding.ActivitySignupBinding
+import com.example.musicplayer.model.User
 import com.example.musicplayer.vm.AuthViewModel
 
 class SignupActivity : AppCompatActivity() {
@@ -37,6 +38,13 @@ class SignupActivity : AppCompatActivity() {
             //handle
             var message = ""
             if (it == true) {
+                viewModel.insertUser(
+                    User(
+                        null,
+                        binding.edtEmail.text.toString(),
+                        binding.edtPassword.text.toString()
+                    )
+                )
                 message = "Sign Up Success!"
                 startActivity(Intent(this, SigninActivity::class.java))
                 finish()

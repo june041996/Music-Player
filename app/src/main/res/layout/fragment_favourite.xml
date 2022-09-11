@@ -48,7 +48,7 @@
                 android:layout_margin="10dp"
                 android:textSize="@dimen/title_text"
                 android:textStyle="bold"
-                android:text="@{String.valueOf(favourite.sizeFvouriteSongs)}"
+                android:text="@{String.valueOf(favourite.sizeFavouriteSongs)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

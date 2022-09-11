@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.Adapter.ListSongPlaylistAdapter
+import com.example.musicplayer.adapter.ListSongPlaylistAdapter
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.vm.SongViewModel

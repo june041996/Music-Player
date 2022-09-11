@@ -1,6 +1,8 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -19,6 +21,46 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
     private val dao = MusicDatabase.getInstance(getApplication()).songDao()
     val playlistRepository = PlaylistRepository(getApplication<Application>().applicationContext)
     val songRepository = SongRepository(getApplication<Application>().applicationContext)
+    private val SHARED_PREFS = "shared_prefs"
+    private var sharedpreferences: SharedPreferences =
+        getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+    private val id = sharedpreferences.getInt("id", 0)
+    private val name = sharedpreferences.getString("username", null)
+
+    //get Playlist of song
+    val _playlistOfSong = MutableLiveData<List<Playlist>>()
+    val playlistOfSong: LiveData<List<Playlist>>
+        get() = _playlistOfSong
+
+    fun getPlaylistOfSong(idSong: Int) {
+        viewModelScope.launch {
+            //delay(500L)
+            val l = playlistRepository.getPlaylistOfSong(id, idSong)
+            _playlistOfSong.value = l
+        }
+    }
+
+    //get playlistWithoutSong
+    var _playlistWithoutSong = MutableLiveData<List<Playlist>>()
+    val playlistWithoutSong: LiveData<List<Playlist>>
+        get() = getPlaylistWithoutSong()
+
+    fun getPlaylistWithoutSong(): MutableLiveData<List<Playlist>> {
+        getAllPlaylist()
+        viewModelScope.launch {
+            delay(500L)
+            val all = _playlist.value
+            Log.d(Contanst.TAG, "all: ${all.toString()}")
+            val inPlaylist = _playlistOfSong.value
+            Log.d(Contanst.TAG, "in: ${inPlaylist.toString()}")
+
+            all!!.removeAll(inPlaylist!!)
+            Log.d(Contanst.TAG, "out: ${all.toString()}")
+
+            _playlistWithoutSong.value = all!!
+        }
+        return _playlistWithoutSong
+    }
 
     //size songs of playlist
     val sizeSongs: LiveData<Int>
@@ -41,6 +83,23 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
             _sizeSongs.value = listSongs.size
         }
         return _songsOfPlaylist
+    }
+
+    fun insertSongInPlaylist(idSong: Int, idPlaylist: Int) {
+        viewModelScope.launch {
+            playlistRepository.insertSongPlaylistCrossRef(idSong, idPlaylist)
+            getPlaylistWithoutSong()
+            getPlaylistOfSong(idSong)
+        }
+    }
+
+    //delete song in playlist
+    fun deleteSongInPlaylist(idPlaylist: Int, idSong: Int) {
+        viewModelScope.launch {
+            playlistRepository.deleteSongOfPlaylist(idPlaylist, idSong)
+            getPlaylistWithoutSong()
+            getPlaylistOfSong(idSong)
+        }
     }
 
     //get suggest songs = all songs - songs of playlist
@@ -127,7 +186,7 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
 
         val temp = arrayListOf<Playlist>()
         viewModelScope.launch {
-            playlistRepository.getUserWithPLaylistAndSongs(1).playlists.forEach {
+            playlistRepository.getUserWithPLaylistAndSongs(id).playlists.forEach {
                 temp.add(it.playlist)
             }
             _playlist.value = temp
@@ -137,12 +196,13 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
 
     //insert
     fun insertPlaylist(name: String) {
-        val playlist = Playlist(null, 1, name, "1")
+        val playlist = Playlist(null, id, name, "1")
         viewModelScope.launch {
             playlistRepository.insertPlaylist(playlist)
             getAllPlaylist()
         }
     }
+
 
     fun insertSongPlaylist(idSong: Int, idPlaylist: Int) {
         viewModelScope.launch {
