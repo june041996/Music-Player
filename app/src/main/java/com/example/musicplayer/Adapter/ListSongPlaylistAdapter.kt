@@ -2,13 +2,10 @@ package com.example.musicplayer.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
-
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.databinding.ListMusicPlaylistBinding
 import com.example.musicplayer.model.Song
-
 class SongDiff(
     val oldSong:List<Song>,
     val newSong:List<Song>
@@ -26,12 +23,12 @@ class SongDiff(
 
 }
 
-class ListSongFavoriteAdapter :
-    RecyclerView.Adapter<ListSongFavoriteAdapter.ViewHolder>() {
+class ListSongPlaylistAdapter :
+    RecyclerView.Adapter<ListSongPlaylistAdapter.ViewHolder>() {
     private val song = arrayListOf<Song>()
 
     fun submitData(temp:List<Song>){
-        val diff = DiffUtil.calculateDiff(SongDiff(song,temp))
+        val diff = DiffUtil.calculateDiff(SongDiff(song, temp))
         song.clear()
         song.addAll(temp)
         diff.dispatchUpdatesTo(this)
@@ -60,5 +57,3 @@ class ListSongFavoriteAdapter :
 
     override fun getItemCount() = song.size
 }
-
-

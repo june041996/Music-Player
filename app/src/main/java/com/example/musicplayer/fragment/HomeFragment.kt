@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.Adapter.ListSongFavoriteAdapter
+import com.example.musicplayer.Adapter.ListSongPlaylistAdapter
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.model.Song
@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
 
 
         //recycleview
-        val adapter = ListSongFavoriteAdapter()
+        val adapter = ListSongPlaylistAdapter()
 
         //get all Song
         mSongViewModel.localSongs.observe(viewLifecycleOwner){
