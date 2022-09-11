@@ -58,18 +58,23 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    var _localSong = MutableLiveData<List<Song>>()
 
     //get all local song from room database
     val localSongs: LiveData<List<Song>>
         get() = getLocalSongs()
-
+    var _localSong = MutableLiveData<List<Song>>()
     private fun getLocalSongs(): MutableLiveData<List<Song>> {
         viewModelScope.launch {
             _localSong.value = dao.getLocalSongs(true)
+            _sizeLocalSongs.value = _localSong.value!!.size
         }
         return _localSong
     }
+
+    //
+    val sizeLocalSongs: LiveData<Int>
+        get() = _sizeLocalSongs
+    val _sizeLocalSongs = MutableLiveData<Int>()
 
     //update local song
     fun updateLocalSongs() {

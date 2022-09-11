@@ -36,6 +36,32 @@ class CustomDialog(val context: Context) {
         }
     }
 
+    fun createEditDialog(oldName: String, onSubmitBtnClick: OnSubmitBtnClick) {
+        val dialog = Dialog(context).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setContentView(R.layout.dialog_create_playlist)
+            window?.apply {
+                setLayout(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT
+                )
+                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                attributes.gravity = Gravity.CENTER
+            }
+            setCancelable(true)
+        }
+        val edt = dialog.findViewById<EditText>(R.id.edtName)
+        edt.setText(oldName)
+        dialog.show()
+        dialog.findViewById<Button>(R.id.btnCancel).setOnClickListener() {
+            dialog.dismiss()
+        }
+        dialog.findViewById<Button>(R.id.btnOk).setOnClickListener() {
+            onSubmitBtnClick.onClick(edt.text.toString())
+            dialog.dismiss()
+        }
+    }
+
     fun createConfirmDialog(onSubmitBtnClick: OnSubmitBtnClick) {
         val dialog = Dialog(context).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
