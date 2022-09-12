@@ -5,19 +5,21 @@
 
         <variable
             name="song"
-            type="com.example.musicplayer.model.Song" />
+            type="com.example.musicplayer.model.Playlist" />
     </data>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/iv_songPlaylist"
-            android:layout_width="82dp"
-            android:layout_height="73dp"
-            android:src="@drawable/relax" />
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:src="@drawable/ic_music_player_splash_screen" />
+
 
         <TextView
             android:id="@+id/txt_NamePlaylist"
@@ -25,8 +27,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="@{String.valueOf(song.nameSong)}"
+            android:text="@{String.valueOf(song.name)}"
             android:textAlignment="center"
-            android:textSize="15dp" />
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
 </layout>
