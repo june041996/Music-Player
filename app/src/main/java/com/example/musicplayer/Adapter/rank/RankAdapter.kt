@@ -27,17 +27,13 @@ class RankAdapter : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
             binding.song = song
-//            for (i in 1..5){
-//                when(i){
-//                    1-> binding.tvCount.text = "1"
-//                }
-//            }
+
             binding.executePendingBindings()
         }
 
         init {
             binding.root.setOnClickListener {
-                itemViewOnClick.onClick(listSong[adapterPosition])
+                itemViewOnClick.onClick(listSong[bindingAdapterPosition], pos = bindingAdapterPosition)
             }
         }
     }

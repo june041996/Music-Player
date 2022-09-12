@@ -23,6 +23,8 @@
         <item name="icon_checked_color">@color/text_light</item>
         <item name="text_color">@color/text_light</item>
         <item name="title_color">@color/title_light</item>
+        <item name="background_color_now_playing">@color/now_playing_light</item>
+        <item name="text_hint_color">@color/text_light_hint</item>
     </style>
 
     <!-- Base application theme. -->
