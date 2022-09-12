@@ -68,6 +68,9 @@ interface MusicDao {
 
 
     //QUERY
+    @Query("SELECT * FROM tb_user WHERE email=:email")
+    suspend fun getUser(email: String): User
+
     @Query("SELECT * FROM tb_song")
     fun getAllSongs(): LiveData<List<Song>>
 
@@ -80,6 +83,10 @@ interface MusicDao {
 
     @Query("SELECT * FROM tb_favourite WHERE idUser=:idUser AND idSong=:idSong")
     suspend fun getFavouriteSong(idUser: Int, idSong: Int): Favourite
+
+    //get playlist of song
+    @Query("SELECT * FROM tb_playlist INNER JOIN tb_user ON tb_playlist.idUserCreator=tb_user.idUser INNER JOIN songplaylistcrossref ON tb_playlist.idPlaylist=songplaylistcrossref.idPlaylist WHERE tb_user.idUser=:idUser AND songplaylistcrossref.idSong=:idSong")
+    suspend fun getPlaylistOfSong(idUser: Int, idSong: Int): List<Playlist>
 
     //get list song of playlist
     @Transaction

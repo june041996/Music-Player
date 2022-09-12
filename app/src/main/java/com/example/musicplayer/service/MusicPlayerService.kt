@@ -144,9 +144,10 @@ class MusicPlayerService : Service() {
 
     fun seekBarSetup() {
         runnable = Runnable {
-            MusicPlayerFragment.binding.timeReal.text=
-                formatSongDuration((if (mediaPlayer?.currentPosition!=null) mediaPlayer?.currentPosition!!.toLong() else 0L))
-            MusicPlayerFragment.binding.seekbarTime.progress = if(mediaPlayer?.currentPosition!=null) mediaPlayer?.currentPosition!! else 0
+            MusicPlayerFragment.binding.timeReal.text =
+                formatSongDuration((if (mediaPlayer?.currentPosition != null) mediaPlayer?.currentPosition!!.toLong() else 0L))
+            MusicPlayerFragment.binding.seekbarTime.progress =
+                if (mediaPlayer?.currentPosition != null) mediaPlayer?.currentPosition!! else 0
             Handler(Looper.getMainLooper()).postDelayed(runnable, 200)
         }
         Handler(Looper.getMainLooper()).postDelayed(runnable, 0)
