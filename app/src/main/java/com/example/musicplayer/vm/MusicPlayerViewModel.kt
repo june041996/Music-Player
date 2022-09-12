@@ -27,8 +27,8 @@ class MusicPlayerViewModel(application: Application) : AndroidViewModel(applicat
 
     //Nhận id ở MusicPlayer
 
-    fun songById(id:Int): LiveData<Song> {
-       return songDao.getSongById(id)
+    fun songById(id: Int): LiveData<Song> {
+        return songDao.getSongById(id)
     }
 
     //val songById = songDao.getSongById(1004)

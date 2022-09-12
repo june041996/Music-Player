@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_play">Play</string>
     <string name="btn_shuffle">Shuffle</string>
+
+    //xml
+    <string name="songs">songs</string>
 </resources>

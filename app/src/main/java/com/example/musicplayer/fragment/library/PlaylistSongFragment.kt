@@ -12,10 +12,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
-import com.example.musicplayer.adapter.OnItemButtonClickListener
-import com.example.musicplayer.adapter.OnItemClickListener
-import com.example.musicplayer.adapter.SongsOfPlaylistAdapter
-import com.example.musicplayer.adapter.SuggestSongsAdapter
+import com.example.musicplayer.adapter.library.OnItemButtonClickListener
+import com.example.musicplayer.adapter.library.OnItemClickListener
+import com.example.musicplayer.adapter.library.SongsOfPlaylistAdapter
+import com.example.musicplayer.adapter.library.SuggestSongsAdapter
 import com.example.musicplayer.databinding.FragmentPlaylistSongBinding
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.Contanst

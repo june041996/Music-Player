@@ -2,10 +2,8 @@ package com.example.musicplayer.fragment
 
 
 import android.annotation.SuppressLint
-import android.content.ComponentName
+import android.content.*
 import android.content.Context.BIND_AUTO_CREATE
-import android.content.Intent
-import android.content.ServiceConnection
 import android.media.MediaPlayer
 import android.net.Uri.parse
 import android.os.Bundle
@@ -18,18 +16,22 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.FragmentMusicPlayerBinding
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.service.MusicPlayerService
 import com.example.musicplayer.utils.ConnectivityObserver
+import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.NetworkConnectivityObserver
 import com.example.musicplayer.utils.formatSongDuration
-import com.example.musicplayer.vm.MusicPlayerViewModel
+import com.example.musicplayer.vm.*
 import kotlinx.coroutines.launch
 
 class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnCompletionListener {
@@ -45,6 +47,28 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
     }
 
     private val viewModel: MusicPlayerViewModel by viewModels()
+    private val favouriteViewModel: FavouriteViewModel by viewModels()
+    private val songViewModel: SongViewModel by viewModels()
+    private val playlistViewModel: PlaylistViewModel by viewModels()
+    private val downloadViewModel: DownloadViewModel by viewModels()
+    private var onCompleted: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            downloadViewModel.stopDownloadService()
+            val url = intent.getStringExtra("downloaded")
+            Log.d(Contanst.TAG, "downloaded1: ${url.toString()}")
+            //downloadViewModel.updateUrlSong(url!!)
+            if (url != null) {
+                downloadViewModel.updateUrlSong(url)
+            }
+            //songViewModel.updateLocalSongs()
+            Toast.makeText(context, "Download success", Toast.LENGTH_LONG).show()
+            //unregister()
+        }
+    }
+
+    private fun unregister() {
+        requireActivity().unregisterReceiver(onCompleted)
+    }
 
     private var getID: Int = 0
 
@@ -55,6 +79,39 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
     ): View {
         binding = FragmentMusicPlayerBinding.inflate(inflater, container, false)
 
+        val song = requireActivity().intent.getSerializableExtra("song") as Song
+        binding.song = song
+        binding.favourite = favouriteViewModel
+        binding.lifecycleOwner = this
+        favouriteViewModel.checkFavouriteSong(song.idSong!!)
+        /*favouriteViewModel.checkSong.observe(viewLifecycleOwner){
+            if (it!=null) {
+                //binding.btnFavourite.setImageResource(R.drawable.ic_favorite)
+                Log.d(Contanst.TAG, "like")
+            } else {
+               // binding.btnFavourite.setImageResource(R.drawable.ic_unfavorite)
+                Log.d(Contanst.TAG, "unlike")
+            }
+        }*/
+        binding.btnFavourite.setOnClickListener() {
+            favouriteViewModel.checkFavouriteCheckUnCheck(song)
+        }
+
+        binding.btnAddPlaylist.setOnClickListener() {
+            songViewModel.setSelectSong(song)
+            findNavController().navigate(
+                MusicPlayerFragmentDirections.actionMusicPlayerFragment2ToAddToPlaylistFragment2(
+                    song.nameSong!!
+                )
+            )
+
+        }
+
+        binding.btnDownload.setOnClickListener() {
+            LocalBroadcastManager.getInstance(requireActivity())
+                .registerReceiver(onCompleted, IntentFilter("Download"))
+            downloadViewModel.startDownloadService(song)
+        }
 //        lifecycleScope.launch {
 //            viewModel.getSongById(1004).observe(viewLifecycleOwner) {
 //                it?.let {
@@ -67,7 +124,8 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
 //                }
 //
 //            }}
-        getID = requireActivity().intent.getIntExtra("idSong", 1003)
+        // getID = requireActivity().intent.getIntExtra("idSong", 1003)
+        getID = song.idSong!!
         Log.d(LOG, getID.toString())
 
 

@@ -1,5 +1,6 @@
 package com.example.musicplayer.fragment.library
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,9 +14,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
-import com.example.musicplayer.adapter.OnDeviceAdapter
-import com.example.musicplayer.adapter.OnItemButtonClickListener
-import com.example.musicplayer.adapter.OnItemClickListener
+import com.example.musicplayer.activity.MusicPlayerActivity
+import com.example.musicplayer.adapter.library.OnDeviceAdapter
+import com.example.musicplayer.adapter.library.OnItemButtonClickListener
+import com.example.musicplayer.adapter.library.OnItemClickListener
 import com.example.musicplayer.databinding.FragmentOnDeviceBinding
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.Contanst
@@ -32,7 +34,6 @@ class OnDeviceFragment : Fragment() {
     private val playlistViewModel: PlaylistViewModel by activityViewModels()
     private val favouriteViewModel: FavouriteViewModel by activityViewModels()
     private var localSongs = arrayListOf<Song>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,11 +43,11 @@ class OnDeviceFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.song = songViewModel
         binding.lifecycleOwner = this
+
         songViewModel.sizeLocalSongs.observe(viewLifecycleOwner) {
             Log.d(Contanst.TAG, "size: ${it.toString()}")
         }
@@ -57,7 +58,9 @@ class OnDeviceFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 //play music
                 Log.d(Contanst.TAG, "item: ${localSongs[position].nameSong}")
-
+                val intent = Intent(context, MusicPlayerActivity::class.java)
+                intent.putExtra("song", localSongs[position])
+                startActivity(intent)
             }
         }, object : OnItemButtonClickListener {
             override fun onItemClick(position: Int, view: View) {
@@ -75,6 +78,14 @@ class OnDeviceFragment : Fragment() {
 
         binding.btnPlay.setOnClickListener() {
             //play all songs
+        }
+        binding.btnShuffle.setOnClickListener() {
+            //songViewModel.updateLocalSongs()
+        }
+        binding.swipeFreshLayout.setOnRefreshListener() {
+            songViewModel.updateLocalSongs()
+            binding.swipeFreshLayout.isRefreshing = false
+            adapter.submitData(localSongs)
         }
     }
 

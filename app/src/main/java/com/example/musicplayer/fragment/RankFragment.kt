@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +21,6 @@ import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.Status
 import com.example.musicplayer.vm.MusicPlayerViewModel
 import com.example.musicplayer.vm.RankViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RankFragment : Fragment() {
@@ -71,7 +69,8 @@ class RankFragment : Fragment() {
                 viewModelMusicPlayer.idSong.observe(viewLifecycleOwner) { idSong ->
                     Toast.makeText(requireContext(), idSong.toString(), Toast.LENGTH_SHORT).show()
                     val intent = Intent(requireContext(), MusicPlayerActivity::class.java)
-                    intent.putExtra("idSong", idSong)
+                    //intent.putExtra("idSong", idSong)
+                    intent.putExtra("song", song)
                     startActivity(intent)
                 }
             }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.musicplayer.adapter.library.OnItemClickListener
 import com.example.musicplayer.databinding.ListMusicFavoriteBinding
 import com.example.musicplayer.model.Song
 
@@ -53,3 +54,4 @@ class ListSongFavoriteAdapter :
     }
 
     override fun getItemCount() = mFavofite.size
+}

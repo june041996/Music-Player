@@ -9,6 +9,14 @@
         <variable
             name="vm"
             type="MusicPlayerViewModel" />
+
+        <variable
+            name="favourite"
+            type="com.example.musicplayer.vm.FavouriteViewModel" />
+
+        <variable
+            name="song"
+            type="com.example.musicplayer.model.Song" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,12 +76,12 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btn_favourite"
+                set_icon_favourite="@{favourite.checkFavourite}"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/shape_button_next_previous"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_unfavorite"
                 android:tint="?attr/text_color" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -85,6 +93,17 @@
                 android:background="@drawable/shape_button_next_previous"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_file_download"
+                android:tint="?attr/text_color" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_add_playlist"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="15dp"
+                android:layout_toRightOf="@+id/btn_download"
+                android:background="@drawable/shape_button_next_previous"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_playlist_add"
                 android:tint="?attr/text_color" />
 
             <!--        <TextView-->

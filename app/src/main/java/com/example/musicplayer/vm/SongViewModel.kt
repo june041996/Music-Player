@@ -12,6 +12,7 @@ import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.network.SongClient
 import com.example.musicplayer.repository.SongRepository
+import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -69,6 +70,36 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    //get all songs
+    //get all songs
+    val _songs = MutableLiveData<ArrayList<Song>>()
+    val songs: LiveData<ArrayList<Song>>
+        get() = getAllSongs()
+
+    fun getAllSongs(): MutableLiveData<ArrayList<Song>> {
+        Log.d(Contanst.TAG, "id: ${id.toString()} - name: $name")
+        var list = arrayListOf<Song>()
+        viewModelScope.launch {
+            songRepository.getAllSongs().forEach {
+                list.add(it)
+            }
+            _songs.value = list
+            Log.d(Contanst.TAG, "it: ${_songs.value.toString()}")
+        }
+        return _songs
+    }
+
+    //get song by name
+    val _songByName = MutableLiveData<Song>()
+    val songByName: LiveData<Song>
+        get() = _songByName
+
+    fun getSongByName(name: String) {
+        viewModelScope.launch {
+            val song = songRepository.getSongByName(name)
+            _songByName.value = song
+        }
+    }
 
     //get all local song from room database
     val localSongs: LiveData<List<Song>>
@@ -89,6 +120,7 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
 
     //update local song
     fun updateLocalSongs() {
+
         val oldSongs = _localSong.value
         val newSongs: ArrayList<Song> = arrayListOf()
         //get local song from device

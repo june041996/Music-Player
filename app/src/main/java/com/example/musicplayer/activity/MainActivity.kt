@@ -13,16 +13,12 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
-
-import android.view.Menu
-
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
@@ -42,6 +38,7 @@ import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Status
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.SongViewModelFactory
+import com.example.musicplayer.vm.WorkViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -54,7 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var sharedpreferences: SharedPreferences
     private val SHARED_PREFS = "shared_prefs"
-
+    private val workViewModel: WorkViewModel by viewModels()
 
     private lateinit var toolBar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
@@ -63,7 +60,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val themePrefsKey = "theme"
 
     private var checkOn: Boolean = true
-
 
 
     //   // private val viewModel: HomeViewModel by viewModels()
@@ -83,7 +79,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        //
+        //reminder play song
+        viewModel.songs.observe(this) {
+            workViewModel.enqueuePeriodicReminder(it)
+        }
+        val reminder = intent.getStringExtra("reminder")
+        Log.d(Contanst.TAG, "reminder: $reminder")
+        if (reminder != null) {
+            viewModel.getSongByName(reminder)
+            viewModel.songByName.observe(this) {
+                Log.d(Contanst.TAG, "play s: ${it.toString()}")
+                //play music
+                val intent = Intent(this, MusicPlayerActivity::class.java)
+                intent.putExtra("song", it)
+                startActivity(intent)
+            }
+        }
 
 
         ///Không xoá

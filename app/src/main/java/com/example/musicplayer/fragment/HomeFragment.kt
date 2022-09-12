@@ -9,15 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.musicplayer.adapter.ListSongFavoriteAdapter
-
 import com.example.musicplayer.adapter.ListSongPlaylistAdapter
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.vm.FavouriteViewModel
 import com.example.musicplayer.vm.PlaylistViewModel
-import com.example.musicplayer.vm.SongViewModel
 
 
 class HomeFragment : Fragment() {
@@ -45,7 +42,8 @@ class HomeFragment : Fragment() {
             adapter.submitData(it)
         }
         binding.recycleViewPlaylist.adapter = adapter
-        binding.recycleViewPlaylist.layoutManager = GridLayoutManager(context,2,GridLayoutManager.HORIZONTAL,false)
+        binding.recycleViewPlaylist.layoutManager =
+            GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
 
         //recycleview favorite
         val adapterFavorite = ListSongFavoriteAdapter()
@@ -59,7 +57,6 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         return binding.root
     }
-
 
 
 }
