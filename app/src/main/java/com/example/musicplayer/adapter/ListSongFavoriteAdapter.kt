@@ -53,3 +53,4 @@ class ListSongFavoriteAdapter :
     }
 
     override fun getItemCount() = mFavofite.size
+}

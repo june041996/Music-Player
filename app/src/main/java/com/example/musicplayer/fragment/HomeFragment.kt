@@ -35,8 +35,6 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
-        //recycleview Playlist
         val adapter = ListSongPlaylistAdapter()
 
         //get all Song
@@ -45,7 +43,9 @@ class HomeFragment : Fragment() {
             adapter.submitData(it)
         }
         binding.recycleViewPlaylist.adapter = adapter
-        binding.recycleViewPlaylist.layoutManager = GridLayoutManager(context,2,GridLayoutManager.HORIZONTAL,false)
+
+        binding.recycleViewPlaylist.layoutManager =
+            GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
 
         //recycleview favorite
         val adapterFavorite = ListSongFavoriteAdapter()
@@ -54,12 +54,11 @@ class HomeFragment : Fragment() {
             Log.d("QuangLPT", "call data favorite: ${it.size}")
             adapterFavorite.submitDataFavorite(it)
         }
+
         binding.recycleViewFavorite.adapter = adapterFavorite
         binding.recycleViewFavorite.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         return binding.root
     }
-
-
 
 }
