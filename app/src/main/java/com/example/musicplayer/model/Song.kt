@@ -24,38 +24,4 @@ data class Song(
     val duration: String?,
     val views: Int,
     val isOffline: Boolean
-) : Serializable, Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString(),
-        parcel.readInt(),
-        parcel.readByte() != 0.toByte()
-    ) {
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
-        TODO("Not yet implemented")
-    }
-
-    companion object CREATOR : Parcelable.Creator<Song> {
-        override fun createFromParcel(parcel: Parcel): Song {
-            return Song(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Song?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+) : Serializable

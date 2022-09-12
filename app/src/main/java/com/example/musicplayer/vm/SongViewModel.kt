@@ -1,6 +1,8 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
@@ -16,7 +18,13 @@ import kotlinx.coroutines.launch
 
 
 class SongViewModel(application: Application) : AndroidViewModel(application) {
-    private val songRepository = SongRepository(getApplication<Application>().applicationContext)
+
+    val songRepository = SongRepository(getApplication<Application>().applicationContext)
+    private val SHARED_PREFS = "shared_prefs"
+    private var sharedpreferences: SharedPreferences =
+        getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+    private val id = sharedpreferences.getInt("id", 0)
+    private val name = sharedpreferences.getString("username", null)
 
     companion object {
         private const val TAG: String = "DHP"

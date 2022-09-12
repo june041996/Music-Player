@@ -1,6 +1,8 @@
 package com.example.musicplayer.activity
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -15,12 +17,15 @@ import com.example.musicplayer.vm.AuthViewModel
 class SigninActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninBinding
     private lateinit var viewModel: AuthViewModel
-
+    private lateinit var sharedpreferences: SharedPreferences
+    private val SHARED_PREFS = "shared_prefs"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+        val editor = sharedpreferences.edit()
 
         //init viewmodel here
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
@@ -52,8 +57,15 @@ class SigninActivity : AppCompatActivity() {
             //handle
             var message = ""
             if (it == true) {
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                viewModel.getUser(binding.edtUser.text.toString())
+                viewModel.user.observe(this) {
+                    editor.putInt("id", it.idUser!!)
+                    editor.putString("username", it.email)
+                    editor.apply()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+
                 message = "Logged in successfully!"
             } else {
                 message = "Login failed!"

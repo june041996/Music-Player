@@ -1,35 +1,22 @@
-package com.example.musicplayer.Adapter
+package com.example.musicplayer.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.databinding.ListMusicPlaylistBinding
+
+import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
+import com.example.musicplayer.vm.PlaylistViewModel
 
-class SongDiff(
-    val oldSong: List<Song>,
-    val newSong: List<Song>
-) : DiffUtil.Callback() {
-    override fun getOldListSize() = oldSong.size
-    override fun getNewListSize() = newSong.size
-
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldSong[oldItemPosition].idSong == newSong[oldItemPosition].idSong
-    }
-
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldSong === newSong
-    }
-
-}
 
 class ListSongPlaylistAdapter :
     RecyclerView.Adapter<ListSongPlaylistAdapter.ViewHolder>() {
-    private val song = arrayListOf<Song>()
+    private val song = arrayListOf<Playlist>()
 
-    fun submitData(temp: List<Song>) {
-        val diff = DiffUtil.calculateDiff(SongDiff(song, temp))
+    fun submitData(temp: List<Playlist>) {
+        val diff = DiffUtil.calculateDiff(DiffPlaylist(song, temp))
         song.clear()
         song.addAll(temp)
         diff.dispatchUpdatesTo(this)
@@ -37,7 +24,8 @@ class ListSongPlaylistAdapter :
 
     class ViewHolder(private val binding: ListMusicPlaylistBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(s: Song) {
+
+        fun bind(s: Playlist) {
             binding.song = s
             binding.executePendingBindings()
         }

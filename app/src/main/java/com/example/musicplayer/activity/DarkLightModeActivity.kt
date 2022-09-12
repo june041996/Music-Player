@@ -1,9 +1,8 @@
 package com.example.musicplayer.activity
 
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.musicplayer.databinding.ActivityDarkLightModeBinding
 
