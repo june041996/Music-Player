@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMusicPlayerBinding
 
@@ -29,7 +28,7 @@ class MusicPlayerActivity : AppCompatActivity() {
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
 
-        setupActionBarWithNavController(navController)
+        // setupActionBarWithNavController(navController)
     }
 
 }

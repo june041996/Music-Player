@@ -1,5 +1,6 @@
 package com.example.musicplayer.adapter
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -52,4 +53,3 @@ class ListSongFavoriteAdapter :
     }
 
     override fun getItemCount() = mFavofite.size
-}

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/icon_checked_color">
+    android:background="?attr/background_color">
 
     <TextView
         android:id="@+id/tv_playlist"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="My Playlist"
-        android:textColor="@color/white"
+       android:textColor="?attr/text_color"
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.055"
@@ -36,7 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Favorite"
-        android:textColor="@color/white"
+       android:textColor="?attr/text_color"
+
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"

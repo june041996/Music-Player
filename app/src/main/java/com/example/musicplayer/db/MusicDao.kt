@@ -11,6 +11,7 @@ import com.example.musicplayer.model.relation.*
 
 @Dao
 interface MusicDao {
+
     //INSERT Thêm dữ liệu từ API vào Local DB
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSong(song: Song)
@@ -18,6 +19,10 @@ interface MusicDao {
     //SELECT song by id
     @Query("SELECT * FROM tb_song WHERE idSong=:id")
     fun getSongById(id: Int): LiveData<Song>
+
+    //SELECT Song rank
+    @Query("SELECT * FROM tb_song WHERE isOffline=:isOffline")
+    fun getSongsOnline(isOffline: Int): LiveData<List<Song>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlaylist(playlist: Playlist)
@@ -63,6 +68,9 @@ interface MusicDao {
 
 
     //QUERY
+    @Query("SELECT * FROM tb_user WHERE email=:email")
+    suspend fun getUser(email: String): User
+
     @Query("SELECT * FROM tb_song")
     fun getAllSongs(): LiveData<List<Song>>
 
@@ -72,6 +80,13 @@ interface MusicDao {
     //get all local song with isOffline = true
     @Query("SELECT * FROM tb_song WHERE isOffline=:status ")
     suspend fun getLocalSongs(status: Boolean): List<Song>
+
+    @Query("SELECT * FROM tb_favourite WHERE idUser=:idUser AND idSong=:idSong")
+    suspend fun getFavouriteSong(idUser: Int, idSong: Int): Favourite
+
+    //get playlist of song
+    @Query("SELECT * FROM tb_playlist INNER JOIN tb_user ON tb_playlist.idUserCreator=tb_user.idUser INNER JOIN songplaylistcrossref ON tb_playlist.idPlaylist=songplaylistcrossref.idPlaylist WHERE tb_user.idUser=:idUser AND songplaylistcrossref.idSong=:idSong")
+    suspend fun getPlaylistOfSong(idUser: Int, idSong: Int): List<Playlist>
 
     //get list song of playlist
     @Transaction

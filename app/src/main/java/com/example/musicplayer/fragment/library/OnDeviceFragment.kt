@@ -3,12 +3,13 @@ package com.example.musicplayer.fragment.library
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
@@ -21,6 +22,8 @@ import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.vm.FavouriteViewModel
 import com.example.musicplayer.vm.PlaylistViewModel
 import com.example.musicplayer.vm.SongViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class OnDeviceFragment : Fragment() {
@@ -39,10 +42,13 @@ class OnDeviceFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.song = songViewModel
+        binding.lifecycleOwner = this
         songViewModel.sizeLocalSongs.observe(viewLifecycleOwner) {
-            binding.tvSizeSongs.text = "${it.toString()} Track"
+            Log.d(Contanst.TAG, "size: ${it.toString()}")
         }
         val adapter = OnDeviceAdapter()
         binding.rvSongs.adapter = adapter
@@ -73,21 +79,37 @@ class OnDeviceFragment : Fragment() {
     }
 
     private fun showMenuPopup(v: View, song: Song) {
-        val popupMenu = PopupMenu(requireContext(), v)
-        popupMenu.menuInflater.inflate(R.menu.song_menu, popupMenu.menu)
-        popupMenu.show()
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(item: MenuItem): Boolean {
+        PopupMenu(requireContext(), v).apply {
+            menuInflater.inflate(R.menu.song_menu, menu)
+            show()
+            setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.favourite -> {
-                        favouriteViewModel.insertFavourite(song)
+                        lifecycleScope.launch {
+                            favouriteViewModel.checkFavouriteSong(song.idSong!!)
+                            delay(500L)
+                            if (favouriteViewModel.check) {
+                                Toast.makeText(
+                                    context,
+                                    "This song already was added to favorites list",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                favouriteViewModel.insertFavourite(song)
+                            }
+                        }
                     }
                     R.id.addToPlaylist -> {
-                        findNavController().navigate(OnDeviceFragmentDirections.actionOnDeviceFragmentToAddToPlaylistFragment())
+                        findNavController().navigate(
+                            OnDeviceFragmentDirections.actionOnDeviceFragmentToAddToPlaylistFragment(
+                                song.nameSong!!
+                            )
+                        )
                     }
                 }
-                return true
+                true
             }
-        })
+        }
+
     }
 }

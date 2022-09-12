@@ -5,6 +5,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 
+//set img song off/on
 @BindingAdapter("set_url")
 fun loadImage(img: ImageView, link: String) {
     Glide.with(img)
@@ -12,3 +13,7 @@ fun loadImage(img: ImageView, link: String) {
         .placeholder(R.mipmap.ic_launcher)
         .into(img)
 }
+
+//set date create playlist
+
+
