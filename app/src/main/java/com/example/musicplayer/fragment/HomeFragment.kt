@@ -7,17 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+
+import com.example.musicplayer.adapter.ListSongFavoriteAdapter
+
 import com.example.musicplayer.adapter.ListSongPlaylistAdapter
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.model.Song
+import com.example.musicplayer.vm.FavouriteViewModel
+import com.example.musicplayer.vm.PlaylistViewModel
 import com.example.musicplayer.vm.SongViewModel
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 
-    private val mSongViewModel: SongViewModel by activityViewModels()
+    private val mSongViewModel: PlaylistViewModel by activityViewModels()
+    private val mFavoretiViewModel: FavouriteViewModel by activityViewModels()
     var song = listOf<Song>()
 
 
@@ -29,21 +36,30 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
-        //recycleview
+        //recycleview Playlist
         val adapter = ListSongPlaylistAdapter()
 
         //get all Song
-        mSongViewModel.localSongs.observe(viewLifecycleOwner) {
-            Log.d("QuangLPT", "call data: ${it.size}")
+        mSongViewModel.playlists.observe(viewLifecycleOwner) {
+            Log.d("QuangLPT", "call data song: ${it.size}")
             adapter.submitData(it)
         }
         binding.recycleViewPlaylist.adapter = adapter
-        binding.recycleViewPlaylist.layoutManager =
+        binding.recycleViewPlaylist.layoutManager = GridLayoutManager(context,2,GridLayoutManager.HORIZONTAL,false)
+
+        //recycleview favorite
+        val adapterFavorite = ListSongFavoriteAdapter()
+        //get all Favorite
+        mFavoretiViewModel.songs.observe(viewLifecycleOwner) {
+            Log.d("QuangLPT", "call data favorite: ${it.size}")
+            adapterFavorite.submitDataFavorite(it)
+        }
+        binding.recycleViewFavorite.adapter = adapterFavorite
+        binding.recycleViewFavorite.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-
         return binding.root
     }
+
 
 
 }
