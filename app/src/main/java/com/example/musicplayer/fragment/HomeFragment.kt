@@ -28,7 +28,6 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
         //recycleview
         val adapter = ListSongPlaylistAdapter()
 
@@ -38,12 +37,10 @@ class HomeFragment : Fragment() {
             adapter.submitData(it)
         }
         binding.recycleViewPlaylist.adapter = adapter
+
         binding.recycleViewPlaylist.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-
         return binding.root
     }
-
-
 }
