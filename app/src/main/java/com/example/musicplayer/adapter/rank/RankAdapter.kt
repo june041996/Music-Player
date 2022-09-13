@@ -4,16 +4,12 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.R
 import com.example.musicplayer.adapter.DiffSong
 import com.example.musicplayer.databinding.ItemRankMusicBinding
-import com.example.musicplayer.fragment.RankFragment
 import com.example.musicplayer.model.Song
-import com.example.musicplayer.vm.FavouriteViewModel
-import java.util.*
 
 class RankAdapter : RecyclerView.Adapter<RankAdapter.RankViewHolder>() {
 

@@ -2,13 +2,11 @@ package com.example.musicplayer.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.adapter.rank.ItemViewOnClick
 import com.example.musicplayer.databinding.ItemRankMusicBinding
 import com.example.musicplayer.model.Song
-import com.example.musicplayer.utils.Resource
 
 class ListRankAdapter : RecyclerView.Adapter<ListRankAdapter.ViewHolder>() {
 
@@ -35,7 +33,7 @@ class ListRankAdapter : RecyclerView.Adapter<ListRankAdapter.ViewHolder>() {
 
         init {
             binding.root.setOnClickListener {
-                itemViewOnClick.onClick(listRank[adapterPosition],adapterPosition)
+                itemViewOnClick.onClick(listRank[adapterPosition], adapterPosition)
             }
         }
     }
@@ -56,6 +54,6 @@ class ListRankAdapter : RecyclerView.Adapter<ListRankAdapter.ViewHolder>() {
         }
     }
 
-    override fun getItemCount()= listRank.size
+    override fun getItemCount() = listRank.size
 
 }

@@ -4,14 +4,14 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.musicplayer.db.MusicDao
+import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
-@HiltViewModel
-class MusicPlayerViewModel @Inject constructor(val songDao: MusicDao, application: Application) :
+
+class MusicPlayerViewModel(application: Application) :
     AndroidViewModel(application) {
+    val songDao = MusicDatabase.getInstance(getApplication()).songDao()
+
     companion object {
         private const val LOG: String = "TCR"
     }

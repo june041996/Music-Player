@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.adapter.rank.ItemViewOnClick
 import com.example.musicplayer.databinding.ListMusicPlaylistBinding
 import com.example.musicplayer.model.Playlist
 
@@ -20,11 +19,11 @@ class ListSongPlaylistAdapter :
         diff.dispatchUpdatesTo(this)
     }
 
-    fun setOnItemClickListener(onItemClickListener: ItemOnclick){
+    fun setOnItemClickListener(onItemClickListener: ItemOnclick) {
         listener = onItemClickListener
     }
 
-   inner class ViewHolder(private val binding: ListMusicPlaylistBinding) :
+    inner class ViewHolder(private val binding: ListMusicPlaylistBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(s: Playlist) {

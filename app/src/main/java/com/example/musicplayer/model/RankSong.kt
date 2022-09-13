@@ -1,9 +1,5 @@
 package com.example.musicplayer.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-
 //@Entity(tableName = "tb_rank_song")
 //data class RankSong(
 //    @PrimaryKey(autoGenerate = true)

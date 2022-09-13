@@ -34,7 +34,7 @@ class SignupActivity : AppCompatActivity() {
                 viewModel.register(
                     binding.edtEmail.text.toString(),
                     binding.edtAddress.text.toString(),
-                    )
+                )
             }
         }
         viewModel.isSuccessful.observe(this, Observer {

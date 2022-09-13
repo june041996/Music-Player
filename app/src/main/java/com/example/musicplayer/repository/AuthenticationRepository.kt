@@ -48,7 +48,6 @@ class AuthenticationRepository(val application: Application) {
     }
 
 
-
     // đăng ký
     fun requestRegister(mail: String, password: String) {
         //if all credential are correct
@@ -63,14 +62,14 @@ class AuthenticationRepository(val application: Application) {
                     val email = firebaseUser!!.email
                     isSuccessful.value = it.isSuccessful
                     //luu lai mail va password vao app de lan sau su dung
-                    val loginInfo = LoginModel(mail, password,)
+                    val loginInfo = LoginModel(mail, password)
                     val dbManager = DBManager(application)
                     dbManager.saveLoginInfo(loginInfo)
 
                 } else {
                     isSuccessful.value = false
                     //xoa thong tin dang nhap di
-                    val loginInfo = LoginModel(mail, "",)
+                    val loginInfo = LoginModel(mail, "")
                     val dbManager = DBManager(application)
                     dbManager.saveLoginInfo(loginInfo)
 

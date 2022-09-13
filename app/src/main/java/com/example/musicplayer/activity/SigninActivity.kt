@@ -30,7 +30,9 @@ class SigninActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val editor = sharedpreferences.edit()
-        var check = sharedpreferences.getString("check", "")
+
+        val check = sharedpreferences.getString("check", "")
+
         if (check.equals("true")) {
             startActivity(Intent(this, MainActivity::class.java))
         }
