@@ -161,14 +161,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 READ_STORAGE_PERMISSION_CODE
             )
         }
-
-        //Rin
-        /////////////////////////////////////////////////////////////////////
-        //INSERT to DB
-
-        /////////////////////////////////////////////////////////////
-
-
     }
 
 
@@ -310,7 +302,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onDestroy()
         //Nếu không play nhạc thì stop service
         if (!MusicPlayerFragment.isPlaying && MusicPlayerFragment.musicPlayerService != null) {
-           exitApp()
+            exitApp()
         }
     }
 }

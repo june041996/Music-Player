@@ -71,6 +71,8 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         var min60: Boolean = false
 
         var nowPlayingId: Int = 0
+
+
     }
 
     private val viewModel: MusicPlayerViewModel by viewModels()

@@ -9,6 +9,6 @@ import com.example.musicplayer.model.Song
 class RankRepository(val context: Context) {
     var dao: MusicDao = MusicDatabase.getInstance(context).songDao()
 
-    fun getSongsOnline(): LiveData<List<Song>> = dao.getSongsOnline(0)
+    fun getSongsOnline(): LiveData<MutableList<Song>> = dao.getSongsOnline(0)
 
 }
