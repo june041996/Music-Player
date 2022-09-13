@@ -48,7 +48,7 @@ class RankFragment : Fragment() {
                             it.data?.observe(viewLifecycleOwner) { listSong ->
                                 val list: List<Song> = listSong.sortedByDescending { it.views }
                                 adapter.submitData(list)
-                                listRankSong.addAll(listSong)
+                                listRankSong.addAll(list)
 
                             }
                         }

@@ -78,7 +78,7 @@ fun loadImage(img: ImageView, s: Song) {
         mmr.setDataSource(s.urlSong)
         val data: ByteArray? = mmr.embeddedPicture
         if (data != null) {
-            val bitmap = BitmapFactory.decodeByteArray(data, 0, data!!.size)
+            val bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
             img.setImageBitmap(bitmap)
         } else {
             img.setImageResource(R.drawable.icon_music_player_app)

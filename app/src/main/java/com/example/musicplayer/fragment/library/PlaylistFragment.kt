@@ -27,7 +27,9 @@ class PlaylistFragment : Fragment() {
     private lateinit var binding: FragmentPlaylistBinding
     private val playlistViewModel: PlaylistViewModel by activityViewModels()
     private val searchViewModel: SearchViewModel by activityViewModels()
-    private val playlists = arrayListOf<Playlist>()
+    companion object{
+        var playlists = arrayListOf<Playlist>()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +47,7 @@ class PlaylistFragment : Fragment() {
         val adapter = PlaylistAdapter()
         binding.rvPlaylist.adapter = adapter
         binding.rvPlaylist.layoutManager = LinearLayoutManager(context)
+
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d(Contanst.TAG, position.toString())

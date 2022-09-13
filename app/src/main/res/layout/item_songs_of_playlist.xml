@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgSong"
             set_img_url="@{song}"
             android:layout_width="65dp"
@@ -24,7 +24,8 @@
             android:src="@drawable/icon_music_player_app"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/rounded_corner" />
 
         <TextView
             android:id="@+id/tvNameSong"
