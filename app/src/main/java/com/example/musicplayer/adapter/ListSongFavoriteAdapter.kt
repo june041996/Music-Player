@@ -33,7 +33,6 @@ class ListSongFavoriteAdapter :
             binding.favorite = f
             binding.executePendingBindings()
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
