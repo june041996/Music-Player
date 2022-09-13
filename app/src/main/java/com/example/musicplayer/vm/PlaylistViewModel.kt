@@ -28,9 +28,8 @@ class PlaylistViewModel @Inject constructor(
 
     val playlistRepository = PlaylistRepository(dao)
     val songRepository = SongRepository(dao)
-    private val id = prefs.getInt("id", 0)
+    val id = prefs.getInt("id", 0)
     private val name = prefs.getString("username", null)
-
 
 
     //get Playlist of song

@@ -30,7 +30,7 @@ class SigninActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val editor = sharedpreferences.edit()
-        check = sharedpreferences.getString("check", "")
+        val check = sharedpreferences.getString("check", "")
         if (check.equals("true")) {
             startActivity(Intent(this, MainActivity::class.java))
         }
@@ -96,6 +96,7 @@ class SigninActivity : AppCompatActivity() {
         }
         return true
     }
+
     //showdialog
     fun showDialog(message: String) {
         val builder = AlertDialog.Builder(this)
