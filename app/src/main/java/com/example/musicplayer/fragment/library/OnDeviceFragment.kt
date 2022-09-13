@@ -101,9 +101,9 @@ class OnDeviceFragment : Fragment() {
                 searchView?.onQueryTextChanged {
                     searchViewModel.searchQuery.value = it
                     searchViewModel.tasks.observe(parentFragment!!.viewLifecycleOwner) {
-                        val songs = arrayListOf<Song>()
-                        songs.addAll(it)
-                        adapter.submitData(songs)
+                        localSongs.clear()
+                        localSongs.addAll(it)
+                        adapter.submitData(localSongs)
                     }
                 }
             }

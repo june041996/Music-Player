@@ -77,10 +77,13 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         override fun onReceive(context: Context, intent: Intent) {
             downloadViewModel.stopDownloadService()
             val url = intent.getStringExtra("downloaded")
+            val song: Song? = intent.getSerializableExtra("song_downloaded") as Song?
+
             Log.d(Contanst.TAG, "downloaded1: ${url.toString()}")
             //downloadViewModel.updateUrlSong(url!!)
-            if (url != null) {
-                downloadViewModel.updateUrlSong(url)
+            if (url != null && song != null) {
+                Log.d(Contanst.TAG, "check d: $url - ${song.idSong}")
+                downloadViewModel.updateUrlSong(url, song!!)
             }
             //songViewModel.updateLocalSongs()
             Toast.makeText(context, "Download success", Toast.LENGTH_LONG).show()
@@ -103,7 +106,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         binding = FragmentMusicPlayerBinding.inflate(inflater, container, false)
 
         val extras = activity?.intent?.extras
-
+        binding.song = extras?.getSerializable("song") as Song
         //initial check internet
         connectivityObserver = NetworkConnectivityObserver(requireContext())
 

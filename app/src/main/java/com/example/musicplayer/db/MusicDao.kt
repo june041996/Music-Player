@@ -47,7 +47,7 @@ interface MusicDao {
     @Update
     suspend fun updateSong(song: Song)
 
-    @Query("UPDATE tb_song SET urlSong = :urlSong AND isOffline=:status WHERE idSong =:id")
+    @Query("UPDATE tb_song SET urlSong =:urlSong , isOffline=:status WHERE idSong =:id")
     suspend fun updateUrlSong(urlSong: String, status: Boolean, id: Int)
 
     @Query("UPDATE tb_playlist SET name = :name WHERE idPlaylist =:id")
@@ -63,6 +63,9 @@ interface MusicDao {
 
     @Query("SELECT * FROM tb_playlist INNER JOIN tb_user ON tb_playlist.idUserCreator=tb_user.idUser WHERE tb_user.idUser =:idUser AND tb_playlist.name LIKE '%' || :searchQuery || '%' ORDER BY tb_playlist.name ASC")
     fun getPlaylists(searchQuery: String, idUser: Int): Flow<List<Playlist>>
+
+    @Query("SELECT * FROM tb_song WHERE nameSong LIKE '%' || :searchQuery || '%'")
+    fun getFlowAllSongs(searchQuery: String): Flow<List<Song>>
 
     @Query("DELETE FROM tb_playlist WHERE idPlaylist=:id")
     suspend fun deletePlaylist(id: Int)
@@ -99,7 +102,7 @@ interface MusicDao {
     suspend fun getFavouriteSong(idUser: Int, idSong: Int): Favourite
 
     //get playlist of song
-    @Query("SELECT * FROM tb_playlist INNER JOIN tb_user ON tb_playlist.idUserCreator=tb_user.idUser INNER JOIN songplaylistcrossref ON tb_playlist.idPlaylist=songplaylistcrossref.idPlaylist WHERE tb_user.idUser=:idUser AND songplaylistcrossref.idSong=:idSong")
+    @Query("SELECT tb_playlist.* FROM tb_playlist INNER JOIN tb_user ON tb_playlist.idUserCreator=tb_user.idUser INNER JOIN songplaylistcrossref ON tb_playlist.idPlaylist=songplaylistcrossref.idPlaylist WHERE tb_playlist.idUserCreator=:idUser AND songplaylistcrossref.idSong=:idSong")
     suspend fun getPlaylistOfSong(idUser: Int, idSong: Int): List<Playlist>
 
     //get list song of playlist

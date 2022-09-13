@@ -6,16 +6,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.musicplayer.db.MusicDao
+import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.LoginModel
 import com.example.musicplayer.model.User
 import com.example.musicplayer.repository.AuthenticationRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class AuthViewModel @Inject constructor(val dao: MusicDao, application: Application) :
+
+class AuthViewModel(application: Application) :
     AndroidViewModel(application) {
+    val dao: MusicDao = MusicDatabase.getInstance(getApplication()).songDao()
     private val repository = AuthenticationRepository(application)
     val isSuccessful: LiveData<Boolean>
 

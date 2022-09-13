@@ -29,18 +29,19 @@ class DownloadService : Service() {
         return null
     }
 
+    var song: Song? = null
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         //HttpsTrustManager.allowAllSSL()
         Log.d(TAG, "onStartCommand")
-        val song = intent!!.getSerializableExtra("download") as Song
+        song = intent!!.getSerializableExtra("download") as Song
         Log.d("DHP", "song s: ${song.toString()}")
         createNotificationChannel()
-        createNotification(song.nameSong!!)
+        createNotification(song!!.nameSong!!)
         Thread(object : Runnable {
             override fun run() {
                 // download("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
                 //download("https://firebasestorage.googleapis.com/v0/b/music-player-97edf.appspot.com/o/BienNho-LeQuyen-5410854.mp3?alt=media&token=f4fc74a5-d247-4a32-a54d-6df2c97014b4")
-                download(song)
+                download(song!!)
             }
         }).start()
         return START_NOT_STICKY
@@ -213,6 +214,7 @@ class DownloadService : Service() {
     private fun sendMessageToActivity(url: String) {
         val intent = Intent("Download")
         intent.putExtra("downloaded", url)
+        intent.putExtra("song_downloaded", song)
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 }

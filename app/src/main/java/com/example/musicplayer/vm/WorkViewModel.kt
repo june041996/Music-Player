@@ -7,16 +7,16 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.example.musicplayer.db.MusicDao
+import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.repository.SongRepository
 import com.example.musicplayer.worker.SongReminderWorker
-import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-@HiltViewModel
-class WorkViewModel @Inject constructor(val dao: MusicDao, app: Application) :
+
+class WorkViewModel(app: Application) :
     AndroidViewModel(app) {
+    val dao: MusicDao = MusicDatabase.getInstance(getApplication()).songDao()
     private val workManager = WorkManager.getInstance(app.applicationContext)
     private val songRepository = SongRepository(dao)
     val names: ArrayList<String> = arrayListOf()
@@ -39,4 +39,9 @@ class WorkViewModel @Inject constructor(val dao: MusicDao, app: Application) :
             request.build()
         )
     }
+
+    fun cancel() {
+        workManager.cancelAllWork()
+    }
+
 }
