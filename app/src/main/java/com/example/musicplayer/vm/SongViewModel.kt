@@ -1,6 +1,8 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
@@ -9,12 +11,22 @@ import androidx.lifecycle.*
 import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.network.SongClient
+import com.example.musicplayer.repository.SongRepository
+import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
 class SongViewModel(application: Application) : AndroidViewModel(application) {
+
+    val songRepository = SongRepository(getApplication<Application>().applicationContext)
+    private val SHARED_PREFS = "shared_prefs"
+    private var sharedpreferences: SharedPreferences =
+        getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+    private val id = sharedpreferences.getInt("id", 0)
+    private val name = sharedpreferences.getString("username", null)
+
     companion object {
         private const val TAG: String = "DHP"
     }
@@ -38,7 +50,6 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
 
     //INSERT Song to Database
     private suspend fun insertSongDao(song: Song) = dao.insertSong(song)
-
     fun insertSongToDB(song: Song) = viewModelScope.launch {
         insertSongDao(song)
     }
@@ -48,13 +59,13 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun insertSong(song: Song) {
         viewModelScope.launch {
-            dao.insertSong(song)
+            songRepository.insertSong(song)
         }
     }
 
     private fun deleteSong(song: Song) {
         viewModelScope.launch {
-            dao.deleteSong(song.idSong!!)
+            songRepository.deleteSong(song)
         }
     }
 
@@ -65,7 +76,7 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
     var _localSong = MutableLiveData<List<Song>>()
     private fun getLocalSongs(): MutableLiveData<List<Song>> {
         viewModelScope.launch {
-            _localSong.value = dao.getLocalSongs(true)
+            _localSong.value = songRepository.getLocalSongs()
             _sizeLocalSongs.value = _localSong.value!!.size
         }
         return _localSong
@@ -159,5 +170,26 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
 
     fun setSelectSong(song: Song) {
         _selectedSong.value = song
+    }
+
+
+
+    ////////////////
+    //get all songs
+    val _songs = MutableLiveData<ArrayList<Song>>()
+    val songs: LiveData<ArrayList<Song>>
+        get() = getAllSongs()
+
+    fun getAllSongs(): MutableLiveData<ArrayList<Song>> {
+        Log.d(Contanst.TAG, "id: ${id.toString()} - name: $name")
+        var list = arrayListOf<Song>()
+        viewModelScope.launch {
+            songRepository.getAllSongs().forEach {
+                list.add(it)
+            }
+            _songs.value = list
+            Log.d(Contanst.TAG, "it: ${_songs.value.toString()}")
+        }
+        return _songs
     }
 }

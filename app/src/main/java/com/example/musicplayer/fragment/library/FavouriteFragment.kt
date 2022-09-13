@@ -33,6 +33,10 @@ class FavouriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.favourite = favouriteViewModel
+        binding.lifecycleOwner = this
+
+
         val adapter = FavouriteSongAdapter()
         binding.rvSongs.adapter = adapter
         binding.rvSongs.layoutManager = LinearLayoutManager(context)

@@ -12,53 +12,59 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
-
     <application
-        android:requestLegacyExternalStorage="true"
         android:name=".service.ApplicationClass"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_music_player"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_music_player"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicPlayer"
         tools:targetApi="31">
         <activity
-
+            android:name=".activity.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DarkLightModeActivity"
+            android:exported="true"
+            android:label="Dark Light mode"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
             android:name=".activity.MusicPlayerActivity"
             android:exported="true"
             android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.SigninActivity"
-            android:exported="true" />
-
+            android:exported="true"
+            android:theme="@style/Theme.MusicPlayer" />
         <activity
             android:name=".activity.SplashScreenActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.CustomMusicPlayer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-
             android:name=".activity.SignupActivity"
             android:exported="true"
-            android:usesCleartextTraffic="true">
-
-        </activity>
+            android:usesCleartextTraffic="true" />
         <activity
             android:name=".activity.MainActivity"
+            android:configChanges="uiMode"
             android:exported="true"
             android:theme="@style/Theme.MusicPlayer" />
-
         <activity
             android:name=".test.TestDatabaseActivity"
             android:exported="true" />
 
         <service android:name=".service.MusicPlayerService" />
+
         <receiver
             android:name=".service.NotificationReceiver"
             android:enabled="true" />

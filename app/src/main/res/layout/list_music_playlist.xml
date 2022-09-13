@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/iv_songPlaylist"
@@ -29,8 +29,9 @@
             android:gravity="center"
             android:text="@{String.valueOf(song.name)}"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="?attr/text_color"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            />
+
     </LinearLayout>
 </layout>

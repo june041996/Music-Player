@@ -37,6 +37,7 @@ class PlaylistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //
+        requireActivity().title = "test"
         val adapter = PlaylistAdapter()
         binding.rvPlaylist.adapter = adapter
         binding.rvPlaylist.layoutManager = LinearLayoutManager(context)
@@ -44,7 +45,11 @@ class PlaylistFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 Log.d(Contanst.TAG, position.toString())
                 playlistViewModel.setSelectedPlaylist(playlists[position])
-                findNavController().navigate(PlaylistFragmentDirections.actionPlaylistFragmentToPlaylistSongFragment())
+                findNavController().navigate(
+                    PlaylistFragmentDirections.actionPlaylistFragmentToPlaylistSongFragment(
+                        playlists[position].name
+                    )
+                )
             }
 
         }, object : OnItemButtonClickListener {

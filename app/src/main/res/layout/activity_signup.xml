@@ -50,11 +50,28 @@
         app:layout_constraintVertical_bias="0.299" />
 
     <EditText
+        android:id="@+id/edt_address"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_address"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Address"
+        android:paddingStart="10dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_name" />
+
+    <EditText
         android:id="@+id/edt_email"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/ic_person"
+        android:drawableStart="@drawable/ic_email"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="Email"
@@ -64,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_name"
+        app:layout_constraintTop_toBottomOf="@+id/edt_address"
         app:layout_constraintVertical_bias="0.061" />
 
     <EditText
