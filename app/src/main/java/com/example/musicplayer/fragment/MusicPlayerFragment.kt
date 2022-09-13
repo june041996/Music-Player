@@ -29,6 +29,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.FragmentMusicPlayerBinding
+import com.example.musicplayer.fragment.library.FavouriteFragment
+import com.example.musicplayer.fragment.library.OnDeviceFragment
+import com.example.musicplayer.fragment.library.PlaylistSongFragment
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.service.MusicPlayerService
 import com.example.musicplayer.utils.*
@@ -52,7 +55,16 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
 
         //List Rank
         var listRankSong: ArrayList<Song> = arrayListOf()
-        var getID: Int = 0
+
+        //List favourite
+        var listFavouriteSong: ArrayList<Song> = arrayListOf()
+
+        //List playlist
+        var listPlaylistSong: ArrayList<Song> = arrayListOf()
+
+        //List device
+        var listDevice: ArrayList<Song> = arrayListOf()
+
         var postion: Int = 0
 
         var repeat: Boolean = false
@@ -64,7 +76,8 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
 
         var nowPlayingId: Int = 0
 
-
+        //Check list (rank, favourite,..)
+        var checkList = 0
     }
 
     private val viewModel: MusicPlayerViewModel by viewModels()
@@ -73,6 +86,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
     private val songViewModel: SongViewModel by viewModels()
     private val playlistViewModel: PlaylistViewModel by viewModels()
     private val downloadViewModel: DownloadViewModel by viewModels()
+
     private var onCompleted: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             downloadViewModel.stopDownloadService()
@@ -110,6 +124,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         when (extras!!.getString("list")) {
             "listRankSong" -> {
                 //Start service
+                checkList = 1
                 val intent = Intent(requireContext(), MusicPlayerService::class.java)
                 activity?.bindService(intent, this, BIND_AUTO_CREATE)
                 activity?.startService(intent)
@@ -126,17 +141,54 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 //Play music
                 controlMusic(getID)
             }
-            "listRankSong1" -> {
+            "listFavourite" -> {
                 //Start service
+                checkList = 2
                 val intent = Intent(requireContext(), MusicPlayerService::class.java)
                 activity?.bindService(intent, this, BIND_AUTO_CREATE)
                 activity?.startService(intent)
 
-                getID = extras!!.getInt("idSong", 1003)
+                getID = extras.getInt("idSong", 1003)
 
                 Log.d(LOG, getID.toString())
 
+                listFavouriteSong.addAll(FavouriteFragment.songs)
 
+                postion = extras.getInt("pos", 0)
+                //Play music
+                controlMusic(getID)
+            }
+            "listPlaylist" -> {
+                //Start service
+                checkList = 3
+                val intent = Intent(requireContext(), MusicPlayerService::class.java)
+                activity?.bindService(intent, this, BIND_AUTO_CREATE)
+                activity?.startService(intent)
+
+                getID = extras.getInt("idSong", 1003)
+
+                Log.d(LOG, getID.toString())
+
+                listPlaylistSong.addAll(PlaylistSongFragment.songs)
+
+                postion = extras.getInt("pos", 0)
+                //Play music
+                controlMusic(getID)
+            }
+            "listDevice"->{
+                //Start service
+                checkList = 4
+                val intent = Intent(requireContext(), MusicPlayerService::class.java)
+                activity?.bindService(intent, this, BIND_AUTO_CREATE)
+                activity?.startService(intent)
+
+                getID = extras.getInt("idSong", 1003)
+
+                Log.d(LOG, getID.toString())
+
+                listDevice.addAll(OnDeviceFragment.localSongs)
+
+                postion = extras.getInt("pos", 0)
                 //Play music
                 controlMusic(getID)
             }
@@ -151,6 +203,17 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 binding.seekbarTime.max = musicPlayerService!!.mediaPlayer!!.duration
                 if (isPlaying) binding.btnPlayStopMusic.setImageResource(R.drawable.ic_pause)
                 else binding.btnPlayStopMusic.setImageResource(R.drawable.ic_play_arrow)
+            }
+            "remindSong" -> {
+                //Start service
+                val intent = Intent(requireContext(), MusicPlayerService::class.java)
+                activity?.bindService(intent, this, BIND_AUTO_CREATE)
+                activity?.startService(intent)
+
+                getID = extras.getInt("idSong", 1003)
+                Log.d(LOG, "trang $getID")
+                //Play music
+                controlMusic(getID)
             }
         }
 
@@ -243,14 +306,10 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
 
             }
         )
-
-
-
         Log.d(LOG, "CreateView")
 
         return binding.root
     }
-
 
     private fun setLayout(song: Song) {
         //Databinding
@@ -293,7 +352,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                     ConnectivityObserver.StatusInternet.AVAILABLE -> {
                         viewModel.songById(id).observe(viewLifecycleOwner) { song ->
                             setLayout(song)
-                            song.urlSong?.let { url -> createMediaPlayer(url) }
+                            song.urlSong.let { url -> createMediaPlayer(url) }
 
                         }
                     }
@@ -366,12 +425,45 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
     private fun prevNextSong(increment: Boolean) {
         if (increment) {
             setSongPosition(increment)
-            val idSong = listRankSong[postion].idSong.toString().toInt()
-            controlMusic(idSong)
+            when (checkList) {
+                1 -> {
+                    val idSong = listRankSong[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+                2 -> {
+                    val idSong = listFavouriteSong[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+                3 -> {
+                    val idSong = listPlaylistSong[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+                4 -> {
+                    val idSong = listDevice[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+            }
+
         } else {
             setSongPosition(increment)
-            val idSong = listRankSong[postion].idSong.toString().toInt()
-            controlMusic(idSong)
+            when (checkList) {
+                1 -> {
+                    val idSong = listRankSong[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+                2 -> {
+                    val idSong = listFavouriteSong[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+                3 -> {
+                    val idSong = listPlaylistSong[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+                4 -> {
+                    val idSong = listDevice[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+            }
         }
     }
 
@@ -460,9 +552,29 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
             R.drawable.ic_pause
         )
 
-        val idSong = listRankSong[postion].idSong.toString().toInt()
-        controlMusic(idSong)
-        musicPlayerService?.seekBarSetup()
+        when (checkList) {
+            1 -> {
+                val idSong = listRankSong[postion].idSong.toString().toInt()
+                controlMusic(idSong)
+                musicPlayerService?.seekBarSetup()
+            }
+            2 -> {
+                val idSong = listFavouriteSong[postion].idSong.toString().toInt()
+                controlMusic(idSong)
+                musicPlayerService?.seekBarSetup()
+            }
+            3 -> {
+                val idSong = listPlaylistSong[postion].idSong.toString().toInt()
+                controlMusic(idSong)
+                musicPlayerService?.seekBarSetup()
+            }
+            4-> {
+                val idSong = listDevice[postion].idSong.toString().toInt()
+                controlMusic(idSong)
+                musicPlayerService?.seekBarSetup()
+            }
+        }
+
     }
 
     override fun onServiceDisconnected(componentName: ComponentName?) {
@@ -472,8 +584,23 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
     //MediaPlayer.OnCompletionListener
     override fun onCompletion(mediaPlayer: MediaPlayer?) {
         setSongPosition(true)
-        createMediaPlayer(listRankSong[postion].urlSong.toString())
-        setLayout(listRankSong[postion])
-
+        when (checkList) {
+            1 -> {
+                createMediaPlayer(listRankSong[postion].urlSong)
+                setLayout(listRankSong[postion])
+            }
+            2 -> {
+                createMediaPlayer(listFavouriteSong[postion].urlSong)
+                setLayout(listFavouriteSong[postion])
+            }
+            3 -> {
+                createMediaPlayer(listPlaylistSong[postion].urlSong)
+                setLayout(listPlaylistSong[postion])
+            }
+            4 -> {
+                createMediaPlayer(listDevice[postion].urlSong)
+                setLayout(listDevice[postion])
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.musicplayer.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.example.musicplayer.utils.setSongPosition
 
 class NowPlayingFragment : Fragment() {
     companion object {
+        @SuppressLint("StaticFieldLeak")
         lateinit var binding: FragmentNowPlayingBinding
     }
 
@@ -20,7 +22,7 @@ class NowPlayingFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNowPlayingBinding.inflate(inflater, container, false)
         binding.root.visibility = View.INVISIBLE
         binding.btnPlayStopMusic.setOnClickListener {
@@ -30,8 +32,24 @@ class NowPlayingFragment : Fragment() {
             setSongPosition(true)
 
             MusicPlayerFragment.musicPlayerService!!.createMediaPlayer()
+            when (MusicPlayerFragment.checkList) {
+                1 -> {
+                    binding.song = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion]
+                }
+                2 -> {
+                    binding.song =
+                        MusicPlayerFragment.listFavouriteSong[MusicPlayerFragment.postion]
+                }
+                3 -> {
+                    binding.song =
+                        MusicPlayerFragment.listPlaylistSong[MusicPlayerFragment.postion]
+                }
+                4 -> {
+                    binding.song =
+                        MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
+                }
+            }
 
-            binding.song = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion]
             binding.lifecycleOwner = this@NowPlayingFragment
             MusicPlayerFragment.musicPlayerService!!.showNotification(R.drawable.ic_pause)
             playMusic()
@@ -42,7 +60,24 @@ class NowPlayingFragment : Fragment() {
 
             MusicPlayerFragment.musicPlayerService!!.createMediaPlayer()
 
-            binding.song = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion]
+            when (MusicPlayerFragment.checkList) {
+                1 -> {
+                    binding.song = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion]
+                }
+                2 -> {
+                    binding.song =
+                        MusicPlayerFragment.listFavouriteSong[MusicPlayerFragment.postion]
+                }
+                3->{
+                    binding.song =
+                        MusicPlayerFragment.listPlaylistSong[MusicPlayerFragment.postion]
+                }
+                3->{
+                    binding.song =
+                        MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
+                }
+            }
+
             binding.lifecycleOwner = this@NowPlayingFragment
             MusicPlayerFragment.musicPlayerService!!.showNotification(R.drawable.ic_pause)
             playMusic()
@@ -52,8 +87,25 @@ class NowPlayingFragment : Fragment() {
             val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
             val bundle = Bundle()
             bundle.putInt("pos", MusicPlayerFragment.postion)
-            val song = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion]
-            bundle.putSerializable("song", song)
+            when (MusicPlayerFragment.checkList) {
+                1 -> {
+                    val song = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion]
+                    bundle.putSerializable("song", song)
+                }
+                2 -> {
+                    val song = MusicPlayerFragment.listFavouriteSong[MusicPlayerFragment.postion]
+                    bundle.putSerializable("song", song)
+                }
+                3->{
+                    val song = MusicPlayerFragment.listPlaylistSong[MusicPlayerFragment.postion]
+                    bundle.putSerializable("song", song)
+                }
+                4->{
+                    val song = MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
+                    bundle.putSerializable("song", song)
+                }
+            }
+
             bundle.putString("list", "NowPlaying")
             intentSong.putExtras(bundle)
             startActivity(intentSong)
@@ -68,7 +120,23 @@ class NowPlayingFragment : Fragment() {
             binding.tvNameSong.isSelected = true
             binding.tvSinger.isSelected = true
             //dataBinding
-            binding.song = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion]
+            when (MusicPlayerFragment.checkList) {
+                1 -> {
+                    binding.song = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion]
+                }
+                2 -> {
+                    binding.song =
+                        MusicPlayerFragment.listFavouriteSong[MusicPlayerFragment.postion]
+                }
+                3 -> {
+                    binding.song =
+                        MusicPlayerFragment.listPlaylistSong[MusicPlayerFragment.postion]
+                }
+                4 -> {
+                    binding.song =
+                        MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
+                }
+            }
             binding.lifecycleOwner = this@NowPlayingFragment
 
             if (MusicPlayerFragment.isPlaying) binding.btnPlayStopMusic.setImageResource(R.drawable.ic_pause)
@@ -76,7 +144,7 @@ class NowPlayingFragment : Fragment() {
         }
     }
 
-    fun playMusic() {
+    private fun playMusic() {
         MusicPlayerFragment.musicPlayerService!!.mediaPlayer!!.start()
         binding.btnPlayStopMusic.setImageResource(R.drawable.ic_pause)
         MusicPlayerFragment.musicPlayerService!!.showNotification(R.drawable.ic_pause)
@@ -84,7 +152,7 @@ class NowPlayingFragment : Fragment() {
         MusicPlayerFragment.isPlaying = true
     }
 
-    fun pauseMusic() {
+    private fun pauseMusic() {
         MusicPlayerFragment.musicPlayerService!!.mediaPlayer!!.pause()
         binding.btnPlayStopMusic.setImageResource(R.drawable.ic_play_arrow)
         MusicPlayerFragment.musicPlayerService!!.showNotification(R.drawable.ic_play_arrow)

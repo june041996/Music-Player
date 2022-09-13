@@ -96,9 +96,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intentSong = Intent(this, MusicPlayerActivity::class.java)
 
                 val bundle = Bundle()
-                //bundle.putInt("pos", pos)
-                bundle.putInt("idSong", it.idSong!!)
-                bundle.putString("list", "listRankSong1")
+                bundle.putInt("idSongRemind", it.idSong!!)
+                bundle.putString("list", "remindSong")
                 intentSong.putExtras(bundle)
                 startActivity(intentSong)
             }
@@ -143,6 +142,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         binding.apply {
             bnvMain.setupWithNavController(navController)
+
             //navView.setupWithNavController(navController)
             navView.setNavigationItemSelectedListener(this@MainActivity)
         }
@@ -308,6 +308,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_profile -> {
                 startActivity(Intent(this, ProfileActivity::class.java))
+            }
+            R.id.favouriteFragment->{
+
             }
             R.id.settingFragment -> {
 

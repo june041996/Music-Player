@@ -15,7 +15,6 @@ class MusicPlayerActivity : AppCompatActivity() {
         private const val LOG = "TCR"
     }
 
-
     private lateinit var binding: ActivityMusicPlayerBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration

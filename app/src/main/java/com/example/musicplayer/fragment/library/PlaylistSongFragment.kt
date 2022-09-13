@@ -1,5 +1,6 @@
 package com.example.musicplayer.fragment.library
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
+import com.example.musicplayer.activity.MusicPlayerActivity
 import com.example.musicplayer.adapter.library.OnItemButtonClickListener
 import com.example.musicplayer.adapter.library.OnItemClickListener
 import com.example.musicplayer.adapter.library.SongsOfPlaylistAdapter
@@ -28,7 +30,9 @@ class PlaylistSongFragment : Fragment() {
     private lateinit var binding: FragmentPlaylistSongBinding
     private val playlistViewModel: PlaylistViewModel by activityViewModels()
     private val favouriteViewModel: FavouriteViewModel by activityViewModels()
-    private var songs = arrayListOf<Song>()
+    companion object{
+        var songs = arrayListOf<Song>()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,22 +48,10 @@ class PlaylistSongFragment : Fragment() {
         binding.lifecycleOwner = this
         //playlistViewModel.getSuggestSongs()
 
-
         //songs of playlist
         val adapter = SongsOfPlaylistAdapter()
         binding.rvSongs.adapter = adapter
         binding.rvSongs.layoutManager = LinearLayoutManager(context)
-        adapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                Log.d(Contanst.TAG, position.toString())
-            }
-
-        }, object : OnItemButtonClickListener {
-            override fun onItemClick(position: Int, view: View) {
-                showMenuPopup(view, songs[position])
-            }
-
-        })
         playlistViewModel.songsOfPlaylist.observe(viewLifecycleOwner) {
             songs.clear()
             songs.addAll(it)
@@ -68,11 +60,44 @@ class PlaylistSongFragment : Fragment() {
             adapter.submitData(songs)
         }
 
+        binding.btnPlay.setOnClickListener {
+            val idSong  = songs[0].idSong.toString().toInt()
+            val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt("pos", 0)
+            bundle.putInt("idSong", idSong)
+            bundle.putString("list", "listPlaylist")
+            intentSong.putExtras(bundle)
+            startActivity(intentSong)
+        }
+
+
+        adapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val idSong  = songs[position].idSong.toString().toInt()
+                val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
+                val bundle = Bundle()
+                bundle.putInt("pos", position)
+                bundle.putInt("idSong", idSong)
+                bundle.putString("list", "listPlaylist")
+                intentSong.putExtras(bundle)
+                startActivity(intentSong)
+            }
+
+        }, object : OnItemButtonClickListener {
+            override fun onItemClick(position: Int, view: View) {
+                showMenuPopup(view, songs[position])
+            }
+
+        })
+
+
         //suggest songs
         val suggestSongs = arrayListOf<Song>()
         val adapterSuggest = SuggestSongsAdapter()
         binding.rvSuggestSongs.adapter = adapterSuggest
         binding.rvSuggestSongs.layoutManager = LinearLayoutManager(context)
+
         adapterSuggest.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d(Contanst.TAG, position.toString())
