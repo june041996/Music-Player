@@ -7,9 +7,4 @@
         android:title="Search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
-    <item
-        android:id="@+id/add"
-        android:icon="@drawable/ic_playlist_add"
-        android:title="Add"
-        app:showAsAction="ifRoom" />
 </menu>

@@ -7,7 +7,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMusicPlayerBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MusicPlayerActivity : AppCompatActivity() {
     companion object {
         private const val LOG = "TCR"

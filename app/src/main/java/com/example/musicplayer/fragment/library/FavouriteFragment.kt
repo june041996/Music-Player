@@ -16,12 +16,14 @@ import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.CustomDialog
 import com.example.musicplayer.vm.FavouriteViewModel
+import com.example.musicplayer.vm.SearchViewModel
 
 
 class FavouriteFragment : Fragment() {
     private lateinit var binding: FragmentFavouriteBinding
     private var songs = arrayListOf<Song>()
     private val favouriteViewModel: FavouriteViewModel by activityViewModels()
+    private val searchViewModel: SearchViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,5 +70,6 @@ class FavouriteFragment : Fragment() {
             Log.d(Contanst.TAG, it.toString())
             adapter.submitData(songs)
         }
+
     }
 }

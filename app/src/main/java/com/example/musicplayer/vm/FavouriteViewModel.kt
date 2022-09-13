@@ -1,28 +1,31 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.musicplayer.db.MusicDatabase
+import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.Favourite
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.repository.FavouriteRepository
 import com.example.musicplayer.utils.Contanst
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FavouriteViewModel(app: Application) : AndroidViewModel(app) {
-    private val dao = MusicDatabase.getInstance(getApplication()).songDao()
-    private val favouriteRepository = FavouriteRepository(getApplication())
-    private val SHARED_PREFS = "shared_prefs"
-    private var sharedpreferences: SharedPreferences =
-        getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
-    private val id = sharedpreferences.getInt("id", 0)
-    private val name = sharedpreferences.getString("username", null)
+@HiltViewModel
+class FavouriteViewModel @Inject constructor(
+    val dao: MusicDao,
+    val prefs: SharedPreferences,
+    app: Application
+) : AndroidViewModel(app) {
+    private val favouriteRepository = FavouriteRepository(dao)
+
+    private val id = prefs.getInt("id", 0)
+    private val name = prefs.getString("username", null)
 
 
     //insert

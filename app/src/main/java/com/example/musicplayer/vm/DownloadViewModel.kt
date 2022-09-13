@@ -7,16 +7,21 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.repository.SongRepository
 import com.example.musicplayer.service.DownloadService
 import com.example.musicplayer.utils.Contanst
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
+import javax.inject.Inject
 
-class DownloadViewModel(app: Application) : AndroidViewModel(app) {
-    val songRepository = SongRepository(getApplication())
+@HiltViewModel
+class DownloadViewModel @Inject constructor(val dao: MusicDao, app: Application) :
+    AndroidViewModel(app) {
+    val songRepository = SongRepository(dao)
     var songDownload: Song? = null
     val intent = Intent(getApplication(), DownloadService::class.java)
     fun startDownloadService(song: Song) {

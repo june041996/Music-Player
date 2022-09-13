@@ -1,12 +1,10 @@
 package com.example.musicplayer.repository
 
-import android.content.Context
 import com.example.musicplayer.db.MusicDao
-import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
 
-class SongRepository(val context: Context) {
-    var dao: MusicDao = MusicDatabase.getInstance(context).songDao()
+class SongRepository(val dao: MusicDao) {
+
 
     suspend fun insertSong(song: Song) {
         dao.insertSong(song)

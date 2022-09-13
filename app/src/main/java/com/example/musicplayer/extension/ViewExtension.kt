@@ -7,12 +7,26 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.model.Song
 import java.time.Instant
 import java.time.ZoneId
+
+inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit) {
+    this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            listener(newText.orEmpty())
+            return true
+        }
+    })
+}
 
 //set img song off/on
 @BindingAdapter("set_url")
@@ -66,6 +80,8 @@ fun loadImage(img: ImageView, s: Song) {
         if (data != null) {
             val bitmap = BitmapFactory.decodeByteArray(data, 0, data!!.size)
             img.setImageBitmap(bitmap)
+        } else {
+            img.setImageResource(R.drawable.icon_music_player_app)
         }
     } else {
         if (s.urlImage != "") {
@@ -76,8 +92,8 @@ fun loadImage(img: ImageView, s: Song) {
                 .into(img)
         }
     }
-
 }
+
 
 
 

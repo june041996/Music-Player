@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.musicplayer.databinding.ActivitySignupBinding
 import com.example.musicplayer.model.User
 import com.example.musicplayer.vm.AuthViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
     private lateinit var viewModel: AuthViewModel
