@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
+
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -312,7 +313,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         return false
     }
-
 
 
 }

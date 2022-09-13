@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.adapter.rank.ItemViewOnClick
 import com.example.musicplayer.databinding.ListMusicPlaylistBinding
+
 import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.vm.PlaylistViewModel
@@ -29,6 +30,7 @@ class ListSongPlaylistAdapter :
 
    inner class ViewHolder(private val binding: ListMusicPlaylistBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(s: Playlist) {
             binding.song = s
             binding.executePendingBindings()
