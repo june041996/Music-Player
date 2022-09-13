@@ -33,9 +33,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMainBinding
+import com.example.musicplayer.fragment.MusicPlayerFragment
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Status
+import com.example.musicplayer.utils.exitApp
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.SongViewModelFactory
 import com.example.musicplayer.vm.WorkViewModel
@@ -90,9 +92,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             viewModel.songByName.observe(this) {
                 Log.d(Contanst.TAG, "play s: ${it.toString()}")
                 //play music
-                val intent = Intent(this, MusicPlayerActivity::class.java)
+                /*val intent = Intent(this, MusicPlayerActivity::class.java)
                 intent.putExtra("song", it)
-                startActivity(intent)
+                startActivity(intent)*/
+                val intentSong = Intent(this, MusicPlayerActivity::class.java)
+
+                val bundle = Bundle()
+                //bundle.putInt("pos", pos)
+                bundle.putInt("idSong", it.idSong!!)
+                bundle.putString("list", "listRankSong1")
+                intentSong.putExtras(bundle)
+                startActivity(intentSong)
             }
         }
 
@@ -197,7 +207,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     when (it.status) {
                         Status.SUCCESS -> {
                             val songs = it.data
-                            Log.d(LOG, songs.toString())
+                            Log.d(LOG, "Main $songs")
                             for (i in 0..songs!!.size) {
                                 val song = Song(
                                     songs[i].idSong,
@@ -303,18 +313,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.dark_light_mode -> {
                 startActivity(Intent(this, DarkLightModeActivity::class.java))
-//                isNightModeOn = if (isNightModeOn) {
-//                    Log.d(LOG, "click light")
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//                    install = false
-//                    false
-//                } else {
-//                    Log.d(LOG, "click night")
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//                    delegate.applyDayNight()
-//                    install = false
-//                    true
-//                }
             }
             R.id.settingFragment -> {
 
@@ -327,4 +325,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return false
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        //Nếu không play nhạc thì stop service
+        if (!MusicPlayerFragment.isPlaying && MusicPlayerFragment.musicPlayerService != null) {
+            exitApp()
+        }
+    }
 }

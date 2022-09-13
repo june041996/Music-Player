@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -26,11 +25,13 @@ import kotlinx.coroutines.launch
 class RankFragment : Fragment() {
     companion object {
         private const val LOG: String = "TCR"
+        var listRankSong: ArrayList<Song> = arrayListOf()
     }
 
     private lateinit var binding: FragmentRankBinding
     private val viewModel: RankViewModel by activityViewModels()
     private val viewModelMusicPlayer: MusicPlayerViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +47,7 @@ class RankFragment : Fragment() {
                         Status.SUCCESS -> {
                             it.data?.observe(viewLifecycleOwner) { listSong ->
                                 adapter.submitData(listSong)
+                                listRankSong.addAll(listSong)
                             }
                         }
                         Status.LOADING -> {
@@ -64,14 +66,19 @@ class RankFragment : Fragment() {
         binding.rvRank.addItemDecoration(decoration)
 
         adapter.setItemViewOnClick(object : ItemViewOnClick {
-            override fun onClick(song: Song) {
+            override fun onClick(song: Song, pos: Int) {
                 song.idSong?.let { viewModelMusicPlayer.setIdSong(it) }
                 viewModelMusicPlayer.idSong.observe(viewLifecycleOwner) { idSong ->
-                    Toast.makeText(requireContext(), idSong.toString(), Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireContext(), MusicPlayerActivity::class.java)
-                    //intent.putExtra("idSong", idSong)
-                    intent.putExtra("song", song)
-                    startActivity(intent)
+
+                    val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
+
+                    val bundle = Bundle()
+                    bundle.putInt("pos", pos)
+                    bundle.putInt("idSong", idSong)
+                    bundle.putString("list", "listRankSong")
+                    intentSong.putExtras(bundle)
+                    startActivity(intentSong)
+
                 }
             }
 

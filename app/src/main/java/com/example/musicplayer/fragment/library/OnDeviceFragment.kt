@@ -1,6 +1,5 @@
 package com.example.musicplayer.fragment.library
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
-import com.example.musicplayer.activity.MusicPlayerActivity
 import com.example.musicplayer.adapter.library.OnDeviceAdapter
 import com.example.musicplayer.adapter.library.OnItemButtonClickListener
 import com.example.musicplayer.adapter.library.OnItemClickListener
@@ -58,9 +56,9 @@ class OnDeviceFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 //play music
                 Log.d(Contanst.TAG, "item: ${localSongs[position].nameSong}")
-                val intent = Intent(context, MusicPlayerActivity::class.java)
+                /*val intent = Intent(context, MusicPlayerActivity::class.java)
                 intent.putExtra("song", localSongs[position])
-                startActivity(intent)
+                startActivity(intent)*/
             }
         }, object : OnItemButtonClickListener {
             override fun onItemClick(position: Int, view: View) {

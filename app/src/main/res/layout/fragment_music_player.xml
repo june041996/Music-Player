@@ -4,19 +4,11 @@
 
     <data>
 
-        <import type="com.example.musicplayer.vm.MusicPlayerViewModel" />
-
-        <variable
-            name="vm"
-            type="MusicPlayerViewModel" />
-
-        <variable
-            name="favourite"
-            type="com.example.musicplayer.vm.FavouriteViewModel" />
+        <import type="com.example.musicplayer.model.Song" />
 
         <variable
             name="song"
-            type="com.example.musicplayer.model.Song" />
+            type="Song" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,24 +16,23 @@
         android:layout_height="match_parent"
         android:background="?attr/background_color">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/music_disc"
+            set_url="@{song.urlImage}"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/shape_music_disc"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_music_note"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/rounded_corner_player" />
 
         <TextView
             android:id="@+id/tv_name_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@{vm.nameSong}"
+            android:text="@{song.nameSong}"
             android:textColor="?attr/text_color"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -54,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@{vm.singer}"
+            android:text="@{song.singer}"
             android:textColor="?attr/title_color"
             android:textFontWeight="20"
             android:textSize="20sp"
@@ -63,6 +54,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_name_song" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_timer"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shape_button_next_previous"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_timer"
+            android:tint="?attr/text_color"
+            app:layout_constraintBottom_toTopOf="@+id/rl_option"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <RelativeLayout
             android:id="@+id/rl_option"
@@ -76,12 +79,12 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btn_favourite"
-                set_icon_favourite="@{favourite.checkFavourite}"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/shape_button_next_previous"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_unfavorite"
                 android:tint="?attr/text_color" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -95,16 +98,6 @@
                 android:src="@drawable/ic_file_download"
                 android:tint="?attr/text_color" />
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btn_add_playlist"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="15dp"
-                android:layout_toRightOf="@+id/btn_download"
-                android:background="@drawable/shape_button_next_previous"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_playlist_add"
-                android:tint="?attr/text_color" />
 
             <!--        <TextView-->
             <!--            android:id="@+id/time_real"-->
@@ -177,7 +170,7 @@
 
         <LinearLayout
             android:id="@+id/ll_play_music"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="35dp"
             android:gravity="center"
