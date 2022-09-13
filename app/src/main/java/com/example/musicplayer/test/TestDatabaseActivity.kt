@@ -46,8 +46,8 @@ class TestDatabaseActivity : AppCompatActivity() {
             SongPlaylistCrossRef(2, 2),
         )
         var users = listOf<User>(
-            User(null, "a", "a","",""),
-            User(null, "b", "b","",""),
+            User(null, "a", "a", "", ""),
+            User(null, "b", "b", "", ""),
         )
         val favourites = listOf<Favourite>(
             Favourite(1, 1),

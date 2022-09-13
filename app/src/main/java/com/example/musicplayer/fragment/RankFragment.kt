@@ -17,7 +17,6 @@ import com.example.musicplayer.adapter.rank.ItemViewOnClick
 import com.example.musicplayer.adapter.rank.RankAdapter
 import com.example.musicplayer.databinding.FragmentRankBinding
 import com.example.musicplayer.model.Song
-import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Status
 import com.example.musicplayer.vm.MusicPlayerViewModel
 import com.example.musicplayer.vm.RankViewModel
@@ -47,7 +46,7 @@ class RankFragment : Fragment() {
                     when (it.status) {
                         Status.SUCCESS -> {
                             it.data?.observe(viewLifecycleOwner) { listSong ->
-                                val list:List<Song> = listSong.sortedByDescending { it.views }
+                                val list: List<Song> = listSong.sortedByDescending { it.views }
                                 adapter.submitData(list)
                                 listRankSong.addAll(listSong)
 

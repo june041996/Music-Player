@@ -33,11 +33,11 @@ class ListSongFavoriteAdapter :
             binding.executePendingBindings()
         }
 
-       init {
-           binding.root.setOnClickListener {
-               itemViewOnClick.onClick(mFavofite[adapterPosition])
-           }
-       }
+        init {
+            binding.root.setOnClickListener {
+                itemViewOnClick.onClick(mFavofite[adapterPosition])
+            }
+        }
 
     }
 

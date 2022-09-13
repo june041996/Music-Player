@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
-
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -34,19 +33,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMainBinding
-import com.example.musicplayer.fragment.MusicPlayerFragment
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Status
-import com.example.musicplayer.utils.exitApp
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.WorkViewModel
 import com.google.android.material.navigation.NavigationView
-
-import dagger.hilt.android.AndroidEntryPoint
-
 import com.google.firebase.auth.FirebaseAuth
-
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -109,7 +103,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intentSong)
             }
         }
-
 
 
         ///Không xoá
@@ -189,7 +182,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
         }
     }
-
 
 
     //update local song between room and device
@@ -314,7 +306,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.dark_light_mode -> {
                 startActivity(Intent(this, DarkLightModeActivity::class.java))
             }
-            R.id.nav_profile->{
+            R.id.nav_profile -> {
                 startActivity(Intent(this, ProfileActivity::class.java))
             }
             R.id.settingFragment -> {
