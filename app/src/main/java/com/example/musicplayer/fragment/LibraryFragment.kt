@@ -11,6 +11,7 @@ import com.example.musicplayer.databinding.FragmentLibraryBinding
 
 class LibraryFragment : Fragment() {
     private lateinit var binding: FragmentLibraryBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

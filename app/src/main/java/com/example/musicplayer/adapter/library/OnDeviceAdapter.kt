@@ -1,13 +1,14 @@
-package com.example.musicplayer.adapter
+package com.example.musicplayer.adapter.library
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.databinding.ItemFavouriteSongBinding
+import com.example.musicplayer.adapter.DiffSong
+import com.example.musicplayer.databinding.ItemOnDeviceSongBinding
 import com.example.musicplayer.model.Song
 
-class FavouriteSongAdapter() : RecyclerView.Adapter<FavouriteSongAdapter.ViewHolder>() {
+class OnDeviceAdapter() : RecyclerView.Adapter<OnDeviceAdapter.ViewHolder>() {
     private var songs = arrayListOf<Song>()
     private lateinit var listener: OnItemClickListener
     private lateinit var btnListener: OnItemButtonClickListener
@@ -28,7 +29,7 @@ class FavouriteSongAdapter() : RecyclerView.Adapter<FavouriteSongAdapter.ViewHol
     }
 
     class ViewHolder(
-        private var binding: ItemFavouriteSongBinding,
+        private var binding: ItemOnDeviceSongBinding,
         val listener: OnItemClickListener,
         val btnListener: OnItemButtonClickListener
     ) :
@@ -37,7 +38,7 @@ class FavouriteSongAdapter() : RecyclerView.Adapter<FavouriteSongAdapter.ViewHol
             binding.root.setOnClickListener() {
                 listener.onItemClick(absoluteAdapterPosition)
             }
-            binding.imgFavourite.setOnClickListener() {
+            binding.imgMenu.setOnClickListener() {
                 btnListener.onItemClick(absoluteAdapterPosition, it)
             }
         }
@@ -50,7 +51,7 @@ class FavouriteSongAdapter() : RecyclerView.Adapter<FavouriteSongAdapter.ViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemFavouriteSongBinding.inflate(
+            ItemOnDeviceSongBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             ), listener, btnListener
         )

@@ -9,15 +9,17 @@
             type="com.example.musicplayer.vm.SongViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeFreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/background_color"
         tools:context=".fragment.library.OnDeviceFragment">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,7 +34,8 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_btn_play"
-                    android:text="@string/btn_play" />
+                    android:text="@string/btn_play"
+                    android:textColor="@color/black" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnShuffle"
@@ -41,23 +44,25 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_btn_play"
-                    android:text="@string/btn_shuffle" />
+                    android:text="@string/btn_shuffle"
+                    android:textColor="@color/black" />
             </LinearLayout>
 
             <TextView
-                android:layout_margin="5dp"
                 android:id="@+id/tvSizeSongs"
-                android:textSize="@dimen/title_text"
-                android:textStyle="bold"
-                android:text="@{String.valueOf(song.sizeLocalSongs)}"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@{String.valueOf(song.sizeLocalSongs)+` `+ @string/songs}"
+                android:textColor="?attr/text_color"
+                android:textSize="@dimen/title_text"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_margin="5dp"
                 android:id="@+id/rvSongs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" />
         </LinearLayout>
-    </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

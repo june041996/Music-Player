@@ -3,15 +3,10 @@ package com.example.musicplayer.fragment
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.ComponentName
+import android.content.*
 import android.content.Context.BIND_AUTO_CREATE
-import android.content.Intent
-import android.content.Intent.getIntent
-import android.content.ServiceConnection
-import android.content.res.Configuration
 import android.graphics.Color
 import android.media.MediaPlayer
-import android.media.VolumeShaper
 import android.net.Uri.parse
 import android.os.Bundle
 import android.os.IBinder
@@ -23,24 +18,21 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.FragmentMusicPlayerBinding
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.service.MusicPlayerService
 import com.example.musicplayer.utils.*
-import com.example.musicplayer.vm.FavouriteViewModel
-import com.example.musicplayer.vm.MusicPlayerViewModel
+import com.example.musicplayer.vm.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
@@ -74,7 +66,32 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
     }
 
     private val viewModel: MusicPlayerViewModel by viewModels()
-    private val favouriteViewModel: FavouriteViewModel by activityViewModels()
+
+    private val favouriteViewModel: FavouriteViewModel by viewModels()
+    private val songViewModel: SongViewModel by viewModels()
+    private val playlistViewModel: PlaylistViewModel by viewModels()
+    private val downloadViewModel: DownloadViewModel by viewModels()
+    private var onCompleted: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            downloadViewModel.stopDownloadService()
+            val url = intent.getStringExtra("downloaded")
+            Log.d(Contanst.TAG, "downloaded1: ${url.toString()}")
+            //downloadViewModel.updateUrlSong(url!!)
+            if (url != null) {
+                downloadViewModel.updateUrlSong(url)
+            }
+            //songViewModel.updateLocalSongs()
+            Toast.makeText(context, "Download success", Toast.LENGTH_LONG).show()
+            //unregister()
+        }
+    }
+
+    private fun unregister() {
+        requireActivity().unregisterReceiver(onCompleted)
+    }
+
+    private var getID: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +99,9 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMusicPlayerBinding.inflate(inflater, container, false)
+
         val extras = activity?.intent?.extras
+
         //initial check internet
         connectivityObserver = NetworkConnectivityObserver(requireContext())
 
@@ -102,6 +121,20 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
 
                 postion = extras.getInt("pos", 0)
                 Log.d(LOG, "Pos rank $postion")
+                //Play music
+                controlMusic(getID)
+            }
+            "listRankSong1" -> {
+                //Start service
+                val intent = Intent(requireContext(), MusicPlayerService::class.java)
+                activity?.bindService(intent, this, BIND_AUTO_CREATE)
+                activity?.startService(intent)
+
+                getID = extras!!.getInt("idSong", 1003)
+
+                Log.d(LOG, getID.toString())
+
+
                 //Play music
                 controlMusic(getID)
             }
@@ -180,6 +213,12 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
             binding.btnFavourite.setImageResource(R.drawable.ic_favorite)
             val song = listRankSong[postion]
             favouriteViewModel.insertFavourite(song)
+        }
+
+        binding.btnDownload.setOnClickListener() {
+            LocalBroadcastManager.getInstance(requireActivity())
+                .registerReceiver(onCompleted, IntentFilter("Download"))
+            downloadViewModel.startDownloadService(listRankSong[postion])
         }
 
         //Seekbar

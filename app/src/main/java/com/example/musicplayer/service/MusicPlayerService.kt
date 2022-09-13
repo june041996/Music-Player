@@ -3,11 +3,9 @@ package com.example.musicplayer.service
 import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Binder
 import android.os.Handler
 import android.os.IBinder
@@ -15,13 +13,9 @@ import android.os.Looper
 import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.fragment.MusicPlayerFragment
-import com.example.musicplayer.utils.ConnectivityObserver
 import com.example.musicplayer.utils.formatSongDuration
-import kotlinx.coroutines.launch
 
 class MusicPlayerService : Service() {
     private var myBinder = MyBinder()
@@ -143,7 +137,8 @@ class MusicPlayerService : Service() {
             MusicPlayerFragment.binding.seekbarTime.max =
                 MusicPlayerFragment.musicPlayerService!!.mediaPlayer!!.duration
 
-            MusicPlayerFragment.nowPlayingId = MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].idSong!!.toInt()
+            MusicPlayerFragment.nowPlayingId =
+                MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].idSong!!.toInt()
             Log.d(
                 MusicPlayerFragment.LOG,
                 MusicPlayerFragment.musicPlayerService?.mediaPlayer?.duration.toString()

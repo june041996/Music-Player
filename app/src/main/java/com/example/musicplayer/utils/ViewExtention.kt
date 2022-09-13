@@ -1,8 +1,6 @@
 package com.example.musicplayer.utils
 
 
-import android.media.MediaMetadataRetriever
-import android.provider.MediaStore
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R

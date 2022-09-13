@@ -1,4 +1,4 @@
-package com.example.musicplayer.adapter
+package com.example.musicplayer.adapter.library
 
 import android.view.View
 

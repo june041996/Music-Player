@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_onDeviceFragment_to_addToPlaylistFragment"
             app:destination="@id/addToPlaylistFragment" />
+        <action
+            android:id="@+id/action_onDeviceFragment_to_nav_music_player"
+            app:destination="@id/nav_music_player" />
     </fragment>
 
     <fragment
@@ -91,5 +94,6 @@
             android:id="@+id/action_playlistFragment_to_playlistSongFragment"
             app:destination="@id/playlistSongFragment" />
     </fragment>
+    <include app:graph="@navigation/nav_music_player" />
 
 </navigation>

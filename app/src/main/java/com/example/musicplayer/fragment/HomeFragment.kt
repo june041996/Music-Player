@@ -9,15 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.musicplayer.adapter.ListSongFavoriteAdapter
-
 import com.example.musicplayer.adapter.ListSongPlaylistAdapter
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.vm.FavouriteViewModel
 import com.example.musicplayer.vm.PlaylistViewModel
-import com.example.musicplayer.vm.SongViewModel
 
 
 class HomeFragment : Fragment() {

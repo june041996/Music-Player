@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.adapter.AddedPlaylistAdapter
-import com.example.musicplayer.adapter.NewPlaylistAdapter
-import com.example.musicplayer.adapter.OnItemButtonClickListener
-import com.example.musicplayer.adapter.OnItemClickListener
+import com.example.musicplayer.adapter.library.AddedPlaylistAdapter
+import com.example.musicplayer.adapter.library.NewPlaylistAdapter
+import com.example.musicplayer.adapter.library.OnItemButtonClickListener
+import com.example.musicplayer.adapter.library.OnItemClickListener
 import com.example.musicplayer.databinding.FragmentAddToPlaylistBinding
 import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
@@ -39,6 +39,15 @@ class AddToPlaylistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(Contanst.TAG, "add song")
+
+        songViewModel.selectedSong.observe(viewLifecycleOwner) {
+            Log.d(Contanst.TAG, "sz: ${it.toString()}")
+        }
+        //playlistViewModel.getPlaylistOfSong(1009)
+        /*playlistViewModel.playlistWithoutSong.observe(viewLifecycleOwner){
+            Log.d(Contanst.TAG,"add to: ${it.toString()}")
+        }*/
         binding.btnCreatePlaylist.setOnClickListener() {
             CustomDialog(requireContext()).createInputDialog(object :
                 CustomDialog.OnSubmitBtnClick {

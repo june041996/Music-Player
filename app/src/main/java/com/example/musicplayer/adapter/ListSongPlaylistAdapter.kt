@@ -5,10 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.databinding.ListMusicPlaylistBinding
-
 import com.example.musicplayer.model.Playlist
-import com.example.musicplayer.model.Song
-import com.example.musicplayer.vm.PlaylistViewModel
 
 
 class ListSongPlaylistAdapter :

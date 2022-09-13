@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.activity.MusicPlayerActivity
 import com.example.musicplayer.databinding.FragmentNowPlayingBinding
-import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.setSongPosition
 
 class NowPlayingFragment : Fragment() {

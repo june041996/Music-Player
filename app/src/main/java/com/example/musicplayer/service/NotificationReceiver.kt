@@ -3,15 +3,12 @@ package com.example.musicplayer.service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.fragment.MusicPlayerFragment
 import com.example.musicplayer.fragment.NowPlayingFragment
 import com.example.musicplayer.utils.exitApp
 import com.example.musicplayer.utils.setSongPosition
-import kotlin.system.exitProcess
 
 class NotificationReceiver : BroadcastReceiver() {
     override fun onReceive(ctx: Context?, intent: Intent?) {
