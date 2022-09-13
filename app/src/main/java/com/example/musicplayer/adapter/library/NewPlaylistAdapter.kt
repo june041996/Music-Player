@@ -1,16 +1,17 @@
-package com.example.musicplayer.adapter
-
+package com.example.musicplayer.adapter.library
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.databinding.ItemAddToPlaylistBinding
+import com.example.musicplayer.adapter.DiffPlaylist
+import com.example.musicplayer.databinding.ItemNewPlaylistBinding
 import com.example.musicplayer.model.Playlist
 
-class AddToPlaylistAdapter() : RecyclerView.Adapter<AddToPlaylistAdapter.ViewHolder>() {
+class NewPlaylistAdapter() : RecyclerView.Adapter<NewPlaylistAdapter.ViewHolder>() {
     private var playlists = arrayListOf<Playlist>()
     private lateinit var listener: OnItemClickListener
+    private lateinit var btnListener: OnItemButtonClickListener
 
     fun submitData(temp: ArrayList<Playlist>) {
         val diff = DiffUtil.calculateDiff(DiffPlaylist(playlists, temp))
@@ -20,19 +21,25 @@ class AddToPlaylistAdapter() : RecyclerView.Adapter<AddToPlaylistAdapter.ViewHol
     }
 
     fun setOnItemClickListener(
-        onItemClickListener: OnItemClickListener
+        onItemClickListener: OnItemClickListener,
+        onItemButtonClickListener: OnItemButtonClickListener
     ) {
         listener = onItemClickListener
+        btnListener = onItemButtonClickListener
     }
 
     class ViewHolder(
-        private var binding: ItemAddToPlaylistBinding,
-        val listener: OnItemClickListener
+        private var binding: ItemNewPlaylistBinding,
+        val listener: OnItemClickListener,
+        val btnListener: OnItemButtonClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener() {
                 listener.onItemClick(absoluteAdapterPosition)
+            }
+            binding.imgAdd.setOnClickListener() {
+                btnListener.onItemClick(absoluteAdapterPosition, it)
             }
         }
 
@@ -44,9 +51,9 @@ class AddToPlaylistAdapter() : RecyclerView.Adapter<AddToPlaylistAdapter.ViewHol
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemAddToPlaylistBinding.inflate(
+            ItemNewPlaylistBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), listener
+            ), listener, btnListener
         )
     }
 

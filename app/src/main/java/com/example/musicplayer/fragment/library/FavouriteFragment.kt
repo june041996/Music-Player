@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.musicplayer.adapter.FavouriteSongAdapter
-import com.example.musicplayer.adapter.OnItemButtonClickListener
-import com.example.musicplayer.adapter.OnItemClickListener
+import com.example.musicplayer.adapter.library.FavouriteSongAdapter
+import com.example.musicplayer.adapter.library.OnItemButtonClickListener
+import com.example.musicplayer.adapter.library.OnItemClickListener
 import com.example.musicplayer.databinding.FragmentFavouriteBinding
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.Contanst

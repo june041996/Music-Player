@@ -46,6 +46,9 @@ interface MusicDao {
     @Update
     suspend fun updateSong(song: Song)
 
+    @Query("UPDATE tb_song SET urlSong = :urlSong AND isOffline=:status WHERE idSong =:id")
+    suspend fun updateUrlSong(urlSong: String, status: Boolean, id: Int)
+
     @Query("UPDATE tb_playlist SET name = :name WHERE idPlaylist =:id")
     suspend fun updatePlaylist(name: String, id: Int)
 
@@ -53,6 +56,7 @@ interface MusicDao {
     //DELETE
     @Query("DELETE FROM tb_song WHERE idSong=:id")
     suspend fun deleteSong(id: Int)
+
 
     @Query("DELETE FROM tb_playlist WHERE idPlaylist=:id")
     suspend fun deletePlaylist(id: Int)
@@ -80,6 +84,10 @@ interface MusicDao {
     //get all local song with isOffline = true
     @Query("SELECT * FROM tb_song WHERE isOffline=:status ")
     suspend fun getLocalSongs(status: Boolean): List<Song>
+
+    //get song by name
+    @Query("SELECT * FROM tb_song WHERE nameSong=:name ")
+    suspend fun getSongByName(name: String): Song
 
     @Query("SELECT * FROM tb_favourite WHERE idUser=:idUser AND idSong=:idSong")
     suspend fun getFavouriteSong(idUser: Int, idSong: Int): Favourite

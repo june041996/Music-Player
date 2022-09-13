@@ -12,7 +12,7 @@ data class Song(
     val idSong: Int?,
     val nameSong: String?,
     val urlImage: String?,
-    val urlSong: String?,
+    var urlSong: String,
     @SerializedName("category")
     val genre: String?,
     val musician: String?,

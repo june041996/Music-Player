@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,11 +18,11 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/siv_img_song"
+            set_url="@{song.urlImage}"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
             android:src="@drawable/mtp2"
-            set_url="@{song.urlImage}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,33 +35,33 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
             android:text="@{song.nameSong}"
             android:textColor="?attr/text_color"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"
+            app:layout_constraintEnd_toStartOf="@+id/btn_skip_previous"
             app:layout_constraintStart_toEndOf="@+id/siv_img_song"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_skip_previous"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_singer"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginEnd="10dp"
-            android:text="@{song.singer}"
-            android:textColor="?attr/title_color"
-            android:textSize="15sp"
+            android:layout_marginBottom="5dp"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
+            android:text="@{song.singer}"
+            android:textColor="?attr/title_color"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/siv_img_song"
             app:layout_constraintEnd_toStartOf="@+id/btn_skip_previous"
+            app:layout_constraintStart_toEndOf="@+id/siv_img_song"
             app:layout_constraintTop_toBottomOf="@+id/tv_name_song" />
 
         <androidx.appcompat.widget.AppCompatImageButton

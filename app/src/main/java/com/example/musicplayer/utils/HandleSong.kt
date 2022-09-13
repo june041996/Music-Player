@@ -23,7 +23,7 @@ fun setSongPosition(increment: Boolean) {
     }
 }
 
-fun exitApp(){
+fun exitApp() {
     if (MusicPlayerFragment.musicPlayerService != null) {
         MusicPlayerFragment.musicPlayerService!!.stopForeground(true)
         MusicPlayerFragment.musicPlayerService!!.mediaPlayer!!.release()

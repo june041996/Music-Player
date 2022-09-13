@@ -23,4 +23,12 @@ class SongRepository(val context: Context) {
     suspend fun getAllSongs(): List<Song> {
         return dao.getSongs()
     }
+
+    suspend fun updateUrlSong(urlSong: String, idSong: Int) {
+        dao.updateUrlSong(urlSong, true, idSong)
+    }
+
+    suspend fun getSongByName(name: String): Song {
+        return dao.getSongByName(name)
+    }
 }
