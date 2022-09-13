@@ -293,7 +293,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                     ConnectivityObserver.StatusInternet.AVAILABLE -> {
                         viewModel.songById(id).observe(viewLifecycleOwner) { song ->
                             setLayout(song)
-                            song.urlSong?.let { url -> createMediaPlayer(url) }
+                            song.urlSong.let { url -> createMediaPlayer(url) }
 
                         }
                     }

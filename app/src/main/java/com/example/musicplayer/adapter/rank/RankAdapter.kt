@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.R
 import com.example.musicplayer.adapter.DiffSong
-import com.example.musicplayer.adapter.OnItemButtonClickListener
-import com.example.musicplayer.adapter.OnItemClickListener
 import com.example.musicplayer.databinding.ItemRankMusicBinding
 import com.example.musicplayer.fragment.RankFragment
 import com.example.musicplayer.model.Song
