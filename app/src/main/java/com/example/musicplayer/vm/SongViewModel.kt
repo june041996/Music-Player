@@ -50,7 +50,9 @@ class SongViewModel @Inject constructor(
     }
 
     //INSERT Song to Database
+
     private suspend fun insertSongDao(song: Song) = songRepository.insertSong(song)
+
 
     fun insertSongToDB(song: Song) = viewModelScope.launch {
         insertSongDao(song)
@@ -204,4 +206,25 @@ class SongViewModel @Inject constructor(
     fun setSelectSong(song: Song) {
         _selectedSong.value = song
     }
+
+
+
+//    ////////////////
+//    //get all songs
+//    val _songs = MutableLiveData<ArrayList<Song>>()
+//    val songs: LiveData<ArrayList<Song>>
+//        get() = getAllSongs()
+//
+//    fun getAllSongs(): MutableLiveData<ArrayList<Song>> {
+//        Log.d(Contanst.TAG, "id: ${id.toString()} - name: $name")
+//        var list = arrayListOf<Song>()
+//        viewModelScope.launch {
+//            songRepository.getAllSongs().forEach {
+//                list.add(it)
+//            }
+//            _songs.value = list
+//            Log.d(Contanst.TAG, "it: ${_songs.value.toString()}")
+//        }
+//        return _songs
+//    }
 }

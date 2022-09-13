@@ -23,7 +23,7 @@ interface MusicDao {
 
     //SELECT Song rank
     @Query("SELECT * FROM tb_song WHERE isOffline=:isOffline")
-    fun getSongsOnline(isOffline: Int): LiveData<List<Song>>
+    fun getSongsOnline(isOffline: Int): LiveData<MutableList<Song>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlaylist(playlist: Playlist)

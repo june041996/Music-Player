@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,14 +19,21 @@ class SigninActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninBinding
     private lateinit var viewModel: AuthViewModel
 
+
     @Inject
     lateinit var sharedpreferences: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val editor = sharedpreferences.edit()
+        check = sharedpreferences.getString("check", "")
+        if (check.equals("true")) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
 
         //init viewmodel here
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
@@ -34,20 +41,17 @@ class SigninActivity : AppCompatActivity() {
         binding.edtUser.setText(viewModel.getLoginInfo().mail)
         binding.edtPassword.setText(viewModel.getLoginInfo().password)
 
-
         binding.btnSignin.setOnClickListener {
             Log.d("login", "Login here")
             if (isValidData()) {
                 //REQUEST login firebase here
-
-
                 viewModel.requestLogin(
                     binding.edtUser.text.toString(),
                     binding.edtPassword.text.toString()
                 )
-
-
+//                setValueRemember(binding.cbRemember.isChecked)
             }
+
         }
         binding.txtSignup.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
@@ -57,28 +61,32 @@ class SigninActivity : AppCompatActivity() {
         viewModel.isSuccessful.observe(this, Observer {
             //handle
             var message = ""
+            Log.d("edtUser", binding.edtUser.text.toString())
             if (it == true) {
                 viewModel.getUser(binding.edtUser.text.toString())
                 viewModel.user.observe(this) {
                     editor.putInt("id", it.idUser!!)
                     editor.putString("username", it.email)
+                    if (binding.cbRemember.isChecked) {
+                        editor.putString("check", "true")
+                    }
                     editor.apply()
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }
-
-                message = "Logged in successfully!"
+//                message = "Logged in successfully!"
             } else {
-                message = "Login failed!"
+                showDialog("your account or password is wrong")
             }
 
-            Toast.makeText(application, message, Toast.LENGTH_LONG).show()
         })
+
     }
 
     //check valid data
     //true valid - failed invalid
     private fun isValidData(): Boolean {
+
         if (TextUtils.isEmpty(binding.edtUser.text.toString())) {
             binding.edtUser.setError("Please enter Email")
             return false
@@ -88,4 +96,16 @@ class SigninActivity : AppCompatActivity() {
         }
         return true
     }
+    //showdialog
+    fun showDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Login")
+        builder.setMessage(message)
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
+    }
+
 }
+
+

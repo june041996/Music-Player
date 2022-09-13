@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
+
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -41,7 +42,11 @@ import com.example.musicplayer.utils.exitApp
 import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.WorkViewModel
 import com.google.android.material.navigation.NavigationView
+
 import dagger.hilt.android.AndroidEntryPoint
+
+import com.google.firebase.auth.FirebaseAuth
+
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -50,6 +55,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
+    private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private lateinit var sharedpreferences: SharedPreferences
     private val SHARED_PREFS = "shared_prefs"
@@ -62,7 +68,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val themePrefsKey = "theme"
 
     private var checkOn: Boolean = true
-
 
     //   // private val viewModel: HomeViewModel by viewModels()
     private val songViewModel: SongViewModel by viewModels()
@@ -79,6 +84,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         //reminder play song
         songViewModel.songs.observe(this) {
             workViewModel.enqueuePeriodicReminder(it)
@@ -105,6 +111,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
 
+
         ///Không xoá
 //        val sharedPref = getSharedPreferences(themePrefsKey, Context.MODE_PRIVATE)
 //        val isNightMode = sharedPref.getBoolean("NightMode", false)
@@ -128,6 +135,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         //Đồng cấp
         appBarConfig = AppBarConfiguration(
             setOf(
@@ -137,7 +146,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.libraryFragment,
             )
         )
-
         setupActionBarWithNavController(navController, appBarConfig)
 
         binding.apply {
@@ -180,15 +188,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 READ_STORAGE_PERMISSION_CODE
             )
         }
-
-        //Rin
-        /////////////////////////////////////////////////////////////////////
-        //INSERT to DB
-
-        /////////////////////////////////////////////////////////////
-
-
     }
+
 
 
     //update local song between room and device
@@ -308,11 +309,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.dark_light_mode -> {
                 startActivity(Intent(this, DarkLightModeActivity::class.java))
+            }
+            R.id.nav_profile->{
+                startActivity(Intent(this, ProfileActivity::class.java))
             }
             R.id.settingFragment -> {
 
@@ -321,15 +324,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
         }
-
         return false
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //Nếu không play nhạc thì stop service
-        if (!MusicPlayerFragment.isPlaying && MusicPlayerFragment.musicPlayerService != null) {
-            exitApp()
-        }
-    }
+
 }
