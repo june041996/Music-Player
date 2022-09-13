@@ -80,7 +80,9 @@ class SignupActivity : AppCompatActivity() {
 
 
         if (binding.edtPassword.text.toString() != binding.edtPasswordConfim.text.toString()) {
-            showDialog("Password and Confirm Password do not match")
+//            showDialog("Password and Confirm Password do not match")
+            binding.edtPassword.setError("Password and Confirm Password do not match")
+            binding.edtPasswordConfim.setError("Password and Confirm Password do not match")
             return false
         }
         return true
