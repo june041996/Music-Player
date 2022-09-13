@@ -35,7 +35,7 @@ class ListRankAdapter : RecyclerView.Adapter<ListRankAdapter.ViewHolder>() {
 
         init {
             binding.root.setOnClickListener {
-                itemViewOnClick.onClick(listRank[adapterPosition])
+                itemViewOnClick.onClick(listRank[adapterPosition],adapterPosition)
             }
         }
     }

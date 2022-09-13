@@ -3,41 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/background_color"
     tools:context=".fragment.library.AddToPlaylistFragment">
 
     <LinearLayout
-        android:orientation="vertical"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCreatePlaylist"
-            android:padding="10dp"
-            android:background="@drawable/bg_btn_cancel"
-            android:layout_margin="20dp"
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/bg_btn_cancel"
+            android:padding="10dp"
             android:text="Create new playlist"
-            android:layout_height="wrap_content" />
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Added Playlist"
+            android:textColor="?attr/text_color"
+            android:textSize="@dimen/title_text"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_margin="5dp"
             android:id="@+id/rvPlaylist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" />
 
-        <View
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:background="@color/background_dark"
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
+            android:text="Playlist"
+            android:textColor="?attr/text_color"
+            android:textSize="@dimen/title_text"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_margin="5dp"
             android:id="@+id/rvOutPlaylist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

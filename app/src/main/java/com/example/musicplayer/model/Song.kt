@@ -1,7 +1,5 @@
 package com.example.musicplayer.model
 
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -14,7 +12,7 @@ data class Song(
     val idSong: Int?,
     val nameSong: String?,
     val urlImage: String?,
-    val urlSong: String?,
+    var urlSong: String,
     @SerializedName("category")
     val genre: String?,
     val musician: String?,

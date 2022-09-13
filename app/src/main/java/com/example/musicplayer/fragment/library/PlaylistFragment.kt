@@ -11,9 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
-import com.example.musicplayer.adapter.OnItemButtonClickListener
-import com.example.musicplayer.adapter.OnItemClickListener
-import com.example.musicplayer.adapter.PlaylistAdapter
+import com.example.musicplayer.adapter.library.OnItemButtonClickListener
+import com.example.musicplayer.adapter.library.OnItemClickListener
+import com.example.musicplayer.adapter.library.PlaylistAdapter
 import com.example.musicplayer.databinding.FragmentPlaylistBinding
 import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.utils.Contanst
@@ -36,6 +36,7 @@ class PlaylistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //
         requireActivity().title = "test"
         val adapter = PlaylistAdapter()

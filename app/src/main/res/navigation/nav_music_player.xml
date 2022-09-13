@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_music_player"
     app:startDestination="@id/musicPlayerFragment2">
 
     <fragment
         android:id="@+id/musicPlayerFragment2"
         android:name="com.example.musicplayer.fragment.MusicPlayerFragment"
-        android:label="Music Player" />
+        android:label="Music Player">
+        <action
+            android:id="@+id/action_musicPlayerFragment2_to_addToPlaylistFragment2"
+            app:destination="@id/addToPlaylistFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addToPlaylistFragment2"
+        android:name="com.example.musicplayer.fragment.library.AddToPlaylistFragment"
+        android:label="{nameSong}"
+        tools:layout="@layout/fragment_add_to_playlist">
+        <argument
+            android:name="nameSong"
+            app:argType="string" />
+    </fragment>
 </navigation>

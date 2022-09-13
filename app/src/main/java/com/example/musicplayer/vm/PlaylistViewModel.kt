@@ -27,6 +27,7 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
      val id = sharedpreferences.getInt("id", 0)
     private val name = sharedpreferences.getString("username", null)
 
+
     //get Playlist of song
     val _playlistOfSong = MutableLiveData<List<Playlist>>()
     val playlistOfSong: LiveData<List<Playlist>>
@@ -144,7 +145,7 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
     fun updatePlaylist(name: String, id: Int) {
         viewModelScope.launch {
             playlistRepository.updatePlaylist(name, id)
-            getAllPlaylist()
+
         }
     }
 
@@ -182,7 +183,7 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
     val playlists: LiveData<ArrayList<Playlist>>
         get() = getAllPlaylist()
 
-    private fun getAllPlaylist(): MutableLiveData<ArrayList<Playlist>> {
+    fun getAllPlaylist(): MutableLiveData<ArrayList<Playlist>> {
 
         val temp = arrayListOf<Playlist>()
         viewModelScope.launch {
@@ -196,7 +197,10 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
 
     //insert
     fun insertPlaylist(name: String) {
-        val playlist = Playlist(null, id, name, "1")
+        getAllPlaylist()
+        val t = System.currentTimeMillis() / 1000
+        Log.d(Contanst.TAG, "times: ${t.toString()}")
+        val playlist = Playlist(null, id, name, t.toString())
         viewModelScope.launch {
             playlistRepository.insertPlaylist(playlist)
             getAllPlaylist()

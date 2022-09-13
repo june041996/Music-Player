@@ -1,103 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/background_color">
+
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/lnOnDevice"
-            android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_item_library">
+            android:layout_height="@dimen/height_item_library"
+            android:layout_margin="5dp">
 
             <ImageView
-                android:padding="5dp"
-                android:src="@drawable/ic_download"
                 android:layout_width="@dimen/height_item_library"
-                android:layout_height="@dimen/height_item_library" />
+                android:layout_height="@dimen/height_item_library"
+                android:padding="5dp"
+                android:src="@drawable/ic_download" />
 
             <TextView
-                android:padding="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:textSize="@dimen/title_text"
-                android:text="ON DEVICE"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:padding="10dp"
+                android:text="ON DEVICE"
+                android:textColor="?attr/text_color"
+                android:textSize="@dimen/title_text"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <View
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:background="#800098AE"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp" />
+            android:layout_height="0.5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="#800098AE" />
 
         <LinearLayout
             android:id="@+id/lnFavourite"
-            android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_item_library">
+            android:layout_height="@dimen/height_item_library"
+            android:layout_margin="5dp">
 
             <ImageView
-                android:padding="5dp"
-                android:src="@drawable/ic_favorite"
                 android:layout_width="@dimen/height_item_library"
-                android:layout_height="@dimen/height_item_library" />
+                android:layout_height="@dimen/height_item_library"
+                android:padding="5dp"
+                android:src="@drawable/ic_favorite" />
 
             <TextView
-                android:padding="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:textSize="@dimen/title_text"
-                android:text="FAVOURITE"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:padding="10dp"
+                android:text="FAVOURITE"
+                android:textColor="?attr/text_color"
+                android:textSize="@dimen/title_text"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <View
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:background="#800098AE"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp" />
+            android:layout_height="0.5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="#800098AE" />
 
         <LinearLayout
             android:id="@+id/lnPlaylist"
-            android:layout_margin="5dp"
-
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_item_library">
+            android:layout_height="@dimen/height_item_library"
+            android:layout_margin="5dp">
 
             <ImageView
-                android:padding="5dp"
-                android:src="@drawable/ic_playlist"
                 android:layout_width="@dimen/height_item_library"
-                android:layout_height="@dimen/height_item_library" />
+                android:layout_height="@dimen/height_item_library"
+                android:padding="5dp"
+                android:src="@drawable/ic_playlist" />
 
             <TextView
-                android:padding="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:textSize="@dimen/title_text"
-                android:text="PLAYLIST"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:padding="10dp"
+                android:text="PLAYLIST"
+                android:textColor="?attr/text_color"
+                android:textSize="@dimen/title_text"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <View
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="8dp"
-            android:background="#800098AE"
             android:layout_width="match_parent"
-            android:layout_height="0.5dp" />
+            android:layout_height="0.5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:background="#800098AE" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

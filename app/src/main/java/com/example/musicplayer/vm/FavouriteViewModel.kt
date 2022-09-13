@@ -24,10 +24,12 @@ class FavouriteViewModel(app: Application) : AndroidViewModel(app) {
     private val id = sharedpreferences.getInt("id", 0)
     private val name = sharedpreferences.getString("username", null)
 
+
     //insert
     fun insertFavourite(song: Song) {
         viewModelScope.launch {
             favouriteRepository.insertFavourite(Favourite(id, song.idSong!!))
+            checkFavouriteSong(song.idSong)
         }
     }
 
@@ -67,17 +69,32 @@ class FavouriteViewModel(app: Application) : AndroidViewModel(app) {
     val _checkSong = MutableLiveData<Favourite>()
     val checkSong: LiveData<Favourite>
         get() = _checkSong
-
+    val checkFavourite: LiveData<Boolean>
+        get() = _checkFavourite
+    val _checkFavourite = MutableLiveData<Boolean>(false)
     fun checkFavouriteSong(idSong: Int) {
-
         check = false
         viewModelScope.launch {
             val a = favouriteRepository.getFavouriteSong(id, idSong)
             _checkSong.value = a
             if (a != null) {
                 check = true
+                _checkFavourite.value = true
+            } else {
+                _checkFavourite.value = false
             }
 
+        }
+    }
+
+    fun checkFavouriteCheckUnCheck(song: Song) {
+        val b = _checkFavourite.value
+        if (b == true) {
+            Log.d(Contanst.TAG, "remove: ${b.toString()}")
+            removeFavouriteSong(song)
+        } else {
+            Log.d(Contanst.TAG, "insert: ${b.toString()}")
+            insertFavourite(song)
         }
     }
 }

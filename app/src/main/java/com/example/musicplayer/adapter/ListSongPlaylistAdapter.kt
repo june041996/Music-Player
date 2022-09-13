@@ -6,17 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.musicplayer.adapter.rank.ItemViewOnClick
 import com.example.musicplayer.databinding.ListMusicPlaylistBinding
-
 import com.example.musicplayer.model.Playlist
-import com.example.musicplayer.model.Song
-import com.example.musicplayer.vm.PlaylistViewModel
 
 
 class ListSongPlaylistAdapter :
     RecyclerView.Adapter<ListSongPlaylistAdapter.ViewHolder>() {
     private val song = arrayListOf<Playlist>()
-    private lateinit var listener: OnItemClickListener
-
+    private lateinit var listener: ItemOnclick
     fun submitData(temp: List<Playlist>) {
         val diff = DiffUtil.calculateDiff(DiffPlaylist(song, temp))
         song.clear()
@@ -24,7 +20,7 @@ class ListSongPlaylistAdapter :
         diff.dispatchUpdatesTo(this)
     }
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+    fun setOnItemClickListener(onItemClickListener: ItemOnclick){
         listener = onItemClickListener
     }
 

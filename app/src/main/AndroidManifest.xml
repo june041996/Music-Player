@@ -23,7 +23,16 @@
         android:roundIcon="@mipmap/ic_music_player"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicPlayer"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+        <service
+            android:name=".service.DownloadService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".activity.ProfileActivity"
             android:exported="false" />

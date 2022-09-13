@@ -11,17 +11,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 
+
 import com.example.musicplayer.activity.MusicPlayerActivity
 import com.example.musicplayer.activity.SigninActivity
+import com.example.musicplayer.adapter.ItemOnclick
 import com.example.musicplayer.adapter.ListRankAdapter
+
 import com.example.musicplayer.adapter.ListSongFavoriteAdapter
 import com.example.musicplayer.adapter.ListSongPlaylistAdapter
 import com.example.musicplayer.adapter.rank.ItemViewOnClick
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
+
 import com.example.musicplayer.vm.*
 import com.google.firebase.auth.FirebaseAuth
+
 
 
 class HomeFragment : Fragment() {
@@ -47,7 +52,9 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+
         //recycleview Playlist
+
         val adapter = ListSongPlaylistAdapter()
 
         //get all Song
@@ -57,6 +64,7 @@ class HomeFragment : Fragment() {
            adapter.submitData(it)
         }
         binding.recycleViewPlaylist.adapter = adapter
+
         binding.recycleViewPlaylist.layoutManager =
             GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
         //onclick playlist
@@ -69,6 +77,7 @@ class HomeFragment : Fragment() {
 //            }
 //        })
 
+
         //recycleview favorite
         val adapterFavorite = ListSongFavoriteAdapter()
         //get all Favorite
@@ -76,11 +85,12 @@ class HomeFragment : Fragment() {
             Log.d(LOG, "call data favorite: ${it.size}")
             adapterFavorite.submitDataFavorite(it)
         }
+
         binding.recycleViewFavorite.adapter = adapterFavorite
         binding.recycleViewFavorite.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         //onclick favorite
-        adapterFavorite.setOnItemClickListener(object : ItemViewOnClick {
+        adapterFavorite.setOnItemClickListener(object : ItemOnclick {
             override fun onClick(song: Song) {
                 song.idSong?.let {
                     viewModelMusicPlayer.setIdSong(it)
@@ -100,4 +110,5 @@ class HomeFragment : Fragment() {
 
 
 }
+
 

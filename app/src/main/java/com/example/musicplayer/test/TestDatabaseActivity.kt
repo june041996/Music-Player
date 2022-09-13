@@ -1,8 +1,10 @@
 package com.example.musicplayer.test
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.musicplayer.databinding.ActivityTestDatabaseBinding
 import com.example.musicplayer.db.MusicDatabase
@@ -11,6 +13,7 @@ import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.User
 import com.example.musicplayer.model.relation.FavouriteSongCrossRef
 import com.example.musicplayer.model.relation.SongPlaylistCrossRef
+import com.example.musicplayer.service.DownloadService
 import kotlinx.coroutines.launch
 
 class TestDatabaseActivity : AppCompatActivity() {
@@ -20,6 +23,10 @@ class TestDatabaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTestDatabaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.btn.setOnClickListener() {
+            val intent = Intent(this, DownloadService::class.java)
+            ContextCompat.startForegroundService(this, intent)
+        }
         //test edit
         val dao = MusicDatabase.getInstance(this).songDao()
         var playlists = listOf<Playlist>(

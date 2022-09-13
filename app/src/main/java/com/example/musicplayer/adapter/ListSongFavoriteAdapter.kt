@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.adapter.rank.ItemViewOnClick
+
 import com.example.musicplayer.databinding.ListMusicFavoriteBinding
 import com.example.musicplayer.model.Song
 
 class ListSongFavoriteAdapter :
     RecyclerView.Adapter<ListSongFavoriteAdapter.ViewHolder>() {
     private val mFavofite = arrayListOf<Song>()
-    private lateinit var itemViewOnClick: ItemViewOnClick
+    private lateinit var itemViewOnClick: ItemOnclick
 
 
     fun submitDataFavorite(temp: List<Song>) {
@@ -22,7 +22,7 @@ class ListSongFavoriteAdapter :
         diff.dispatchUpdatesTo(this)
     }
 
-    fun setOnItemClickListener(itemViewOnClick: ItemViewOnClick) {
+    fun setOnItemClickListener(itemViewOnClick: ItemOnclick) {
         this.itemViewOnClick = itemViewOnClick
     }
 
@@ -32,6 +32,7 @@ class ListSongFavoriteAdapter :
             binding.favorite = f
             binding.executePendingBindings()
         }
+
        init {
            binding.root.setOnClickListener {
                itemViewOnClick.onClick(mFavofite[adapterPosition])
@@ -58,4 +59,6 @@ class ListSongFavoriteAdapter :
 
     override fun getItemCount() = mFavofite.size
 
+
 }
+

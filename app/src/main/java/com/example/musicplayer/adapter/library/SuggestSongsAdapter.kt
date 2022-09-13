@@ -1,22 +1,23 @@
-package com.example.musicplayer.adapter
+package com.example.musicplayer.adapter.library
 
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.musicplayer.databinding.ItemPlaylistBinding
-import com.example.musicplayer.model.Playlist
+import com.example.musicplayer.adapter.DiffSong
+import com.example.musicplayer.databinding.ItemSuggestSongBinding
+import com.example.musicplayer.model.Song
 
-class PlaylistAdapter() : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>() {
-    private var playlists = arrayListOf<Playlist>()
+class SuggestSongsAdapter() : RecyclerView.Adapter<SuggestSongsAdapter.ViewHolder>() {
+    private var songs = arrayListOf<Song>()
     private lateinit var listener: OnItemClickListener
-    private lateinit var mButton: OnItemButtonClickListener
+    private lateinit var btnListener: OnItemButtonClickListener
 
-    fun submitData(temp: ArrayList<Playlist>) {
-        val diff = DiffUtil.calculateDiff(DiffPlaylist(playlists, temp))
-        playlists.clear()
-        playlists.addAll(temp)
+    fun submitData(temp: ArrayList<Song>) {
+        val diff = DiffUtil.calculateDiff(DiffSong(songs, temp))
+        songs.clear()
+        songs.addAll(temp)
         diff.dispatchUpdatesTo(this)
     }
 
@@ -25,43 +26,43 @@ class PlaylistAdapter() : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>() {
         onItemButtonClickListener: OnItemButtonClickListener
     ) {
         listener = onItemClickListener
-        mButton = onItemButtonClickListener
+        btnListener = onItemButtonClickListener
     }
 
     class ViewHolder(
-        private var binding: ItemPlaylistBinding,
+        private var binding: ItemSuggestSongBinding,
         val listener: OnItemClickListener,
-        val mButton: OnItemButtonClickListener
+        val btnListener: OnItemButtonClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener() {
                 listener.onItemClick(absoluteAdapterPosition)
             }
-            binding.imgMenu.setOnClickListener() {
-                mButton.onItemClick(absoluteAdapterPosition, it)
+            binding.imgAdd.setOnClickListener() {
+                btnListener.onItemClick(absoluteAdapterPosition, it)
             }
         }
 
-        fun bind(p: Playlist) {
-            binding.playlist = p
+        fun bind(s: Song) {
+            binding.song = s
             binding.executePendingBindings()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemPlaylistBinding.inflate(
+            ItemSuggestSongBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), listener, mButton
+            ), listener, btnListener
         )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        playlists[position].let {
+        songs[position].let {
             holder.bind(it)
         }
     }
 
-    override fun getItemCount() = playlists.size
+    override fun getItemCount() = songs.size
 }

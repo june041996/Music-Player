@@ -1,11 +1,11 @@
 package com.example.musicplayer.service
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Binder
 import android.os.Handler
 import android.os.IBinder
@@ -33,6 +33,8 @@ class MusicPlayerService : Service() {
         }
     }
 
+
+    @SuppressLint("UnspecifiedImmutableFlag")
     fun showNotification(playPauseBtn: Int) {
         //Previous
         val prevIntent = Intent(
@@ -43,7 +45,7 @@ class MusicPlayerService : Service() {
             baseContext,
             0,
             prevIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
 
         //Next
@@ -55,7 +57,7 @@ class MusicPlayerService : Service() {
             baseContext,
             0,
             nextIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
 
         //Play
@@ -67,7 +69,7 @@ class MusicPlayerService : Service() {
             baseContext,
             0,
             playIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
 
         //Exit
@@ -79,12 +81,13 @@ class MusicPlayerService : Service() {
             baseContext,
             0,
             exitIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
 
+
         val notification = NotificationCompat.Builder(baseContext, ApplicationClass.CHANNEL_ID)
-            .setContentTitle("Anh sai roi")
-            .setContentText("MTP")
+            .setContentTitle(MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].nameSong)
+            .setContentText(MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].singer)
             .setSmallIcon(R.drawable.ic_library_music)
             .setLargeIcon(
                 BitmapFactory.decodeResource(
@@ -109,25 +112,33 @@ class MusicPlayerService : Service() {
 
     }
 
-    private fun createMediaPlayer(link: String) {
+    fun createMediaPlayer() {
         try {
             if (MusicPlayerFragment.musicPlayerService?.mediaPlayer == null) MusicPlayerFragment.musicPlayerService?.mediaPlayer =
                 MediaPlayer()
             MusicPlayerFragment.musicPlayerService?.mediaPlayer?.reset()
-            MusicPlayerFragment.musicPlayerService?.mediaPlayer?.setDataSource(
-                Uri.parse(link).toString()
-            )
+            MusicPlayerFragment.musicPlayerService?.mediaPlayer?.setDataSource(MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].urlSong)
             MusicPlayerFragment.musicPlayerService?.mediaPlayer?.prepare()
+
             MusicPlayerFragment.binding.btnPlayStopMusic.setImageResource(R.drawable.ic_pause)
+            MusicPlayerFragment.musicPlayerService?.showNotification(R.drawable.ic_pause)
+
             //seekbar
+            MusicPlayerFragment.binding.timeReal.text = formatSongDuration(
+                MusicPlayerFragment.musicPlayerService?.mediaPlayer?.currentPosition.toString()
+                    .toLong()
+            )
+            MusicPlayerFragment.binding.timeTotal.text =
+                formatSongDuration(
+                    MusicPlayerFragment.musicPlayerService?.mediaPlayer?.duration.toString()
+                        .toLong()
+                )
             MusicPlayerFragment.binding.seekbarTime.progress = 0
             MusicPlayerFragment.binding.seekbarTime.max =
                 MusicPlayerFragment.musicPlayerService!!.mediaPlayer!!.duration
 
-//            binding.timeTotal.text = formatSongDuration(listSong[1].duration)
-            MusicPlayerFragment.binding.timeTotal.text = formatSongDuration(
-                MusicPlayerFragment.musicPlayerService?.mediaPlayer?.duration.toString().toLong()
-            )
+            MusicPlayerFragment.nowPlayingId =
+                MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].idSong!!.toInt()
             Log.d(
                 MusicPlayerFragment.LOG,
                 MusicPlayerFragment.musicPlayerService?.mediaPlayer?.duration.toString()
