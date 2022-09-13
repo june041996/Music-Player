@@ -1,6 +1,9 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,6 +19,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = AuthenticationRepository(application)
     val isSuccessful: LiveData<Boolean>
     val dao = MusicDatabase.getInstance(getApplication()).songDao()
+    private val SHARED_PREFS = "shared_prefs"
+    private var sharedpreferences: SharedPreferences =
+        getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+    private val id = sharedpreferences.getInt("id", 0)
+    private val name = sharedpreferences.getString("username", null)
 
     val _user = MutableLiveData<User>()
     val user: LiveData<User>

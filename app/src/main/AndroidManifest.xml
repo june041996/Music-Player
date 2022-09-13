@@ -34,6 +34,9 @@
             android:exported="true"></service>
 
         <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.DarkLightModeActivity"
             android:exported="true"
             android:label="Dark Light mode"

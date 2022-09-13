@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
+
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -42,6 +43,7 @@ import com.example.musicplayer.vm.SongViewModel
 import com.example.musicplayer.vm.SongViewModelFactory
 import com.example.musicplayer.vm.WorkViewModel
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -50,6 +52,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
+    private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private lateinit var sharedpreferences: SharedPreferences
     private val SHARED_PREFS = "shared_prefs"
@@ -62,7 +65,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val themePrefsKey = "theme"
 
     private var checkOn: Boolean = true
-
 
     //   // private val viewModel: HomeViewModel by viewModels()
     private val viewModel: SongViewModel by viewModels {
@@ -81,30 +83,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        //reminder play song
-        viewModel.songs.observe(this) {
-            workViewModel.enqueuePeriodicReminder(it)
-        }
-        val reminder = intent.getStringExtra("reminder")
-        Log.d(Contanst.TAG, "reminder: $reminder")
-        if (reminder != null) {
-            viewModel.getSongByName(reminder)
-            viewModel.songByName.observe(this) {
-                Log.d(Contanst.TAG, "play s: ${it.toString()}")
-                //play music
-                /*val intent = Intent(this, MusicPlayerActivity::class.java)
-                intent.putExtra("song", it)
-                startActivity(intent)*/
-                val intentSong = Intent(this, MusicPlayerActivity::class.java)
-
-                val bundle = Bundle()
-                //bundle.putInt("pos", pos)
-                bundle.putInt("idSong", it.idSong!!)
-                bundle.putString("list", "listRankSong1")
-                intentSong.putExtras(bundle)
-                startActivity(intentSong)
-            }
-        }
 
 
         ///Không xoá
@@ -131,6 +109,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         //Đồng cấp
         appBarConfig = AppBarConfiguration(
             setOf(
@@ -140,7 +120,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.libraryFragment,
             )
         )
-
         setupActionBarWithNavController(navController, appBarConfig)
 
         binding.apply {
@@ -181,6 +160,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
         }
     }
+
 
 
     //update local song between room and device
@@ -300,11 +280,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.dark_light_mode -> {
                 startActivity(Intent(this, DarkLightModeActivity::class.java))
+            }
+            R.id.nav_profile->{
+                startActivity(Intent(this, ProfileActivity::class.java))
             }
             R.id.settingFragment -> {
 
@@ -313,15 +295,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
         }
-
         return false
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //Nếu không play nhạc thì stop service
-        if (!MusicPlayerFragment.isPlaying && MusicPlayerFragment.musicPlayerService != null) {
-            exitApp()
-        }
-    }
+
 }

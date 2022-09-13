@@ -24,7 +24,7 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
     private val SHARED_PREFS = "shared_prefs"
     private var sharedpreferences: SharedPreferences =
         getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
-    private val id = sharedpreferences.getInt("id", 0)
+     val id = sharedpreferences.getInt("id", 0)
     private val name = sharedpreferences.getString("username", null)
 
 
