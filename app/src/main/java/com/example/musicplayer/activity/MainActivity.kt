@@ -39,13 +39,13 @@ import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Status
 import com.example.musicplayer.utils.exitApp
 import com.example.musicplayer.vm.SongViewModel
-import com.example.musicplayer.vm.SongViewModelFactory
 import com.example.musicplayer.vm.WorkViewModel
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -65,9 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     //   // private val viewModel: HomeViewModel by viewModels()
-    private val viewModel: SongViewModel by viewModels {
-        SongViewModelFactory(application)
-    }
+    private val songViewModel: SongViewModel by viewModels()
 
     companion object {
         private const val LOG = "TCR"
@@ -82,14 +80,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val view = binding.root
         setContentView(view)
         //reminder play song
-        viewModel.songs.observe(this) {
+        songViewModel.songs.observe(this) {
             workViewModel.enqueuePeriodicReminder(it)
         }
         val reminder = intent.getStringExtra("reminder")
         Log.d(Contanst.TAG, "reminder: $reminder")
         if (reminder != null) {
-            viewModel.getSongByName(reminder)
-            viewModel.songByName.observe(this) {
+            songViewModel.getSongByName(reminder)
+            songViewModel.songByName.observe(this) {
                 Log.d(Contanst.TAG, "play s: ${it.toString()}")
                 //play music
                 /*val intent = Intent(this, MusicPlayerActivity::class.java)
@@ -124,7 +122,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toolBar = binding.toolbar
 
         setSupportActionBar(toolBar)
-
         drawerLayout = binding.drawerLayout
         navigationView = binding.navView
 
@@ -149,9 +146,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             navView.setNavigationItemSelectedListener(this@MainActivity)
         }
 
-        viewModel.localSongs.observe(this) {
+        songViewModel.localSongs.observe(this) {
             Log.d(TAG, "local songs: ${it.toString()}")
         }
+
 
         // check permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -166,6 +164,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     i.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
                     storageActivityResultLauncher.launch(i)
                 }
+                updateLocalSongs()
+                updateApiSongs()
             } else {
                 //Permission already granted
                 updateLocalSongs()
@@ -195,14 +195,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun updateLocalSongs() {
         lifecycleScope.launch {
             delay(500L)
-            viewModel.updateLocalSongs()
+            songViewModel.updateLocalSongs()
         }
 
     }
 
     private fun updateApiSongs() {
         lifecycleScope.launch {
-            viewModel.getSong().observe(this@MainActivity) {
+            songViewModel.getSong().observe(this@MainActivity) {
                 it?.let {
                     when (it.status) {
                         Status.SUCCESS -> {
@@ -223,7 +223,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                                     songs[i].views,
                                     songs[i].isOffline
                                 )
-                                viewModel.insertSongToDB(song)
+                                this@MainActivity.songViewModel.insertSongToDB(song)
                             }
                         }
                         Status.LOADING -> {

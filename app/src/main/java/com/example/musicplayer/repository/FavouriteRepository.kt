@@ -1,12 +1,10 @@
 package com.example.musicplayer.repository
 
-import android.content.Context
-import com.example.musicplayer.db.MusicDatabase
+import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.Favourite
 import com.example.musicplayer.model.relation.FavouriteWithSongs
 
-class FavouriteRepository(val context: Context) {
-    val dao = MusicDatabase.getInstance(context).songDao()
+class FavouriteRepository(val dao: MusicDao) {
 
     suspend fun insertFavourite(favourite: Favourite) {
         dao.insertFavourite(favourite)

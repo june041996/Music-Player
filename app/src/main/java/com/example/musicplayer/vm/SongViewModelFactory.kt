@@ -9,7 +9,7 @@ class SongViewModelFactory(private val application: Application) : ViewModelProv
     //create ->sẽ tạo viewmodel
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SongViewModel::class.java)) {
-            return SongViewModel(application) as T
+            //return SongViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown to create your view model")
     }

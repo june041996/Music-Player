@@ -1,31 +1,33 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.musicplayer.db.MusicDatabase
+import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.network.SongClient
 import com.example.musicplayer.repository.SongRepository
 import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@HiltViewModel
+class SongViewModel @Inject constructor(
+    val dao: MusicDao,
+    val prefs: SharedPreferences,
+    application: Application
+) : AndroidViewModel(application) {
 
-class SongViewModel(application: Application) : AndroidViewModel(application) {
-
-    val songRepository = SongRepository(getApplication<Application>().applicationContext)
-    private val SHARED_PREFS = "shared_prefs"
-    private var sharedpreferences: SharedPreferences =
-        getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
-    private val id = sharedpreferences.getInt("id", 0)
-    private val name = sharedpreferences.getString("username", null)
+    val songRepository = SongRepository(dao)
+    private val id = prefs.getInt("id", 0)
+    private val name = prefs.getString("username", null)
 
     companion object {
         private const val TAG: String = "DHP"
@@ -33,7 +35,6 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
 
     //Rin
     ////////////////////////////////////////////////////////////////////////////////
-    private val dao = MusicDatabase.getInstance(application.applicationContext).songDao()
 
     //GET Song from API
     private suspend fun getSongFromAPI() = SongClient.invoke().getSong()
@@ -49,7 +50,7 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     //INSERT Song to Database
-    private suspend fun insertSongDao(song: Song) = dao.insertSong(song)
+    private suspend fun insertSongDao(song: Song) = songRepository.insertSong(song)
 
     fun insertSongToDB(song: Song) = viewModelScope.launch {
         insertSongDao(song)

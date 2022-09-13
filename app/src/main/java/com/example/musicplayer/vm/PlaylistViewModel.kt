@@ -1,31 +1,34 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.musicplayer.db.MusicDatabase
+import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.repository.PlaylistRepository
 import com.example.musicplayer.repository.SongRepository
 import com.example.musicplayer.utils.Contanst
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
-    private val dao = MusicDatabase.getInstance(getApplication()).songDao()
-    val playlistRepository = PlaylistRepository(getApplication<Application>().applicationContext)
-    val songRepository = SongRepository(getApplication<Application>().applicationContext)
-    private val SHARED_PREFS = "shared_prefs"
-    private var sharedpreferences: SharedPreferences =
-        getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
-    private val id = sharedpreferences.getInt("id", 0)
-    private val name = sharedpreferences.getString("username", null)
+@HiltViewModel
+class PlaylistViewModel @Inject constructor(
+    val dao: MusicDao,
+    val prefs: SharedPreferences,
+    app: Application
+) : AndroidViewModel(app) {
+
+    val playlistRepository = PlaylistRepository(dao)
+    val songRepository = SongRepository(dao)
+    private val id = prefs.getInt("id", 0)
+    private val name = prefs.getString("username", null)
 
 
     //get Playlist of song
@@ -135,7 +138,9 @@ class PlaylistViewModel(app: Application) : AndroidViewModel(app) {
             // Log.d(Contanst.TAG,temp.size.toString())
             // Log.d(Contanst.TAG,songsOfPlaylist.size.toString())
             temp.removeAll(songsOfPlaylist)
-            _suggestSongs.value = temp
+            val a = arrayListOf<Song>()
+            a.addAll(temp.take(5))
+            _suggestSongs.value = a
             // Log.d(Contanst.TAG,temp.size.toString())
         }
         return _suggestSongs
