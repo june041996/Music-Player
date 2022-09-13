@@ -180,14 +180,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 READ_STORAGE_PERMISSION_CODE
             )
         }
-
-        //Rin
-        /////////////////////////////////////////////////////////////////////
-        //INSERT to DB
-
-        /////////////////////////////////////////////////////////////
-
-
     }
 
 
