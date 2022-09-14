@@ -123,7 +123,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         binding = FragmentMusicPlayerBinding.inflate(inflater, container, false)
 
         val extras = activity?.intent?.extras
-       // binding.song = extras!!.getSerializable("song") as Song
+        // binding.song = extras!!.getSerializable("song") as Song
         //initial check internet
         connectivityObserver = NetworkConnectivityObserver(requireContext())
 
@@ -198,7 +198,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 //Play music
                 controlMusic(getID)
             }
-            "listSearch"->{
+            "listSearch" -> {
                 //Start service
                 checkList = 5
                 val intent = Intent(requireContext(), MusicPlayerService::class.java)
@@ -604,7 +604,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 controlMusic(idSong)
                 musicPlayerService?.seekBarSetup()
             }
-            5->{
+            5 -> {
                 val idSong = listSearch[postion].idSong.toString().toInt()
                 controlMusic(idSong)
                 musicPlayerService?.seekBarSetup()
@@ -637,7 +637,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 createMediaPlayer(listDevice[postion].urlSong)
                 setLayout(listDevice[postion])
             }
-            5->{
+            5 -> {
                 createMediaPlayer(listSearch[postion].urlSong)
                 setLayout(listSearch[postion])
             }

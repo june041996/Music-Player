@@ -44,10 +44,6 @@ class AddToPlaylistFragment : Fragment() {
         songViewModel.selectedSong.observe(viewLifecycleOwner) {
             Log.d(Contanst.TAG, "sz: ${it.toString()}")
         }
-        //playlistViewModel.getPlaylistOfSong(1009)
-        /*playlistViewModel.playlistWithoutSong.observe(viewLifecycleOwner){
-            Log.d(Contanst.TAG,"add to: ${it.toString()}")
-        }*/
         binding.btnCreatePlaylist.setOnClickListener() {
             CustomDialog(requireContext()).createInputDialog(object :
                 CustomDialog.OnSubmitBtnClick {
@@ -65,8 +61,6 @@ class AddToPlaylistFragment : Fragment() {
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 songViewModel.selectedSong.observe(viewLifecycleOwner) {
-
-                    // findNavController().popBackStack()
                 }
             }
         }, object : OnItemButtonClickListener {
@@ -79,10 +73,8 @@ class AddToPlaylistFragment : Fragment() {
                 playlistViewModel.deleteSongInPlaylist(
                     inPlaylist[position]!!.idPlaylist!!,
                     song!!.idSong!!,
-
-                    )
+                )
             }
-
         })
         playlistViewModel.playlistOfSong.observe(viewLifecycleOwner) {
             inPlaylist.clear()
@@ -117,8 +109,6 @@ class AddToPlaylistFragment : Fragment() {
             song = it
             Log.d(Contanst.TAG, "song: ${song!!.nameSong.toString()}")
             playlistViewModel.getPlaylistOfSong(song!!.idSong!!)
-            /*playlistViewModel.playlistOfSong.observe(viewLifecycleOwner){
-                Log.d(Contanst.TAG,"p: ${it.toString()}")*/
             playlistViewModel.playlistWithoutSong.observe(viewLifecycleOwner) {
                 Log.d(Contanst.TAG, "it: ${it.toString()}")
                 out.clear()
@@ -127,7 +117,5 @@ class AddToPlaylistFragment : Fragment() {
             }
             //}
         }
-
-
     }
 }

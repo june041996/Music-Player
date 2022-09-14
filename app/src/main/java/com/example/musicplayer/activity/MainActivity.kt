@@ -75,47 +75,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-
-        //reminder play song
-//        songViewModel.songs.observe(this) {
-//            workViewModel.enqueuePeriodicReminder(it)
-//        }
-        val reminder = intent.getStringExtra("reminder")
-        Log.d(Contanst.TAG, "reminder: $reminder")
-        if (reminder != null) {
-            songViewModel.getSongByName(reminder)
-            songViewModel.songByName.observe(this) {
-                Log.d(Contanst.TAG, "play s: ${it.toString()}")
-                //play music
-                /*val intent = Intent(this, MusicPlayerActivity::class.java)
-                intent.putExtra("song", it)
-                startActivity(intent)*/
-                val intentSong = Intent(this, MusicPlayerActivity::class.java)
-
-                val bundle = Bundle()
-                bundle.putInt("idSongRemind", it.idSong!!)
-                bundle.putString("list", "remindSong")
-                intentSong.putExtras(bundle)
-                startActivity(intentSong)
-            }
-        }
-
-
-        ///Không xoá
-//        val sharedPref = getSharedPreferences(themePrefsKey, Context.MODE_PRIVATE)
-//        val isNightMode = sharedPref.getBoolean("NightMode", false)
-//
-//        if (isNightMode) {
-//            Log.d(LOG, "CREATE n")
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//        } else {
-//            Log.d(LOG, "CREATE l")
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//        }
-////////////////////////////////////////////////Không xoá////////////////////////
-
-
         toolBar = binding.toolbar
 
         setSupportActionBar(toolBar)
@@ -317,9 +276,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_profile -> {
                 startActivity(Intent(this, ProfileActivity::class.java))
             }
-            R.id.favouriteFragment -> {
-
-            }
             R.id.settingFragment -> {
                 startActivity(Intent(this, SettingActivity::class.java))
             }
@@ -329,6 +285,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         return true
     }
-
-
 }

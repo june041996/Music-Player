@@ -89,13 +89,13 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btn_download"
-               android:src="@drawable/ic_file_download"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
                 android:layout_marginStart="15dp"
                 android:layout_toRightOf="@+id/btn_favourite"
                 android:background="@drawable/shape_button_next_previous"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_file_download"
                 android:tint="?attr/text_color" />
 
 

@@ -35,14 +35,4 @@ class MusicPlayerViewModel(application: Application) :
     }
 
 
-//    fun getSongById(id: Int) = liveData(Dispatchers.Main) {
-//        emit(Resource.loading(data = null))
-//        try {
-//            val data = songDao.getSongById(id)
-//            emit(Resource.success(data = data))
-//        } catch (ex: Exception) {
-//            emit(Resource.error(data = null, message = ex.message ?: "Error !!"))
-//        }
-//    }
-
 }

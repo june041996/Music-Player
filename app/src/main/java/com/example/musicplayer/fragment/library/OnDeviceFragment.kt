@@ -100,14 +100,12 @@ class OnDeviceFragment : Fragment() {
             intentSong.putExtras(bundle)
             startActivity(intentSong)
         }
-        binding.btnShuffle.setOnClickListener() {
-            //songViewModel.updateLocalSongs()
+
+        binding.swipeFreshLayout.setOnRefreshListener() {
+            songViewModel.updateLocalSongs()
+            binding.swipeFreshLayout.isRefreshing = false
+            adapter.submitData(localSongs)
         }
-//        binding.swipeFreshLayout.setOnRefreshListener() {
-//            songViewModel.updateLocalSongs()
-//            binding.swipeFreshLayout.isRefreshing = false
-//            adapter.submitData(localSongs)
-//        }
 
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

@@ -118,8 +118,6 @@ class PlaylistSongFragment : Fragment() {
                         suggestSongs[position].idSong!!,
                         it.idPlaylist!!
                     )
-                    //suggestSongs.add(suggestSongs[position])
-                    //adapterSuggest.submitData(suggestSongs)
                 }
 
             }
@@ -131,8 +129,6 @@ class PlaylistSongFragment : Fragment() {
             suggestSongs.addAll(it)
             adapterSuggest.submitData(suggestSongs)
         }
-
-
     }
 
     private fun showMenuPopup(v: View, song: Song) {
