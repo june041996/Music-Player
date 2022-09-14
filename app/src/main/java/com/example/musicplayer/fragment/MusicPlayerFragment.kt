@@ -65,6 +65,9 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         //List device
         var listDevice: ArrayList<Song> = arrayListOf()
 
+        //List search
+        var listSearch: ArrayList<Song> = arrayListOf()
+
         var postion: Int = 0
 
         var repeat: Boolean = false
@@ -120,7 +123,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         binding = FragmentMusicPlayerBinding.inflate(inflater, container, false)
 
         val extras = activity?.intent?.extras
-        binding.song = extras?.getSerializable("song") as Song
+       // binding.song = extras!!.getSerializable("song") as Song
         //initial check internet
         connectivityObserver = NetworkConnectivityObserver(requireContext())
 
@@ -132,8 +135,8 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 activity?.bindService(intent, this, BIND_AUTO_CREATE)
                 activity?.startService(intent)
 
-                getID = extras!!.getInt("idSong", 1003)
-
+                val song = extras.getSerializable("song") as Song
+                getID = song.idSong!!
                 Log.d(LOG, getID.toString())
 
                 listRankSong.addAll(RankFragment.listRankSong)
@@ -151,8 +154,8 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 activity?.bindService(intent, this, BIND_AUTO_CREATE)
                 activity?.startService(intent)
 
-                getID = extras.getInt("idSong", 1003)
-
+                val song = extras.getSerializable("song") as Song
+                getID = song.idSong!!
                 Log.d(LOG, getID.toString())
 
                 listFavouriteSong.addAll(FavouriteFragment.songs)
@@ -168,8 +171,8 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 activity?.bindService(intent, this, BIND_AUTO_CREATE)
                 activity?.startService(intent)
 
-                getID = extras.getInt("idSong", 1003)
-
+                val song = extras.getSerializable("song") as Song
+                getID = song.idSong!!
                 Log.d(LOG, getID.toString())
 
                 listPlaylistSong.addAll(PlaylistSongFragment.songs)
@@ -185,11 +188,28 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 activity?.bindService(intent, this, BIND_AUTO_CREATE)
                 activity?.startService(intent)
 
-                getID = extras.getInt("idSong", 1003)
-
+                val song = extras.getSerializable("song") as Song
+                getID = song.idSong!!
                 Log.d(LOG, getID.toString())
 
                 listDevice.addAll(OnDeviceFragment.localSongs)
+
+                postion = extras.getInt("pos", 0)
+                //Play music
+                controlMusic(getID)
+            }
+            "listSearch"->{
+                //Start service
+                checkList = 5
+                val intent = Intent(requireContext(), MusicPlayerService::class.java)
+                activity?.bindService(intent, this, BIND_AUTO_CREATE)
+                activity?.startService(intent)
+
+                val song = extras.getSerializable("song") as Song
+                getID = song.idSong!!
+                Log.d(LOG, getID.toString())
+
+                listSearch.addAll(SearchFragment.songs)
 
                 postion = extras.getInt("pos", 0)
                 //Play music
@@ -445,6 +465,10 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                     val idSong = listDevice[postion].idSong.toString().toInt()
                     controlMusic(idSong)
                 }
+                5 -> {
+                    val idSong = listSearch[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
             }
 
         } else {
@@ -464,6 +488,10 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 }
                 4 -> {
                     val idSong = listDevice[postion].idSong.toString().toInt()
+                    controlMusic(idSong)
+                }
+                5 -> {
+                    val idSong = listSearch[postion].idSong.toString().toInt()
                     controlMusic(idSong)
                 }
             }
@@ -576,6 +604,11 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 controlMusic(idSong)
                 musicPlayerService?.seekBarSetup()
             }
+            5->{
+                val idSong = listSearch[postion].idSong.toString().toInt()
+                controlMusic(idSong)
+                musicPlayerService?.seekBarSetup()
+            }
         }
 
     }
@@ -603,6 +636,10 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
             4 -> {
                 createMediaPlayer(listDevice[postion].urlSong)
                 setLayout(listDevice[postion])
+            }
+            5->{
+                createMediaPlayer(listSearch[postion].urlSong)
+                setLayout(listSearch[postion])
             }
         }
     }

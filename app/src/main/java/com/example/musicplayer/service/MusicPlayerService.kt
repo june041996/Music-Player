@@ -66,6 +66,13 @@ class MusicPlayerService : Service() {
                     MusicPlayerFragment.postion
                 )
             }
+            5 -> {
+                notification(
+                    playPauseBtn,
+                    MusicPlayerFragment.listSearch,
+                    MusicPlayerFragment.postion
+                )
+            }
         }
 
 

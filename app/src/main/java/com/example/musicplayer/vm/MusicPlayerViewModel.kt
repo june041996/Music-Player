@@ -27,6 +27,7 @@ class MusicPlayerViewModel(application: Application) :
 
     val idSong: LiveData<Int> = _idSong
 
+
     //Nhận id ở MusicPlayer
 
     fun songById(id: Int): LiveData<Song> {

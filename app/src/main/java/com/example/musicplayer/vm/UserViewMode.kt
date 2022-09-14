@@ -2,19 +2,11 @@ package com.example.musicplayer.vm
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.util.Log
+
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-
-import com.example.musicplayer.db.MusicDatabase
-import com.example.musicplayer.model.Playlist
-import com.example.musicplayer.model.Song
-import com.example.musicplayer.model.User
-import com.example.musicplayer.repository.PlaylistRepository
-import com.example.musicplayer.repository.UserRepository
-import com.example.musicplayer.utils.Contanst
 
 import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.User
