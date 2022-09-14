@@ -10,9 +10,11 @@ import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.User
 import com.example.musicplayer.repository.UserRepository
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 
 class UserViewMode(app: Application) : AndroidViewModel(app) {
@@ -46,8 +48,11 @@ class UserViewMode(app: Application) : AndroidViewModel(app) {
                 _user.value = list
             }
             return _user
+
         }
 
 
+
     }
+
 }

@@ -178,7 +178,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 //Play music
                 controlMusic(getID)
             }
-            "listDevice"->{
+            "listDevice" -> {
                 //Start service
                 checkList = 4
                 val intent = Intent(requireContext(), MusicPlayerService::class.java)
@@ -571,7 +571,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 controlMusic(idSong)
                 musicPlayerService?.seekBarSetup()
             }
-            4-> {
+            4 -> {
                 val idSong = listDevice[postion].idSong.toString().toInt()
                 controlMusic(idSong)
                 musicPlayerService?.seekBarSetup()
