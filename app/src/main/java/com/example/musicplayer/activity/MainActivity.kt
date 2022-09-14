@@ -78,9 +78,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         //reminder play song
-        songViewModel.songs.observe(this) {
-            workViewModel.enqueuePeriodicReminder(it)
-        }
+//        songViewModel.songs.observe(this) {
+//            workViewModel.enqueuePeriodicReminder(it)
+//        }
         val reminder = intent.getStringExtra("reminder")
         Log.d(Contanst.TAG, "reminder: $reminder")
         if (reminder != null) {
@@ -273,6 +273,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Toast.makeText(this@MainActivity, "Permission already granted", Toast.LENGTH_SHORT)
                 .show()
             updateLocalSongs()
+            updateApiSongs()
         }
     }
 
@@ -292,6 +293,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 )
                     .show()
                 updateLocalSongs()
+                updateApiSongs()
             } else {
                 Toast.makeText(
                     this@MainActivity,

@@ -1,5 +1,6 @@
 package com.example.musicplayer.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
+import com.example.musicplayer.activity.MusicPlayerActivity
 import com.example.musicplayer.adapter.library.OnDeviceAdapter
 import com.example.musicplayer.adapter.library.OnItemButtonClickListener
 import com.example.musicplayer.adapter.library.OnItemClickListener
@@ -32,7 +34,9 @@ class SearchFragment : Fragment() {
     private val favouriteViewModel: FavouriteViewModel by activityViewModels()
     private val searchViewModel: SearchViewModel by activityViewModels()
 
-    private var songs = arrayListOf<Song>()
+    companion object{
+        var songs = arrayListOf<Song>()
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,6 +58,14 @@ class SearchFragment : Fragment() {
                 /*val intent = Intent(context, MusicPlayerActivity::class.java)
                 intent.putExtra("song", localSongs[position])
                 startActivity(intent)*/
+                val song = songs[position]
+                val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
+                val bundle = Bundle()
+                bundle.putInt("pos", position)
+                bundle.putSerializable("song", song)
+                bundle.putString("list", "listSearch")
+                intentSong.putExtras(bundle)
+                startActivity(intentSong)
             }
         }, object : OnItemButtonClickListener {
             override fun onItemClick(position: Int, view: View) {

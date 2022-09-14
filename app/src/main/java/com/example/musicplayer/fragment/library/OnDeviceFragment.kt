@@ -71,11 +71,11 @@ class OnDeviceFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 //play music
                 Log.d(Contanst.TAG, "item: ${localSongs[position].nameSong}")
-                val idSong = localSongs[position].idSong.toString().toInt()
+                val song = localSongs[position]
                 val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
                 val bundle = Bundle()
                 bundle.putInt("pos", position)
-                bundle.putInt("idSong", idSong)
+                bundle.putSerializable("song", song)
                 bundle.putString("list", "listDevice")
                 intentSong.putExtras(bundle)
                 startActivity(intentSong)
@@ -91,11 +91,11 @@ class OnDeviceFragment : Fragment() {
 
 
         binding.btnPlay.setOnClickListener() {
-            val idSong = localSongs[0].idSong.toString().toInt()
+            val song = localSongs[0]
             val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
             val bundle = Bundle()
             bundle.putInt("pos", 0)
-            bundle.putInt("idSong", idSong)
+            bundle.putSerializable("song", song)
             bundle.putString("list", "listDevice")
             intentSong.putExtras(bundle)
             startActivity(intentSong)
