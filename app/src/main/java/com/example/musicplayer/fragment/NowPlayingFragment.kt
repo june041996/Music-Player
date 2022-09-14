@@ -68,11 +68,11 @@ class NowPlayingFragment : Fragment() {
                     binding.song =
                         MusicPlayerFragment.listFavouriteSong[MusicPlayerFragment.postion]
                 }
-                3->{
+                3 -> {
                     binding.song =
                         MusicPlayerFragment.listPlaylistSong[MusicPlayerFragment.postion]
                 }
-                3->{
+                3 -> {
                     binding.song =
                         MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
                 }
@@ -96,11 +96,11 @@ class NowPlayingFragment : Fragment() {
                     val song = MusicPlayerFragment.listFavouriteSong[MusicPlayerFragment.postion]
                     bundle.putSerializable("song", song)
                 }
-                3->{
+                3 -> {
                     val song = MusicPlayerFragment.listPlaylistSong[MusicPlayerFragment.postion]
                     bundle.putSerializable("song", song)
                 }
-                4->{
+                4 -> {
                     val song = MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
                     bundle.putSerializable("song", song)
                 }

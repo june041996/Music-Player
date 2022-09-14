@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
-        name="user"
-        type="com.example.musicplayer.model.User"/>
+            name="user"
+            type="com.example.musicplayer.model.User" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@{user.name}"
+            android:text="@{user.username}"
             android:textColor="?attr/text_color"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"

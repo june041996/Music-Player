@@ -8,8 +8,8 @@
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter some text"
-       android:gravity="center"
-        />
+        android:gravity="center"
+        android:hint="Enter some text" />
+
 
 </LinearLayout>

@@ -30,9 +30,11 @@ class PlaylistSongFragment : Fragment() {
     private lateinit var binding: FragmentPlaylistSongBinding
     private val playlistViewModel: PlaylistViewModel by activityViewModels()
     private val favouriteViewModel: FavouriteViewModel by activityViewModels()
-    companion object{
+
+    companion object {
         var songs = arrayListOf<Song>()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,7 +63,7 @@ class PlaylistSongFragment : Fragment() {
         }
 
         binding.btnPlay.setOnClickListener {
-            val idSong  = songs[0].idSong.toString().toInt()
+            val idSong = songs[0].idSong.toString().toInt()
             val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
             val bundle = Bundle()
             bundle.putInt("pos", 0)
@@ -74,7 +76,7 @@ class PlaylistSongFragment : Fragment() {
 
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val idSong  = songs[position].idSong.toString().toInt()
+                val idSong = songs[position].idSong.toString().toInt()
                 val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
                 val bundle = Bundle()
                 bundle.putInt("pos", position)

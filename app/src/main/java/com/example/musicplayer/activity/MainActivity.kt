@@ -102,7 +102,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
 
-
         ///Không xoá
 //        val sharedPref = getSharedPreferences(themePrefsKey, Context.MODE_PRIVATE)
 //        val isNightMode = sharedPref.getBoolean("NightMode", false)
@@ -316,7 +315,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_profile -> {
                 startActivity(Intent(this, ProfileActivity::class.java))
             }
-            R.id.favouriteFragment->{
+            R.id.favouriteFragment -> {
 
             }
             R.id.settingFragment -> {

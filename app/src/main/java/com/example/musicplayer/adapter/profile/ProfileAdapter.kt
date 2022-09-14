@@ -35,7 +35,9 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
         diff.dispatchUpdatesTo(this)
     }
 
-    fun setOnItemClickListener(itemProfileOnClick: ItemProfileOnClick ) {
+
+    fun setOnItemClickListener(itemProfileOnClick: ItemProfileOnClick) {
+
         this.itemProfileOnClick = itemProfileOnClick
     }
 
@@ -56,12 +58,14 @@ class ProfileAdapter : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-                ItemProfileBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-                )
+
+            ItemProfileBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+
 
     }
 

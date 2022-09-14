@@ -18,20 +18,12 @@ import com.example.musicplayer.utils.Contanst
 
 import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.User
+import com.example.musicplayer.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
-class UserViewMode(app: Application) : AndroidViewModel(app) {
-    private val dao = MusicDatabase.getInstance(getApplication()).songDao()
-    val userRepository = UserRepository(getApplication<Application>().applicationContext)
-//    private val SHARED_PREFS = "shared_prefs"
-//    private var sharedpreferences: SharedPreferences =
-//        getApplication<Application>().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
-//    private val id = sharedpreferences.getInt("id", 0)
-//    private val name = sharedpreferences.getString("username", null)
 
 @HiltViewModel
 class UserViewMode @Inject constructor(
@@ -39,7 +31,7 @@ class UserViewMode @Inject constructor(
     val prefs: SharedPreferences,
     app: Application
 ) : AndroidViewModel(app) {
-
+    var userRepository = UserRepository(dao)
     private val id = prefs.getInt("id", 0)
     private val name = prefs.getString("username", null)
 
@@ -56,6 +48,5 @@ class UserViewMode @Inject constructor(
         }
         return _user
     }
-
 
 }

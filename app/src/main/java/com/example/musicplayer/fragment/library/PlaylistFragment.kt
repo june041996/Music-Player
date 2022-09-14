@@ -27,9 +27,11 @@ class PlaylistFragment : Fragment() {
     private lateinit var binding: FragmentPlaylistBinding
     private val playlistViewModel: PlaylistViewModel by activityViewModels()
     private val searchViewModel: SearchViewModel by activityViewModels()
-    companion object{
+
+    companion object {
         var playlists = arrayListOf<Playlist>()
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
