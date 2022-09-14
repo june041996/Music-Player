@@ -36,12 +36,15 @@ class ProfileActivity : AppCompatActivity() {
         }
         val adapter = ProfileAdapter()
         mUserModel.user.observe(this) {
+
             adapter.submitData(it)
 
         }
         binding.recyclerView.adapter = adapter
+
         binding.recyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
 
         val toolBar = binding.toolbar
         setSupportActionBar(toolBar)

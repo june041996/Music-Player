@@ -11,4 +11,5 @@
         android:gravity="center"
         android:hint="Enter some text" />
 
+
 </LinearLayout>
