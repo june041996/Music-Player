@@ -7,12 +7,15 @@ import androidx.lifecycle.MutableLiveData
 import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
 
-class MusicPlayerViewModel(application: Application) : AndroidViewModel(application) {
+
+class MusicPlayerViewModel(application: Application) :
+    AndroidViewModel(application) {
+    val songDao = MusicDatabase.getInstance(getApplication()).songDao()
+
     companion object {
         private const val LOG: String = "TCR"
     }
 
-    private val songDao = MusicDatabase.getInstance(application.applicationContext).songDao()
 
     val songs = songDao.getAllSongs()
 

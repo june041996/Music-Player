@@ -15,16 +15,21 @@ import com.example.musicplayer.adapter.library.OnItemButtonClickListener
 import com.example.musicplayer.adapter.library.OnItemClickListener
 import com.example.musicplayer.adapter.library.PlaylistAdapter
 import com.example.musicplayer.databinding.FragmentPlaylistBinding
+import com.example.musicplayer.extension.onQueryTextChanged
 import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.CustomDialog
 import com.example.musicplayer.vm.PlaylistViewModel
+import com.example.musicplayer.vm.SearchViewModel
 
 
 class PlaylistFragment : Fragment() {
     private lateinit var binding: FragmentPlaylistBinding
     private val playlistViewModel: PlaylistViewModel by activityViewModels()
-    private val playlists = arrayListOf<Playlist>()
+    private val searchViewModel: SearchViewModel by activityViewModels()
+    companion object{
+        var playlists = arrayListOf<Playlist>()
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,13 +47,14 @@ class PlaylistFragment : Fragment() {
         val adapter = PlaylistAdapter()
         binding.rvPlaylist.adapter = adapter
         binding.rvPlaylist.layoutManager = LinearLayoutManager(context)
+
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d(Contanst.TAG, position.toString())
                 playlistViewModel.setSelectedPlaylist(playlists[position])
                 findNavController().navigate(
                     PlaylistFragmentDirections.actionPlaylistFragmentToPlaylistSongFragment(
-                        playlists[position].name
+                        "Playlist: ${playlists[position].name}"
                     )
                 )
             }
@@ -71,6 +77,17 @@ class PlaylistFragment : Fragment() {
                 // Add menu items here
                 menu.clear()
                 menuInflater.inflate(R.menu.search_add_menu, menu)
+                val searchItem = menu.findItem(R.id.search)
+                val searchView: androidx.appcompat.widget.SearchView? =
+                    searchItem.actionView as androidx.appcompat.widget.SearchView?
+                searchView?.onQueryTextChanged {
+                    searchViewModel.searchQuery.value = it
+                    searchViewModel.playlists.observe(parentFragment!!.viewLifecycleOwner) {
+                        val songs = arrayListOf<Playlist>()
+                        songs.addAll(it)
+                        adapter.submitData(songs)
+                    }
+                }
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -86,7 +103,8 @@ class PlaylistFragment : Fragment() {
                         })
                         true
                     }
-                    else -> false
+
+                    else -> true
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)

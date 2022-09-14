@@ -1,5 +1,6 @@
 package com.example.musicplayer.fragment
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,23 +11,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-
-
 import com.example.musicplayer.activity.MusicPlayerActivity
-import com.example.musicplayer.activity.SigninActivity
 import com.example.musicplayer.adapter.ItemOnclick
-import com.example.musicplayer.adapter.ListRankAdapter
-
 import com.example.musicplayer.adapter.ListSongFavoriteAdapter
 import com.example.musicplayer.adapter.ListSongPlaylistAdapter
-import com.example.musicplayer.adapter.rank.ItemViewOnClick
 import com.example.musicplayer.databinding.FragmentHomeBinding
 import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
-
-import com.example.musicplayer.vm.*
+import com.example.musicplayer.vm.FavouriteViewModel
+import com.example.musicplayer.vm.MusicPlayerViewModel
+import com.example.musicplayer.vm.PlaylistViewModel
+import com.example.musicplayer.vm.SongViewModel
 import com.google.firebase.auth.FirebaseAuth
-
 
 
 class HomeFragment : Fragment() {
@@ -60,8 +56,9 @@ class HomeFragment : Fragment() {
         //get all Song
         mSongViewModel.playlists.observe(viewLifecycleOwner) {
             Log.d(LOG, "call data song: ${it.size}")
+
             Log.d(LOG, "call data id: ${mSongViewModel.id}")
-           adapter.submitData(it)
+            adapter.submitData(it)
         }
         binding.recycleViewPlaylist.adapter = adapter
 
@@ -104,7 +101,7 @@ class HomeFragment : Fragment() {
             }
 
         })
-        
+
         return binding.root
     }
 

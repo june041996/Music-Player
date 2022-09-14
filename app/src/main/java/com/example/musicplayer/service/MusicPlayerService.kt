@@ -15,6 +15,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.musicplayer.R
 import com.example.musicplayer.fragment.MusicPlayerFragment
+import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.formatSongDuration
 
 class MusicPlayerService : Service() {
@@ -36,6 +37,41 @@ class MusicPlayerService : Service() {
 
     @SuppressLint("UnspecifiedImmutableFlag")
     fun showNotification(playPauseBtn: Int) {
+        when (MusicPlayerFragment.checkList) {
+            1 -> {
+                notification(
+                    playPauseBtn,
+                    MusicPlayerFragment.listRankSong,
+                    MusicPlayerFragment.postion
+                )
+            }
+            2 -> {
+                notification(
+                    playPauseBtn,
+                    MusicPlayerFragment.listFavouriteSong,
+                    MusicPlayerFragment.postion
+                )
+            }
+            3 -> {
+                notification(
+                    playPauseBtn,
+                    MusicPlayerFragment.listPlaylistSong,
+                    MusicPlayerFragment.postion
+                )
+            }
+            4 -> {
+                notification(
+                    playPauseBtn,
+                    MusicPlayerFragment.listDevice,
+                    MusicPlayerFragment.postion
+                )
+            }
+        }
+
+
+    }
+
+    private fun notification(playPauseBtn: Int, listSong: List<Song>, pos: Int) {
         //Previous
         val prevIntent = Intent(
             baseContext,
@@ -83,11 +119,9 @@ class MusicPlayerService : Service() {
             exitIntent,
             PendingIntent.FLAG_IMMUTABLE
         )
-
-
         val notification = NotificationCompat.Builder(baseContext, ApplicationClass.CHANNEL_ID)
-            .setContentTitle(MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].nameSong)
-            .setContentText(MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].singer)
+            .setContentTitle(listSong[pos].nameSong)
+            .setContentText(listSong[pos].singer)
             .setSmallIcon(R.drawable.ic_library_music)
             .setLargeIcon(
                 BitmapFactory.decodeResource(
@@ -109,7 +143,6 @@ class MusicPlayerService : Service() {
             .build()
 
         startForeground(13, notification)
-
     }
 
     fun createMediaPlayer() {

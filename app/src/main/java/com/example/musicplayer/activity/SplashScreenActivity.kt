@@ -9,17 +9,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.musicplayer.databinding.ActivitySplashScreenBinding
 import com.example.musicplayer.vm.SongViewModel
-import com.example.musicplayer.vm.SongViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
     companion object {
         private const val LOG = "TCR"
     }
 
     private lateinit var binding: ActivitySplashScreenBinding
-    private val viewModel: SongViewModel by viewModels {
-        SongViewModelFactory(application)
-    }
+    private val viewModel: SongViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

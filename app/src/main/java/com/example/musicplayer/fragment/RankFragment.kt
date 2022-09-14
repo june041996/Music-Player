@@ -46,8 +46,10 @@ class RankFragment : Fragment() {
                     when (it.status) {
                         Status.SUCCESS -> {
                             it.data?.observe(viewLifecycleOwner) { listSong ->
-                                adapter.submitData(listSong)
-                                listRankSong.addAll(listSong)
+                                val list: List<Song> = listSong.sortedByDescending { it.views }
+                                adapter.submitData(list)
+                                listRankSong.addAll(list)
+
                             }
                         }
                         Status.LOADING -> {
@@ -65,6 +67,8 @@ class RankFragment : Fragment() {
             DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         binding.rvRank.addItemDecoration(decoration)
 
+
+
         adapter.setItemViewOnClick(object : ItemViewOnClick {
             override fun onClick(song: Song, pos: Int) {
                 song.idSong?.let { viewModelMusicPlayer.setIdSong(it) }
@@ -81,8 +85,25 @@ class RankFragment : Fragment() {
 
                 }
             }
-
         })
+
+//        adapter.setOnItemClickListener(
+//            object : OnItemClickListener {
+//                override fun onItemClick(position: Int) {
+//                    Log.d(Contanst.TAG, position.toString())
+//                }
+//
+//            }, object : OnItemButtonClickListener {
+//                override fun onItemClick(position: Int, view: View) {
+//                    //
+//                }
+//
+//            }
+//        )
         return binding.root
+    }
+
+    fun favourite() {
+
     }
 }

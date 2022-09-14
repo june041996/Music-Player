@@ -8,7 +8,7 @@
             android:icon="@drawable/ic_person"
             android:title="Profile" />
         <item
-            android:id="@+id/nav_favoriteSong"
+            android:id="@+id/favouriteFragment"
             android:icon="@drawable/ic_favorite"
             android:title="Favorite Song" />
 

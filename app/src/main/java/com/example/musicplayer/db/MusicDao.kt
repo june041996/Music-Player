@@ -7,6 +7,7 @@ import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.model.User
 import com.example.musicplayer.model.relation.*
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -22,7 +23,7 @@ interface MusicDao {
 
     //SELECT Song rank
     @Query("SELECT * FROM tb_song WHERE isOffline=:isOffline")
-    fun getSongsOnline(isOffline: Int): LiveData<List<Song>>
+    fun getSongsOnline(isOffline: Int): LiveData<MutableList<Song>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlaylist(playlist: Playlist)
@@ -65,6 +66,11 @@ interface MusicDao {
     @Query("DELETE FROM tb_song WHERE idSong=:id")
     suspend fun deleteSong(id: Int)
 
+    @Query("SELECT * FROM tb_song WHERE isOffline =:status AND nameSong LIKE '%' || :searchQuery || '%' ORDER BY nameSong ASC")
+    fun getSongs(searchQuery: String, status: Boolean): Flow<List<Song>>
+
+    @Query("SELECT * FROM tb_playlist INNER JOIN tb_user ON tb_playlist.idUserCreator=tb_user.idUser WHERE tb_user.idUser =:idUser AND tb_playlist.name LIKE '%' || :searchQuery || '%' ORDER BY tb_playlist.name ASC")
+    fun getPlaylists(searchQuery: String, idUser: Int): Flow<List<Playlist>>
 
     @Query("DELETE FROM tb_playlist WHERE idPlaylist=:id")
     suspend fun deletePlaylist(id: Int)
@@ -118,6 +124,7 @@ interface MusicDao {
     @Transaction
     @Query("SELECT * FROM tb_user WHERE idUser=:id")
     suspend fun getSongsOfFavourite(id: Int): List<FavouriteWithSongs>
+
 
     //get user  favourite song
     /*@Transaction

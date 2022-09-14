@@ -26,12 +26,13 @@ class NotificationHelper(val context: Context) {
             context,
             0,
             notificationIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(message)
             .setSmallIcon(R.drawable.icon_music_player_app)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .build()
         NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, notification)
@@ -43,7 +44,7 @@ class NotificationHelper(val context: Context) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 "Reminder Notification Channel",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             val manager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

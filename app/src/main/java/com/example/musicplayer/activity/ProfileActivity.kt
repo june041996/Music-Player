@@ -4,19 +4,26 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.adapter.profile.ProfileAdapter
+
 import com.example.musicplayer.databinding.ActivityProfileBinding
 import com.example.musicplayer.vm.UserViewMode
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     private val mUserModel: UserViewMode by viewModels()
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private lateinit var sharedpreferences: SharedPreferences
+
+    @Inject
+    lateinit var sharedpreferences: SharedPreferences
     private val SHARED_PREFS = "shared_prefs"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

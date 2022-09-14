@@ -1,6 +1,5 @@
 package com.example.musicplayer.activity
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -12,25 +11,36 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.musicplayer.databinding.ActivitySigninBinding
 import com.example.musicplayer.vm.AuthViewModel
+
 import com.google.firebase.auth.FirebaseAuth
 
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class SigninActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninBinding
     private lateinit var viewModel: AuthViewModel
-    private lateinit var sharedpreferences: SharedPreferences
-    private val SHARED_PREFS = "shared_prefs"
-    private var check: String? = null
+
+
+    @Inject
+    lateinit var sharedpreferences: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val user = FirebaseAuth.getInstance().currentUser
 
-        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+
         val editor = sharedpreferences.edit()
-        check = sharedpreferences.getString("check", "")
+
+        val check = sharedpreferences.getString("check", "")
+
+
         if (check.equals("true")) {
             startActivity(Intent(this, MainActivity::class.java))
         }
@@ -95,6 +105,7 @@ class SigninActivity : AppCompatActivity() {
         }
         return true
     }
+
     //showdialog
     fun showDialog(message: String) {
         val builder = AlertDialog.Builder(this)
