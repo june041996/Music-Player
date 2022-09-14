@@ -67,10 +67,10 @@ class SignupActivity : AppCompatActivity() {
             binding.edtName.setError("Please enter Email")
             return false
         } else if (TextUtils.isEmpty(binding.edtAddress.text.toString())) {
-            binding.edtAddress.setError("Please enter Password")
+            binding.edtAddress.setError("Please enter Address")
             return false
         } else if (TextUtils.isEmpty(binding.edtEmail.text.toString())) {
-            binding.edtEmail.setError("Please enter Password")
+            binding.edtEmail.setError("Please enter Email")
             return false
         } else if (TextUtils.isEmpty(binding.edtPassword.text.toString())) {
             binding.edtPassword.setError("Please enter Password")
