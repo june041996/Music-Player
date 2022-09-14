@@ -27,6 +27,12 @@ interface MusicDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlaylist(playlist: Playlist)
 
+    @Query("SELECT * FROM tb_user WHERE idUser=:id")
+    fun getNameById(id: Int): LiveData<User>
+
+    @Query("SELECT * FROM tb_user")
+    suspend fun getName(): List<User>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
@@ -41,10 +47,12 @@ interface MusicDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavouriteSongCrossRef(favouriteSongCrossRef: FavouriteSongCrossRef)
 
-
     //UPDATE
     @Update
     suspend fun updateSong(song: Song)
+
+    @Update
+    suspend fun updateUser(user: User)
 
     @Query("UPDATE tb_song SET urlSong = :urlSong AND isOffline=:status WHERE idSong =:id")
     suspend fun updateUrlSong(urlSong: String, status: Boolean, id: Int)

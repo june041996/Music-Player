@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.musicplayer.databinding.ActivitySigninBinding
 import com.example.musicplayer.vm.AuthViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 
 class SigninActivity : AppCompatActivity() {
@@ -25,8 +26,7 @@ class SigninActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
+        val user = FirebaseAuth.getInstance().currentUser
 
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
         val editor = sharedpreferences.edit()
@@ -49,7 +49,6 @@ class SigninActivity : AppCompatActivity() {
                     binding.edtUser.text.toString(),
                     binding.edtPassword.text.toString()
                 )
-//                setValueRemember(binding.cbRemember.isChecked)
             }
 
         }
