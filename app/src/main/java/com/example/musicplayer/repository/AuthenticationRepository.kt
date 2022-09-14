@@ -21,6 +21,7 @@ class AuthenticationRepository(val application: Application) {
                 if (it.isSuccessful) {
                     // get current user
                     val firebaseUser = firebaseAuth.currentUser
+                    Log.d("check uid", "uid: ${firebaseUser}")
                     val email = firebaseUser!!.email
                     Log.d("login", "login success")
                     isSuccessful.value = it.isSuccessful
