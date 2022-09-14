@@ -48,10 +48,6 @@ class NowPlayingFragment : Fragment() {
                     binding.song =
                         MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
                 }
-                5 -> {
-                    binding.song =
-                        MusicPlayerFragment.listSearch[MusicPlayerFragment.postion]
-                }
             }
 
             binding.lifecycleOwner = this@NowPlayingFragment
@@ -76,13 +72,9 @@ class NowPlayingFragment : Fragment() {
                     binding.song =
                         MusicPlayerFragment.listPlaylistSong[MusicPlayerFragment.postion]
                 }
-                4 -> {
+                3 -> {
                     binding.song =
                         MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
-                }
-                5 -> {
-                    binding.song =
-                        MusicPlayerFragment.listSearch[MusicPlayerFragment.postion]
                 }
             }
 
@@ -110,10 +102,6 @@ class NowPlayingFragment : Fragment() {
                 }
                 4 -> {
                     val song = MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
-                    bundle.putSerializable("song", song)
-                }
-                5 -> {
-                    val song = MusicPlayerFragment.listSearch[MusicPlayerFragment.postion]
                     bundle.putSerializable("song", song)
                 }
             }
@@ -147,10 +135,6 @@ class NowPlayingFragment : Fragment() {
                 4 -> {
                     binding.song =
                         MusicPlayerFragment.listDevice[MusicPlayerFragment.postion]
-                }
-                5 -> {
-                    binding.song =
-                        MusicPlayerFragment.listSearch[MusicPlayerFragment.postion]
                 }
             }
             binding.lifecycleOwner = this@NowPlayingFragment

@@ -63,11 +63,11 @@ class PlaylistSongFragment : Fragment() {
         }
 
         binding.btnPlay.setOnClickListener {
-            val song = songs[0]
+            val idSong = songs[0].idSong.toString().toInt()
             val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
             val bundle = Bundle()
             bundle.putInt("pos", 0)
-            bundle.putSerializable("song", song)
+            bundle.putInt("idSong", idSong)
             bundle.putString("list", "listPlaylist")
             intentSong.putExtras(bundle)
             startActivity(intentSong)
@@ -76,11 +76,11 @@ class PlaylistSongFragment : Fragment() {
 
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val song = songs[position]
+                val idSong = songs[position].idSong.toString().toInt()
                 val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
                 val bundle = Bundle()
                 bundle.putInt("pos", position)
-                bundle.putSerializable("song", song)
+                bundle.putInt("idSong", idSong)
                 bundle.putString("list", "listPlaylist")
                 intentSong.putExtras(bundle)
                 startActivity(intentSong)

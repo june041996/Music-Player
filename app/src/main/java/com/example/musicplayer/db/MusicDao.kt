@@ -79,6 +79,7 @@ interface MusicDao {
     @Query("DELETE FROM tb_playlist WHERE idPlaylist=:id")
     suspend fun deletePlaylist(id: Int)
 
+
     @Query("DELETE FROM songplaylistcrossref WHERE idPlaylist=:id")
     suspend fun deletePlaylistSongs(id: Int)
 
@@ -92,6 +93,9 @@ interface MusicDao {
     //QUERY
     @Query("SELECT * FROM tb_user WHERE email=:email")
     suspend fun getUser(email: String): User
+
+    @Query("SELECT * FROM tb_user WHERE idUser=:id")
+    fun getUsetById(id: Int): LiveData<User>
 
     @Query("SELECT * FROM tb_song")
     fun getAllSongs(): LiveData<List<Song>>

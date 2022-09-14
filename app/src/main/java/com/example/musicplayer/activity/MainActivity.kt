@@ -78,19 +78,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         //reminder play song
-//        songViewModel.songs.observe(this) {
-//            workViewModel.enqueuePeriodicReminder(it)
-//        }
+        /*songViewModel.songs.observe(this) {
+            workViewModel.enqueuePeriodicReminder(it)
+        }*/
         val reminder = intent.getStringExtra("reminder")
         Log.d(Contanst.TAG, "reminder: $reminder")
-        if (reminder != null) {
-            songViewModel.getSongByName(reminder)
-            songViewModel.songByName.observe(this) {
-                Log.d(Contanst.TAG, "play s: ${it.toString()}")
-                //play music
-                /*val intent = Intent(this, MusicPlayerActivity::class.java)
+        /* if (reminder != null) {
+             songViewModel.getSongByName(reminder)
+             songViewModel.songByName.observe(this) {
+                 Log.d(Contanst.TAG, "play s: ${it.toString()}")
+                 //play music
+                 *//*val intent = Intent(this, MusicPlayerActivity::class.java)
                 intent.putExtra("song", it)
-                startActivity(intent)*/
+                startActivity(intent)*//*
                 val intentSong = Intent(this, MusicPlayerActivity::class.java)
 
                 val bundle = Bundle()
@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 intentSong.putExtras(bundle)
                 startActivity(intentSong)
             }
-        }
+        }*/
 
 
         ///Không xoá

@@ -61,11 +61,11 @@ class FavouriteFragment : Fragment() {
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Log.d(Contanst.TAG, "item: ${songs[position].nameSong}")
-                val song = songs[position]
+                val idSong = songs[position].idSong.toString().toInt()
                 val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
                 val bundle = Bundle()
                 bundle.putInt("pos", position)
-                bundle.putSerializable("song", song)
+                bundle.putInt("idSong", idSong)
                 bundle.putString("list", "listFavourite")
                 intentSong.putExtras(bundle)
                 startActivity(intentSong)

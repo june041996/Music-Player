@@ -25,6 +25,25 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val reminder = intent.getStringExtra("reminder")
+        Log.d(Contanst.TAG, "reminder: $reminder")
+        if (reminder != null) {
+            songViewModel.getSongByName(reminder)
+            songViewModel.songByName.observe(this) {
+                Log.d(Contanst.TAG, "play s: ${it.toString()}")
+                //play music
+                val intent = Intent(this, MusicPlayerActivity::class.java)
+                intent.putExtra("song", it)
+                startActivity(intent)
+                val intentSong = Intent(this, MusicPlayerActivity::class.java)
+
+                val bundle = Bundle()
+                bundle.putInt("idSongRemind", it.idSong!!)
+                bundle.putString("list", "remindSong")
+                intentSong.putExtras(bundle)
+                startActivity(intentSong)
+            }
+        }
         val check = prefs.getBoolean("noti", false)
         if (check) binding.switchBtn.isChecked = true
         binding.switchBtn.setOnClickListener() {

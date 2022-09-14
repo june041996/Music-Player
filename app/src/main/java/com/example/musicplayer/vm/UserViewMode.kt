@@ -2,17 +2,14 @@ package com.example.musicplayer.vm
 
 import android.app.Application
 import android.content.SharedPreferences
-
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-
 import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.User
 import com.example.musicplayer.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,5 +37,7 @@ class UserViewMode @Inject constructor(
         }
         return _user
     }
+
+    fun getUserById(id: Int) = dao.getUsetById(id)
 
 }

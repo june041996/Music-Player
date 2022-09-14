@@ -33,12 +33,6 @@ fun setSongPosition(increment: Boolean) {
                     else
                         ++MusicPlayerFragment.postion
                 }
-                5 -> {
-                    if (MusicPlayerFragment.listSearch.size - 1 == MusicPlayerFragment.postion)
-                        MusicPlayerFragment.postion = 0
-                    else
-                        ++MusicPlayerFragment.postion
-                }
             }
 
 
@@ -66,12 +60,6 @@ fun setSongPosition(increment: Boolean) {
                 4 -> {
                     if (0 == MusicPlayerFragment.postion)
                         MusicPlayerFragment.postion = MusicPlayerFragment.listDevice.size - 1
-                    else
-                        --MusicPlayerFragment.postion
-                }
-                5 -> {
-                    if (0 == MusicPlayerFragment.postion)
-                        MusicPlayerFragment.postion = MusicPlayerFragment.listSearch.size - 1
                     else
                         --MusicPlayerFragment.postion
                 }

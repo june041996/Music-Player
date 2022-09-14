@@ -67,17 +67,10 @@ class NotificationReceiver : BroadcastReceiver() {
                     MusicPlayerFragment.postion
                 )
             }
-            4 -> {
+            3 -> {
                 setUpSong(
                     context,
                     MusicPlayerFragment.listDevice,
-                    MusicPlayerFragment.postion
-                )
-            }
-            5->{
-                setUpSong(
-                    context,
-                    MusicPlayerFragment.listSearch,
                     MusicPlayerFragment.postion
                 )
             }

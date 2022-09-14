@@ -8,9 +8,8 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-
 import com.example.musicplayer.R
-import com.example.musicplayer.activity.MainActivity
+import com.example.musicplayer.activity.SettingActivity
 
 class NotificationHelper(val context: Context) {
     private val CHANNEL_ID = "reminder_channel_id"
@@ -19,7 +18,7 @@ class NotificationHelper(val context: Context) {
     //create notification with pending intent
     fun createNotification(title: String, message: String) {
         createNotificationChannel()
-        val notificationIntent = Intent(context, MainActivity::class.java).apply {
+        val notificationIntent = Intent(context, SettingActivity::class.java).apply {
             putExtra("reminder", message)
         }
         val pendingIntent = PendingIntent.getActivity(

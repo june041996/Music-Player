@@ -73,7 +73,9 @@ class RankFragment : Fragment() {
             override fun onClick(song: Song, pos: Int) {
                 song.idSong?.let { viewModelMusicPlayer.setIdSong(it) }
                 viewModelMusicPlayer.idSong.observe(viewLifecycleOwner) { idSong ->
+
                     val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
+
                     val bundle = Bundle()
                     bundle.putInt("pos", pos)
                     bundle.putInt("idSong", idSong)
