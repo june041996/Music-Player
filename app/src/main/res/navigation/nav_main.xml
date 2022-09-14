@@ -16,7 +16,11 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.musicplayer.fragment.SearchFragment"
-        android:label="Search" />
+        android:label="Search">
+        <action
+            android:id="@+id/action_searchFragment_to_addToPlaylistFragment"
+            app:destination="@id/addToPlaylistFragment" />
+    </fragment>
     <fragment
         android:id="@+id/rankFragment"
         android:name="com.example.musicplayer.fragment.RankFragment"

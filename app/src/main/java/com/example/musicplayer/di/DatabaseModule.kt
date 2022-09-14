@@ -17,6 +17,7 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Singleton
     @Provides
+
     fun provideTeaDatabase(app: Application): MusicDatabase {
         return Room.databaseBuilder(
             app.applicationContext,

@@ -36,10 +36,10 @@ class DownloadViewModel(app: Application) :
         //Log.d(Contanst.TAG,"update ${songDownload!!.idSong.toString()} ")
     }
 
-    fun updateUrlSong(urlSong: String) {
+    fun updateUrlSong(urlSong: String, song: Song) {
         //Log.d(Contanst.TAG,"update ${songDownload!!.idSong.toString()} - $urlSong")
         viewModelScope.launch {
-            //songRepository.updateUrlSong(urlSong )
+            songRepository.updateUrlSong(urlSong, song.idSong!!)
             delay(500L)
             val file = File(urlSong)
             MediaScannerConnection.scanFile(

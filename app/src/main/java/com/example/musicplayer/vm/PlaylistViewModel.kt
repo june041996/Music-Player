@@ -41,6 +41,7 @@ class PlaylistViewModel @Inject constructor(
         viewModelScope.launch {
             //delay(500L)
             val l = playlistRepository.getPlaylistOfSong(id, idSong)
+            Log.d(Contanst.TAG, "check in: ${l.toString()}")
             _playlistOfSong.value = l
         }
     }

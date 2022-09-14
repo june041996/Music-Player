@@ -18,7 +18,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/txt_imgFavorite"
-            set_url="@{String.valueOf(favorite.urlImage)}"
+            set_img_url="@{favorite}"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:gravity="center"
