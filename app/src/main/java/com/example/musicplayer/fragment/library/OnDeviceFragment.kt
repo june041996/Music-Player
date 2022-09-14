@@ -1,5 +1,6 @@
 package com.example.musicplayer.fragment.library
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
+import com.example.musicplayer.activity.MusicPlayerActivity
 import com.example.musicplayer.adapter.library.OnDeviceAdapter
 import com.example.musicplayer.adapter.library.OnItemButtonClickListener
 import com.example.musicplayer.adapter.library.OnItemClickListener
@@ -35,11 +37,14 @@ class OnDeviceFragment : Fragment() {
     private val favouriteViewModel: FavouriteViewModel by activityViewModels()
     private val searchViewModel: SearchViewModel by activityViewModels()
 
-    private var localSongs = arrayListOf<Song>()
+    companion object {
+        var localSongs = arrayListOf<Song>()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentOnDeviceBinding.inflate(inflater, container, false)
         return binding.root
@@ -53,16 +58,27 @@ class OnDeviceFragment : Fragment() {
         songViewModel.sizeLocalSongs.observe(viewLifecycleOwner) {
             Log.d(Contanst.TAG, "size: ${it.toString()}")
         }
+
         val adapter = OnDeviceAdapter()
         binding.rvSongs.adapter = adapter
         binding.rvSongs.layoutManager = LinearLayoutManager(context)
+        songViewModel.localSongs.observe(viewLifecycleOwner) {
+            localSongs.clear()
+            localSongs.addAll(it)
+            adapter.submitData(localSongs)
+        }
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 //play music
                 Log.d(Contanst.TAG, "item: ${localSongs[position].nameSong}")
-                /*val intent = Intent(context, MusicPlayerActivity::class.java)
-                intent.putExtra("song", localSongs[position])
-                startActivity(intent)*/
+                val idSong = localSongs[position].idSong.toString().toInt()
+                val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
+                val bundle = Bundle()
+                bundle.putInt("pos", position)
+                bundle.putInt("idSong", idSong)
+                bundle.putString("list", "listDevice")
+                intentSong.putExtras(bundle)
+                startActivity(intentSong)
             }
         }, object : OnItemButtonClickListener {
             override fun onItemClick(position: Int, view: View) {
@@ -72,23 +88,26 @@ class OnDeviceFragment : Fragment() {
             }
 
         })
-        songViewModel.localSongs.observe(viewLifecycleOwner) {
-            localSongs.clear()
-            localSongs.addAll(it)
-            adapter.submitData(localSongs)
-        }
+
 
         binding.btnPlay.setOnClickListener() {
-            //play all songs
+            val idSong = localSongs[0].idSong.toString().toInt()
+            val intentSong = Intent(requireContext(), MusicPlayerActivity::class.java)
+            val bundle = Bundle()
+            bundle.putInt("pos", 0)
+            bundle.putInt("idSong", idSong)
+            bundle.putString("list", "listDevice")
+            intentSong.putExtras(bundle)
+            startActivity(intentSong)
         }
         binding.btnShuffle.setOnClickListener() {
             //songViewModel.updateLocalSongs()
         }
-        binding.swipeFreshLayout.setOnRefreshListener() {
-            songViewModel.updateLocalSongs()
-            binding.swipeFreshLayout.isRefreshing = false
-            adapter.submitData(localSongs)
-        }
+//        binding.swipeFreshLayout.setOnRefreshListener() {
+//            songViewModel.updateLocalSongs()
+//            binding.swipeFreshLayout.isRefreshing = false
+//            adapter.submitData(localSongs)
+//        }
 
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

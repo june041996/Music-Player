@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.musicplayer.R
 import com.example.musicplayer.fragment.MusicPlayerFragment
 import com.example.musicplayer.fragment.NowPlayingFragment
+import com.example.musicplayer.model.Song
 import com.example.musicplayer.utils.exitApp
 import com.example.musicplayer.utils.setSongPosition
 
@@ -48,25 +49,50 @@ class NotificationReceiver : BroadcastReceiver() {
         setSongPosition(increment)
 
         MusicPlayerFragment.musicPlayerService!!.createMediaPlayer()
+        when (MusicPlayerFragment.checkList) {
+            1 -> {
+                setUpSong(context, MusicPlayerFragment.listRankSong, MusicPlayerFragment.postion)
+            }
+            2 -> {
+                setUpSong(
+                    context,
+                    MusicPlayerFragment.listFavouriteSong,
+                    MusicPlayerFragment.postion
+                )
+            }
+            3 -> {
+                setUpSong(
+                    context,
+                    MusicPlayerFragment.listPlaylistSong,
+                    MusicPlayerFragment.postion
+                )
+            }
+            3 -> {
+                setUpSong(
+                    context,
+                    MusicPlayerFragment.listDevice,
+                    MusicPlayerFragment.postion
+                )
+            }
+        }
 
+        playMusic()
+    }
+
+    private fun setUpSong(context: Context, listSong: List<Song>, pos: Int) {
         Glide.with(context)
-            .load(MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].urlImage)
+            .load(listSong[pos].urlImage)
             .placeholder(R.drawable.music).into(MusicPlayerFragment.binding.musicDisc)
 
-        MusicPlayerFragment.binding.tvNameSong.text =
-            MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].nameSong
+        MusicPlayerFragment.binding.tvNameSong.text = listSong[pos].nameSong
 
-        MusicPlayerFragment.binding.tvSinger.text =
-            MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].singer
+        MusicPlayerFragment.binding.tvSinger.text = listSong[pos].singer
 
         Glide.with(context)
-            .load(MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].urlImage)
+            .load(listSong[pos].urlImage)
             .placeholder(R.drawable.music).into(NowPlayingFragment.binding.sivImgSong)
-        NowPlayingFragment.binding.tvNameSong.text =
-            MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].nameSong
+        NowPlayingFragment.binding.tvNameSong.text = listSong[pos].nameSong
 
-        NowPlayingFragment.binding.tvSinger.text =
-            MusicPlayerFragment.listRankSong[MusicPlayerFragment.postion].singer
-        playMusic()
+        NowPlayingFragment.binding.tvSinger.text = listSong[pos].singer
     }
 }

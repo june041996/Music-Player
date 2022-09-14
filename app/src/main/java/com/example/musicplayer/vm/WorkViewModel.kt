@@ -24,7 +24,6 @@ class WorkViewModel(app: Application) :
         songs.forEach {
             names.add(it.nameSong!!)
         }
-
         //create request with input data
         val request = PeriodicWorkRequestBuilder<SongReminderWorker>(15, TimeUnit.MINUTES)
             .setInputData(

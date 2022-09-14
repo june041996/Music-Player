@@ -56,6 +56,7 @@ class HomeFragment : Fragment() {
         //get all Song
         mSongViewModel.playlists.observe(viewLifecycleOwner) {
             Log.d(LOG, "call data song: ${it.size}")
+
             Log.d(LOG, "call data id: ${mSongViewModel.id}")
             adapter.submitData(it)
         }
