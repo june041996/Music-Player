@@ -27,10 +27,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.example.musicplayer.R
 import com.example.musicplayer.databinding.ActivityMainBinding
 import com.example.musicplayer.model.Song
@@ -79,6 +76,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val view = binding.root
         setContentView(view)
 
+
         //reminder play song
         songViewModel.songs.observe(this) {
             workViewModel.enqueuePeriodicReminder(it)
@@ -102,6 +100,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intentSong)
             }
         }
+
 
 
         ///Không xoá
@@ -136,7 +135,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.searchFragment,
                 R.id.rankFragment,
                 R.id.libraryFragment,
-            )
+            ), binding.drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfig)
 
@@ -153,26 +152,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         // check permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (!Environment.isExternalStorageManager()) {
-                try {
-                    val i = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                    i.addCategory("android.intent.category.DEFAULT")
-                    i.data = Uri.parse(String.format("package:%s", applicationContext.packageName))
-                    storageActivityResultLauncher.launch(i)
-                } catch (e: Exception) {
-                    val i = Intent()
-                    i.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                    storageActivityResultLauncher.launch(i)
-                }
-                updateLocalSongs()
-                updateApiSongs()
-            } else {
-                //Permission already granted
-                updateLocalSongs()
-                updateApiSongs()
-            }
-        } else {
+        try {
             checkPermission(
                 arrayOf(
                     Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -180,7 +160,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 ),
                 READ_STORAGE_PERMISSION_CODE
             )
+        } catch (e: Exception) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (!Environment.isExternalStorageManager()) {
+                    try {
+                        val i = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                        i.addCategory("android.intent.category.DEFAULT")
+                        i.data =
+                            Uri.parse(String.format("package:%s", applicationContext.packageName))
+                        storageActivityResultLauncher.launch(i)
+                    } catch (e: Exception) {
+                        val i = Intent()
+                        i.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                        storageActivityResultLauncher.launch(i)
+                    }
+                    updateLocalSongs()
+                    updateApiSongs()
+                } else {
+                    //Permission already granted
+                    updateLocalSongs()
+                    updateApiSongs()
+                }
+            }
         }
+
     }
 
 
@@ -301,6 +304,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.dark_light_mode -> {
@@ -313,13 +320,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.settingFragment -> {
-
+                startActivity(Intent(this, SettingActivity::class.java))
             }
             else -> {
 
             }
         }
-        return false
+        return true
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.musicplayer.vm
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import android.database.Cursor
 import android.net.Uri
@@ -8,22 +9,22 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.musicplayer.db.MusicDao
+import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.network.SongClient
 import com.example.musicplayer.repository.SongRepository
-import com.example.musicplayer.utils.Contanst
 import com.example.musicplayer.utils.Resource
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SongViewModel @Inject constructor(
-    val dao: MusicDao,
-    val prefs: SharedPreferences,
+
+class SongViewModel(
+
     application: Application
 ) : AndroidViewModel(application) {
+    val dao: MusicDao = MusicDatabase.getInstance(getApplication()).songDao()
+    val prefs: SharedPreferences =
+        getApplication<Application>().getSharedPreferences("music", Context.MODE_PRIVATE)
 
     val songRepository = SongRepository(dao)
     private val id = prefs.getInt("id", 0)
@@ -74,20 +75,17 @@ class SongViewModel @Inject constructor(
     }
 
     //get all songs
-    //get all songs
     val _songs = MutableLiveData<ArrayList<Song>>()
     val songs: LiveData<ArrayList<Song>>
         get() = getAllSongs()
 
     fun getAllSongs(): MutableLiveData<ArrayList<Song>> {
-        Log.d(Contanst.TAG, "id: ${id.toString()} - name: $name")
         var list = arrayListOf<Song>()
         viewModelScope.launch {
             songRepository.getAllSongs().forEach {
                 list.add(it)
             }
             _songs.value = list
-            Log.d(Contanst.TAG, "it: ${_songs.value.toString()}")
         }
         return _songs
     }

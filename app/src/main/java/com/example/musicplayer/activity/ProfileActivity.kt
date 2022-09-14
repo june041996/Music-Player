@@ -45,7 +45,7 @@ class ProfileActivity : AppCompatActivity() {
         val toolBar = binding.toolbar
         setSupportActionBar(toolBar)
         binding.logout.setOnClickListener {
-            mAuth.signOut()
+            // mAuth.signOut()
             sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
             val editor = sharedpreferences.edit()
             editor.clear()

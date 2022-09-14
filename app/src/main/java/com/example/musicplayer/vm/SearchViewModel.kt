@@ -34,4 +34,10 @@ class SearchViewModel @Inject constructor(
 
     val playlists = playlistFlow.asLiveData()
 
+    private val allSongsFlow = searchQuery.flatMapLatest {
+        dao.getFlowAllSongs(it)
+    }
+
+    val allSongs = allSongsFlow.asLiveData()
+
 }

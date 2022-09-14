@@ -101,6 +101,7 @@ class AddToPlaylistFragment : Fragment() {
             }, object : OnItemButtonClickListener {
                 override fun onItemClick(position: Int, view: View) {
                     //add
+                    Log.d(Contanst.TAG, "song: ${song!!.idSong!!}-p:${out[position].idPlaylist!!}")
                     playlistViewModel.insertSongInPlaylist(
                         song!!.idSong!!,
                         out[position].idPlaylist!!

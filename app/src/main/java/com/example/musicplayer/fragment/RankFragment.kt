@@ -79,6 +79,7 @@ class RankFragment : Fragment() {
                     val bundle = Bundle()
                     bundle.putInt("pos", pos)
                     bundle.putInt("idSong", idSong)
+                    bundle.putSerializable("song", song)
                     bundle.putString("list", "listRankSong")
                     intentSong.putExtras(bundle)
                     startActivity(intentSong)
