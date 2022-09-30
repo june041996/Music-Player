@@ -11,7 +11,9 @@ import com.example.musicplayer.R
 import com.example.musicplayer.activity.MusicPlayerActivity
 import com.example.musicplayer.databinding.FragmentNowPlayingBinding
 import com.example.musicplayer.utils.setSongPosition
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NowPlayingFragment : Fragment() {
     companion object {
         @SuppressLint("StaticFieldLeak")

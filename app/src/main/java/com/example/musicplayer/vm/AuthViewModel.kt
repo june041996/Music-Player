@@ -10,6 +10,7 @@ import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.LoginModel
 import com.example.musicplayer.model.User
 import com.example.musicplayer.repository.AuthenticationRepository
+import com.example.musicplayer.repository.UserRepository
 import kotlinx.coroutines.launch
 
 
@@ -17,6 +18,9 @@ class AuthViewModel(application: Application) :
     AndroidViewModel(application) {
     val dao: MusicDao = MusicDatabase.getInstance(getApplication()).songDao()
     private val repository = AuthenticationRepository(application)
+    private val userRepository: UserRepository =
+        UserRepository(MusicDatabase.getInstance(application).songDao())
+
     val isSuccessful: LiveData<Boolean>
 
 
@@ -24,10 +28,10 @@ class AuthViewModel(application: Application) :
     val user: LiveData<User>
         get() = _user
 
-    fun getUser(email: String) {
-        viewModelScope.launch {
-            _user.value = dao.getUser(email)
-        }
+    suspend fun getUser(email: String, password: String): User? {
+
+        return dao.getUser(email, password)
+
     }
 
     fun insertUser(user: User) {
@@ -41,8 +45,9 @@ class AuthViewModel(application: Application) :
     }
 
     //request login to filebase
-    fun requestLogin(mail: String, password: String) {
-        repository.requestLogin(mail, password)
+    fun requestLogin(mail: String, password: String): User {
+        //repository.requestLogin(mail, password)
+        return userRepository.checkLogin(mail, password)
     }
 
     //lay thong tin dang nhap

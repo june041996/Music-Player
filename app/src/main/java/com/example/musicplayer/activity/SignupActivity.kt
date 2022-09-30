@@ -4,10 +4,8 @@ package com.example.musicplayer.activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.musicplayer.databinding.ActivitySignupBinding
 import com.example.musicplayer.model.User
@@ -31,16 +29,10 @@ class SignupActivity : AppCompatActivity() {
         // Initialising auth object
         binding.btnSignup.setOnClickListener {
             if (isValidData()) {
-                viewModel.register(
-                    binding.edtEmail.text.toString(),
-                    binding.edtAddress.text.toString(),
-                )
-            }
-        }
-        viewModel.isSuccessful.observe(this, Observer {
-            //handle
-            var message = ""
-            if (it == true) {
+                /* viewModel.register(
+                     binding.edtEmail.text.toString(),
+                     binding.edtAddress.text.toString(),
+                 )*/
                 viewModel.insertUser(
                     User(
                         null,
@@ -50,14 +42,31 @@ class SignupActivity : AppCompatActivity() {
                         binding.edtAddress.text.toString()
                     )
                 )
-                message = "Sign Up Success!"
                 startActivity(Intent(this, SigninActivity::class.java))
                 finish()
-            } else {
-                message = "Sign Up Failed!"
             }
-            Toast.makeText(application, message, Toast.LENGTH_LONG).show()
-        })
+        }
+        /* viewModel.isSuccessful.observe(this, Observer {
+             //handle
+             var message = ""
+             if (it == true) {
+                 viewModel.insertUser(
+                     User(
+                         null,
+                         binding.edtEmail.text.toString(),
+                         binding.edtPassword.text.toString(),
+                         binding.edtName.text.toString(),
+                         binding.edtAddress.text.toString()
+                     )
+                 )
+                 message = "Sign Up Success!"
+                 startActivity(Intent(this, SigninActivity::class.java))
+                 finish()
+             } else {
+                 message = "Sign Up Failed!"
+             }
+             Toast.makeText(application, message, Toast.LENGTH_LONG).show()
+         })*/
     }
 
 

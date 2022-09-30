@@ -1,12 +1,10 @@
 package com.example.musicplayer.vm
 
-import android.app.Application
 import android.content.SharedPreferences
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.User
 import com.example.musicplayer.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,11 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserViewMode @Inject constructor(
-    val dao: MusicDao,
+    val userRepository: UserRepository,
     val prefs: SharedPreferences,
-    app: Application
-) : AndroidViewModel(app) {
-    var userRepository = UserRepository(dao)
+) : ViewModel() {
     private val id = prefs.getInt("id", 0)
     private val name = prefs.getString("username", null)
 
@@ -38,6 +34,6 @@ class UserViewMode @Inject constructor(
         return _user
     }
 
-    fun getUserById(id: Int) = dao.getUsetById(id)
+    fun getUserById(id: Int) = userRepository.getUserById(id)
 
 }

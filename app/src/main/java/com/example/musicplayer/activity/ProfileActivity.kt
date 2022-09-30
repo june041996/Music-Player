@@ -23,10 +23,10 @@ class ProfileActivity : AppCompatActivity() {
 
     @Inject
     lateinit var sharedpreferences: SharedPreferences
-    private val id = sharedpreferences.getInt("id", 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val id = sharedpreferences.getInt("id", 0)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mAuth = FirebaseAuth.getInstance()

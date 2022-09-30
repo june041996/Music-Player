@@ -2,9 +2,7 @@ package com.example.musicplayer.repository
 
 import android.app.Application
 import android.util.Log
-
 import androidx.lifecycle.MutableLiveData
-
 import com.example.musicplayer.db.DBManager
 import com.example.musicplayer.model.LoginModel
 import com.google.firebase.auth.FirebaseAuth

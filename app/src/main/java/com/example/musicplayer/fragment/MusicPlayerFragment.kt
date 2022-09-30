@@ -38,10 +38,11 @@ import com.example.musicplayer.utils.*
 import com.example.musicplayer.vm.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.system.exitProcess
 
-
+@AndroidEntryPoint
 class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnCompletionListener {
     companion object {
         const val LOG: String = "TCR"

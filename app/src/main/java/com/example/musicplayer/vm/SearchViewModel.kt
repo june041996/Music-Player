@@ -1,11 +1,9 @@
 package com.example.musicplayer.vm
 
-import android.app.Application
 import android.content.SharedPreferences
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.musicplayer.db.MusicDao
-import com.example.musicplayer.repository.FavouriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -15,9 +13,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     val dao: MusicDao,
     val prefs: SharedPreferences,
-    app: Application
-) : AndroidViewModel(app) {
-    val favouriteRepository = FavouriteRepository(dao)
+) : ViewModel() {
     private val id = prefs.getInt("id", 0)
     private val name = prefs.getString("username", null)
     val searchQuery = MutableStateFlow("")

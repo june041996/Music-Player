@@ -7,14 +7,15 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.musicplayer.databinding.ActivitySigninBinding
 import com.example.musicplayer.vm.AuthViewModel
-
 import com.google.firebase.auth.FirebaseAuth
-
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -54,11 +55,31 @@ class SigninActivity : AppCompatActivity() {
         binding.btnSignin.setOnClickListener {
             Log.d("login", "Login here")
             if (isValidData()) {
-                //REQUEST login firebase here
-                viewModel.requestLogin(
-                    binding.edtUser.text.toString(),
-                    binding.edtPassword.text.toString()
-                )
+                lifecycleScope.launch {
+                    val userLogin = viewModel.getUser(
+                        binding.edtUser.text.toString(),
+                        binding.edtPassword.text.toString()
+                    )
+                    if (userLogin != null) {
+                        editor.putInt("id", userLogin.idUser!!)
+                        editor.putString("username", userLogin.email)
+                        if (binding.cbRemember.isChecked) {
+                            editor.putString("check", "true")
+                        }
+                        editor.apply()
+                        withContext(Dispatchers.Main) {
+                            startActivity(Intent(this@SigninActivity, MainActivity::class.java))
+                            finish()
+                        }
+
+
+//                message = "Logged in successfully!"
+                    } else {
+                        showDialog("your account or password is wrong")
+                    }
+                }
+
+
             }
 
         }
@@ -67,7 +88,7 @@ class SigninActivity : AppCompatActivity() {
         }
 
         //khi dang nhap thanh cong hoac that bai
-        viewModel.isSuccessful.observe(this, Observer {
+        /*viewModel.isSuccessful.observe(this, Observer {
             //handle
             var message = ""
             Log.d("edtUser", binding.edtUser.text.toString())
@@ -88,7 +109,7 @@ class SigninActivity : AppCompatActivity() {
                 showDialog("your account or password is wrong")
             }
 
-        })
+        })*/
 
     }
 

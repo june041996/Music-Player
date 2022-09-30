@@ -4,11 +4,13 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import androidx.work.WorkManager
 import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.db.MusicDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -39,4 +41,9 @@ class DatabaseModule {
     fun provideSharePreferences(app: Application): SharedPreferences {
         return app.getSharedPreferences("music", Context.MODE_PRIVATE)
     }
+
+    @Provides
+    fun provideWorkManager(
+        @ApplicationContext context: Context
+    ) = WorkManager.getInstance(context)
 }

@@ -1,13 +1,11 @@
 package com.example.musicplayer.vm
 
-import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.musicplayer.db.MusicDao
 import com.example.musicplayer.model.Playlist
 import com.example.musicplayer.model.Song
 import com.example.musicplayer.repository.PlaylistRepository
@@ -21,13 +19,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlaylistViewModel @Inject constructor(
-    val dao: MusicDao,
+    val playlistRepository: PlaylistRepository,
+    val songRepository: SongRepository,
     val prefs: SharedPreferences,
-    app: Application
-) : AndroidViewModel(app) {
+) : ViewModel() {
 
-    val playlistRepository = PlaylistRepository(dao)
-    val songRepository = SongRepository(dao)
     val id = prefs.getInt("id", 0)
     private val name = prefs.getString("username", null)
 

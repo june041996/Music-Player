@@ -1,24 +1,20 @@
 package com.example.musicplayer.vm
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.example.musicplayer.db.MusicDao
-import com.example.musicplayer.db.MusicDatabase
 import com.example.musicplayer.model.Song
-import com.example.musicplayer.repository.SongRepository
 import com.example.musicplayer.worker.SongReminderWorker
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-
-class WorkViewModel(app: Application) :
-    AndroidViewModel(app) {
-    val dao: MusicDao = MusicDatabase.getInstance(getApplication()).songDao()
-    private val workManager = WorkManager.getInstance(app.applicationContext)
-    private val songRepository = SongRepository(dao)
+@HiltViewModel
+class WorkViewModel @Inject constructor(
+    val workManager: WorkManager
+) : ViewModel() {
     val names: ArrayList<String> = arrayListOf()
     fun enqueuePeriodicReminder(songs: List<Song>) {
         songs.forEach {

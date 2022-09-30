@@ -31,6 +31,9 @@ interface MusicDao {
     @Query("SELECT * FROM tb_user WHERE idUser=:id")
     fun getNameById(id: Int): LiveData<User>
 
+    @Query("SELECT * FROM tb_user WHERE email=:email AND password=:password")
+    fun checkLogin(email: String, password: String): User
+
     @Query("SELECT * FROM tb_user")
     suspend fun getName(): List<User>
 
@@ -91,8 +94,8 @@ interface MusicDao {
 
 
     //QUERY
-    @Query("SELECT * FROM tb_user WHERE email=:email")
-    suspend fun getUser(email: String): User
+    @Query("SELECT * FROM tb_user WHERE email=:email AND password=:password")
+    suspend fun getUser(email: String, password: String): User?
 
     @Query("SELECT * FROM tb_user WHERE idUser=:id")
     fun getUsetById(id: Int): LiveData<User>
