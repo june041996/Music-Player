@@ -74,6 +74,15 @@ class NotificationReceiver : BroadcastReceiver() {
                     MusicPlayerFragment.postion
                 )
             }
+
+            5 -> {
+                setUpSong(
+                    context,
+                    MusicPlayerFragment.listSearch,
+                    MusicPlayerFragment.postion
+                )
+            }
+
         }
 
         playMusic()

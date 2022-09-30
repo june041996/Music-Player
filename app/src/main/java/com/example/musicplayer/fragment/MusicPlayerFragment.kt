@@ -64,6 +64,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
 
         //List device
         var listDevice: ArrayList<Song> = arrayListOf()
+        var listSearch: ArrayList<Song> = arrayListOf()
 
         var postion: Int = 0
 
@@ -120,7 +121,7 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
         binding = FragmentMusicPlayerBinding.inflate(inflater, container, false)
 
         val extras = activity?.intent?.extras
-        //binding.song = extras?.getSerializable("song") as Song
+        // binding.song = extras!!.getSerializable("song") as Song
         //initial check internet
         connectivityObserver = NetworkConnectivityObserver(requireContext())
 
@@ -195,6 +196,25 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 //Play music
                 controlMusic(getID)
             }
+
+            "listSearch" -> {
+                //Start service
+                checkList = 5
+                val intent = Intent(requireContext(), MusicPlayerService::class.java)
+                activity?.bindService(intent, this, BIND_AUTO_CREATE)
+                activity?.startService(intent)
+
+                val song = extras.getSerializable("song") as Song
+                getID = song.idSong!!
+                Log.d(LOG, getID.toString())
+
+                listSearch.addAll(SearchFragment.songs)
+
+                postion = extras.getInt("pos", 0)
+                //Play music
+                controlMusic(getID)
+            }
+
             "NowPlaying" -> {
                 val getSong = extras.getSerializable("song") as Song
                 setLayout(getSong)
@@ -576,6 +596,13 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 controlMusic(idSong)
                 musicPlayerService?.seekBarSetup()
             }
+
+            5 -> {
+                val idSong = listSearch[postion].idSong.toString().toInt()
+                controlMusic(idSong)
+                musicPlayerService?.seekBarSetup()
+            }
+
         }
 
     }
@@ -604,6 +631,12 @@ class MusicPlayerFragment : Fragment(), ServiceConnection, MediaPlayer.OnComplet
                 createMediaPlayer(listDevice[postion].urlSong)
                 setLayout(listDevice[postion])
             }
+
+            5 -> {
+                createMediaPlayer(listSearch[postion].urlSong)
+                setLayout(listSearch[postion])
+            }
+
         }
     }
 }

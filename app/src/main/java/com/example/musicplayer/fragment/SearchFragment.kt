@@ -32,7 +32,11 @@ class SearchFragment : Fragment() {
     private val favouriteViewModel: FavouriteViewModel by activityViewModels()
     private val searchViewModel: SearchViewModel by activityViewModels()
 
-    private var songs = arrayListOf<Song>()
+    companion object {
+        var songs = arrayListOf<Song>()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

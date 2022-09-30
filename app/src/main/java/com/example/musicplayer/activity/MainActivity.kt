@@ -317,9 +317,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_profile -> {
                 startActivity(Intent(this, ProfileActivity::class.java))
             }
-            R.id.favouriteFragment -> {
-
-            }
             R.id.settingFragment -> {
                 startActivity(Intent(this, SettingActivity::class.java))
             }
@@ -329,6 +326,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         return true
     }
-
-
 }

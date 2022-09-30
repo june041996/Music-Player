@@ -39,8 +39,6 @@ class DownloadService : Service() {
         createNotification(song!!.nameSong!!)
         Thread(object : Runnable {
             override fun run() {
-                // download("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
-                //download("https://firebasestorage.googleapis.com/v0/b/music-player-97edf.appspot.com/o/BienNho-LeQuyen-5410854.mp3?alt=media&token=f4fc74a5-d247-4a32-a54d-6df2c97014b4")
                 download(song!!)
             }
         }).start()
@@ -83,37 +81,10 @@ class DownloadService : Service() {
             var extension = ""
             connection.apply {
                 connect()
-                /*if (responseCode != HttpURLConnection.HTTP_OK) {
-                    Log.e(TAG, "mess: ${responseMessage.toString()}")
-                    return
-                } else {
-                    Log.e(TAG, "ok: ${responseMessage.toString()}")
-                }*/
+
                 fileLength = contentLength
                 input = inputStream
                 Log.d(TAG, "de:${fileLength.toString()} - ${input.toString()}")
-                /*al disposition = getHeaderField("Content-Disposition")
-
-
-                if (disposition != null) {
-                    // extracts file name from header field
-                    val index = disposition.indexOf("filename=")
-                    if (index > 0) {
-                        fileName = disposition.substring(
-                            index + 10,
-                            disposition.length - 1
-                        )
-                    }
-                } else {
-                    // extracts file name from URL
-
-                }*/
-                /*val contentType = getContentType()
-
-                Log.e(TAG, "FILENAME : $fileName")
-                Log.e(TAG, "CONTENT TYPE : $contentType")
-                extension = contentType.split("/")[1]
-                Log.e(TAG, "extension : ${extension.toString()}")*/
                 fileName = Date().time.toString()
 
             }
