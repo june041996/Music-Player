@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "563588476842",
-    "project_id": "musicplayer-c8128",
-    "storage_bucket": "musicplayer-c8128.appspot.com"
+    "project_number": "47625521234",
+    "project_id": "musicplayer-new-124a8",
+    "storage_bucket": "musicplayer-new-124a8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:563588476842:android:831c692620fbdfb294c5d3",
+        "mobilesdk_app_id": "1:47625521234:android:f89de84ed5ba12de3ef78b",
         "android_client_info": {
           "package_name": "com.example.musicplayer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "563588476842-bipbh4iicejjmk7fkvk6njpalocnscnn.apps.googleusercontent.com",
+          "client_id": "47625521234-g5agiusu2co3tm05jbe5ku7m5sjda08q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.musicplayer",
+            "certificate_hash": "abec696f4cf52310ede9d5b3d18329722a5c9593"
+          }
+        },
+        {
+          "client_id": "47625521234-mp1ap73ihm17ba1n1io6940t9ku11p3t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCq7LN-nuLo9mpfs1No8Fhn4JUoUDZELfc"
+          "current_key": "AIzaSyAErR6Z8QkQeYJJvd8ZNJoQTMAAWdovgDs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "563588476842-bipbh4iicejjmk7fkvk6njpalocnscnn.apps.googleusercontent.com",
+              "client_id": "47625521234-mp1ap73ihm17ba1n1io6940t9ku11p3t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
